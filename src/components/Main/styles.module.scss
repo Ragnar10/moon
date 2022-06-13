@@ -3,11 +3,9 @@
     flex-direction: column;
     width: 100%;
     min-height: 100vh;
+    background: url('../../theme/assets/images/main_bg.jpeg') no-repeat center;
+    background-size: cover;
     overflow: hidden;
-}
-
-.wrapper {
-
 }
 
 .main {

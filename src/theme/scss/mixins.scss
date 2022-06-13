@@ -1,0 +1,27 @@
+@mixin button($width: fit-content, $height: fit-content, $border: none, $bgcolor: var(--primary200-color)) {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: $width;
+    height: $height;
+    padding: 12px 8px;
+    border: $border;
+    border-radius: var(--button-border-radius);
+    box-shadow: var(--box-shadow);
+    background: $bgcolor;
+}
+
+@mixin label($width: fit-content, $height: fit-content, $bgcolor: var(--primary200-color)) {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: $width;
+    height: $height;
+    padding: 8px;
+    border-radius: var(--label-border-radius);
+    background: $bgcolor;
+}
