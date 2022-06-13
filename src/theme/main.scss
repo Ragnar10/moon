@@ -1,0 +1,12 @@
+@import 'scss/reset';
+@import 'scss/fonts';
+@import 'scss/variables';
+@import 'scss/mixins';
+
+html, body {
+    font-family: Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    scroll-behavior: smooth;
+    user-select: none;
+}
