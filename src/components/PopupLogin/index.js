@@ -4,7 +4,7 @@ import Styles from './styles.module.scss';
 
 const PopupLogin = () => {
     return (
-        <section className = { Styles.wrapper }>
+        <section className = { Styles.popup }>
 
         </section>
     );

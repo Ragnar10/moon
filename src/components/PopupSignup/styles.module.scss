@@ -1,3 +1,97 @@
-.wrapper {
+@import '../../theme/scss/mixins';
 
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+    background: rgba(29, 38, 57, 0.7);
+    backdrop-filter: blur(20px);
+}
+
+.popup_content {
+    position: absolute;
+    top: 200px;
+    left: calc((100% - 332px) / 2);
+    z-index: 2;
+    width: 332px;
+    height: fit-content;
+    padding: 30px 16px 16px;
+    border-radius: var(--button-border-radius);
+    box-shadow: var(--box-shadow);
+    background: var(--grey400-color);
+    color: var(--main-color);
+}
+
+.content_title {
+    margin-bottom: 20px;
+    font-size: var(--label-font-size);
+    line-height: 1;
+}
+
+.content_info {
+    margin-bottom: 24px;
+    font-size: var(--text-font-size);
+    line-height: 20px;
+}
+
+.popup_content {
+    & .content_info:last-child {
+        margin-bottom: 16px;
+    }
+}
+
+.content_btns {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.twitter_btn {
+    @include button(#1DA1F2);
+    margin-right: 8px;
+    width: calc(50% - 4px);
+
+    & span:first-child {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        background: url('../../theme/assets/icons/twitter.svg') no-repeat;
+        background-size: cover;
+        filter: invert(100%) brightness(200%);
+        -webkit-filter: invert(100%) brightness(200%);
+    }
+}
+
+.telegram_btn {
+    @include button(#0088CC);
+    width: calc(50% - 4px);
+
+    & span:first-child {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        background: url('../../theme/assets/icons/telegram.svg') no-repeat;
+        background-size: cover;
+        filter: invert(100%) brightness(200%);
+        -webkit-filter: invert(100%) brightness(200%);
+    }
+}
+
+.confirm_btn {
+    @include button(var(--grey600-color));
+    width: 100%;
+    margin-top: 12px;
 }
