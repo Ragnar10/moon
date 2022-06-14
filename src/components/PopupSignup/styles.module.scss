@@ -94,4 +94,9 @@
     @include button(var(--grey600-color));
     width: 100%;
     margin-top: 12px;
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.3;
+    }
 }

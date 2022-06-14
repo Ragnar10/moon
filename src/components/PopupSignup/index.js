@@ -25,7 +25,7 @@ const PopupSignup = (props) => {
                         <span />
                         <span>{ 'Telegram' }</span>
                     </button>
-                    <button className = { Styles.confirm_btn }>{ 'Confirm' }</button>
+                    <button disabled className = { Styles.confirm_btn }>{ 'Confirm' }</button>
                 </div>
             </div>
         </section>
