@@ -14,6 +14,7 @@ const Main = () => {
                 <Content />
             </main>
             <Footer />
+            <div className = { Styles.background } />
         </div>
     );
 };

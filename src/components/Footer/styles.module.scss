@@ -1,6 +1,8 @@
 @import '../../theme/scss/mixins';
 
 .footer {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 240px;
     background: url('../../theme/assets/images/footer_bg.png') no-repeat;
