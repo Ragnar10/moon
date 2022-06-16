@@ -52,4 +52,19 @@
     padding: 12px;
 }
 
+@media (max-width: 768px) {
+    .content {
+        align-items: flex-start;
+    }
+
+    .content_info {
+        align-items: flex-start;
+    }
+
+    .content_title {
+        font-size: 48px;
+        line-height: 60px;
+    }
+}
+
 
