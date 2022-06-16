@@ -11,15 +11,17 @@ const Header = () => {
     const [toggle, setToggle] = useToggle();
 
     return (
-        <header className = { Styles.header }>
-            <div className = { Styles.header_logo }>
-                <img src = { logo } alt = 'logo' />
-            </div>
-            <button
-                onClick = { () => setToggle(true) }
-                className = { Styles.header_btn_login }>{ 'Login' }</button>
+        <>
             { toggle && <PopupLogin onSetToggle = { setToggle } /> }
-        </header>
+            <header className = { Styles.header }>
+                <div className = { Styles.header_logo }>
+                    <img src = { logo } alt = 'logo' />
+                </div>
+                <button
+                    onClick = { () => setToggle(true) }
+                    className = { Styles.header_btn_login }>{ 'Login' }</button>
+            </header>
+        </>
     );
 };
 

@@ -1,7 +1,7 @@
 @import '../../theme/scss/mixins';
 
 .popup {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
@@ -22,7 +22,7 @@
 
 .popup_content {
     position: absolute;
-    top: 200px;
+    top: 100px;
     left: calc((100% - 332px) / 2);
     z-index: 2;
     width: 332px;
@@ -98,5 +98,12 @@
     &:disabled {
         pointer-events: none;
         opacity: 0.3;
+    }
+}
+
+@media (max-width: 360px) {
+    .popup_content {
+        left: calc((100% - 300px) / 2);
+        width: 300px;
     }
 }
