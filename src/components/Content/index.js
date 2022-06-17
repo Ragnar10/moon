@@ -25,7 +25,11 @@ const Content = () => {
                 <button
                     onClick = { () => setToggle(true) }
                     className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</button>
-                { /* <button className = { Styles.content_connected_btn }>{ 'Investor Deck' }</button> */ }
+                { /* <a */ }
+                { /*     href = { 'https://bit.ly/LVRGD_public' } */ }
+                { /*     target = '_blank' */ }
+                { /*     rel = 'noreferrer' */ }
+                { /*     className = { Styles.content_connected_btn }>{ 'Investor Deck' }</a> */ }
             </section>
         </>
     );
