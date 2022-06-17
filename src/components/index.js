@@ -1,3 +1,2 @@
-import Main from './Main';
-
-export { Main };
+export * from './Main';
+export * from './ConnectWith';

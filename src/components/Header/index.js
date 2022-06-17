@@ -7,7 +7,7 @@ import logo from '../../theme/assets/images/logo.svg';
 // Components
 import PopupLogin from '../PopupLogin';
 
-const Header = () => {
+const Header = (props) => {
     const [toggle, setToggle] = useToggle();
 
     return (
@@ -17,9 +17,11 @@ const Header = () => {
                 <div className = { Styles.header_logo }>
                     <img src = { logo } alt = 'logo' />
                 </div>
-                <button
-                    onClick = { () => setToggle(true) }
-                    className = { Styles.header_btn_login }>{ 'Login' }</button>
+                {
+                    props.login && <button
+                        onClick = { () => setToggle(true) }
+                        className = { Styles.header_btn_login }>{ 'Login' }</button>
+                }
             </header>
         </>
     );

@@ -3,6 +3,7 @@
         "@sotream/eslint-config-react-js"
     ],
     "rules": {
-        "max-len": [2, {"code": 120, "tabWidth": 4, "ignoreUrls": true, "ignoreStrings": true}]
+        "max-len": [2, {"code": 120, "tabWidth": 4, "ignoreUrls": true, "ignoreStrings": true}],
+        "no-param-reassign": 0
     }
 }

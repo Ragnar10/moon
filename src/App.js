@@ -2,13 +2,15 @@
 import {
     Routes, Navigate, Route,
 } from 'react-router-dom';
-// Components
-import { Main } from './components';
+// Pages
+import { ConnectWithWalletPage, ConnectWithLoginPage } from './pages';
 
 const App = () => {
     return (
         <Routes>
-            <Route path = '/' element = { <Main /> } />
+            <Route path = '/' element = { <ConnectWithWalletPage /> } />
+
+            <Route path = '/login' element = { <ConnectWithLoginPage /> } />
 
             <Route path = '*' element = { <Navigate to = '/' replace /> } />
         </Routes>
