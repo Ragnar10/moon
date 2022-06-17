@@ -50,6 +50,7 @@
 .content_connected_btn {
     @include button();
     padding: 12px;
+    text-decoration: none;
 }
 
 @media (max-width: 768px) {
