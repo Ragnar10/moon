@@ -1,5 +1,9 @@
+// Core
+import { useDispatch, useSelector } from 'react-redux';
 // Hooks
 import { useToggle } from '../../hooks';
+// Actions
+import { authActions } from '../../actions';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -7,6 +11,13 @@ import PopupSignup from '../PopupSignup';
 
 const Content = (props) => {
     const [toggle, setToggle] = useToggle();
+
+    const dispatch = useDispatch();
+    const wallet = useSelector((state) => state.auth.wallet);
+    const loading = useSelector((state) => state.auth.loading);
+    const error = useSelector((state) => state.auth.error);
+
+    console.log(wallet, loading, error);
 
     return (
         <>
@@ -33,7 +44,7 @@ const Content = (props) => {
                             rel = 'noreferrer'
                             className = { Styles.content_connected_btn }>{ 'Investor Deck' }</a>
                         : <button
-                            onClick = { () => setToggle(true) }
+                            onClick = { () => dispatch(authActions.connectMeta()) }
                             className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</button>
                 }
             </section>
