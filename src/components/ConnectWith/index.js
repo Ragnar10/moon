@@ -2,14 +2,15 @@
 import Styles from './styles.module.scss';
 // Components
 import Header from '../Header';
-import Content from '../Content';
+import ContentMeta from '../ContentMeta';
+import ContentLogin from '../ContentLogin';
 
 const ConnectWithWallet = () => {
     return (
         <div className = { Styles.wrapper }>
             <Header />
             <main className = { Styles.main }>
-                <Content />
+                <ContentMeta />
             </main>
         </div>
     );
@@ -20,7 +21,7 @@ const ConnectWithLogin = () => {
         <div className = { Styles.wrapper }>
             <Header login = 'login' />
             <main className = { Styles.main }>
-                <Content login = 'login' />
+                <ContentLogin />
             </main>
         </div>
     );

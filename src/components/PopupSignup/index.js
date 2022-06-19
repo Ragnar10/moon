@@ -1,15 +1,26 @@
+// Core
+import { useDispatch, useSelector } from 'react-redux';
+// Actions
+import { authActions } from '../../actions';
+// Utils
+import { cutLine } from '../../utils';
 // Styles
 import Styles from './styles.module.scss';
 // Components
+import Loader from '../Loader';
+import Message from '../Message';
 
 const PopupSignup = (props) => {
+    const dispatch = useDispatch();
+    const wallet = useSelector((state) => state.auth.wallet);
+    const loading = useSelector((state) => state.auth.loading);
+    const error = useSelector((state) => state.auth.error);
+
     return (
         <section className = { Styles.popup }>
-            <div
-                onClick = { () => props.onSetToggle(false) }
-                className = { Styles.shadow } />
+            <div className = { Styles.shadow } />
             <div className = { Styles.popup_content }>
-                <h3 className = { Styles.content_title }>{ 'Congratulations!' }</h3>
+                <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>
                     { 'You have successfully been referred by: Influencer Name and you will receive a special Bonus at LVRGD Launch.' }
                 </p>
@@ -25,7 +36,9 @@ const PopupSignup = (props) => {
                         <span />
                         <span>{ 'Telegram' }</span>
                     </button>
-                    <button disabled className = { Styles.confirm_btn }>{ 'Confirm' }</button>
+                    <button
+                        disabled
+                        className = { Styles.confirm_btn }>{ 'Confirm' }</button>
                 </div>
             </div>
         </section>

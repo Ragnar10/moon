@@ -1,0 +1,22 @@
+.message {
+    position: absolute;
+    top: 50px;
+    left: calc(50% - 150px);
+    width: 300px;
+    height: fit-content;
+    padding: 10px;
+    border-radius: var(--button-border-radius);
+    text-align: center;
+    background: #fd4b4b;
+    color: var(--main-color);
+    animation: msg 0.2s linear;
+
+    @keyframes msg {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}

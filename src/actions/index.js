@@ -6,27 +6,29 @@ import {
 export const authActions = {
     connectMeta: () => (dispatch) => {
         if (window.ethereum) {
-            dispatch(setLoading());
+            dispatch(clearError(''));
+            dispatch(setLoading(true));
             window.ethereum
                 .request({ method: 'eth_requestAccounts' })
                 .then((res) => {
                     if (res.code) {
-                        dispatch(setLoading());
+                        dispatch(setLoading(false));
                         dispatch(setError('Check your extension!'));
                     } else {
                         dispatch(clearError(''));
                         dispatch(setWallet(res[ 0 ]));
-                        dispatch(setLoading());
+                        dispatch(setLoading(false));
                     }
 
                     return null;
                 })
                 .catch(() => {
                     dispatch(clearError(''));
-                    dispatch(setLoading());
+                    dispatch(setLoading(false));
                     dispatch(setError('Something went wrong, please try again later!'));
                 });
         } else {
+            dispatch(clearError(''));
             dispatch(setError('Install metamask extension!'));
         }
     },

@@ -14,8 +14,8 @@ export const authSlice = createSlice({
         setWallet: (state, action) => {
             state.wallet = action.payload;
         },
-        setLoading: (state) => {
-            state.loading = !state.loading;
+        setLoading: (state, action) => {
+            state.loading = action.payload;
         },
         setError: (state, action) => {
             state.error = action.payload;
