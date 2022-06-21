@@ -1,7 +1,5 @@
 // Core
 import { useDispatch, useSelector } from 'react-redux';
-// Actions
-import { authActions } from '../../actions';
 // Utils
 import { cutLine } from '../../utils';
 // Styles
@@ -9,12 +7,17 @@ import Styles from './styles.module.scss';
 // Components
 import Loader from '../Loader';
 import Message from '../Message';
+import TelegramLoginBtn from '../TelegramLoginBtn';
 
 const PopupSignup = (props) => {
     const dispatch = useDispatch();
     const wallet = useSelector((state) => state.auth.wallet);
     const loading = useSelector((state) => state.auth.loading);
     const error = useSelector((state) => state.auth.error);
+
+    const handleTelegramResponse = (res) => {
+        console.log(res);
+    };
 
     return (
         <section className = { Styles.popup }>
@@ -32,10 +35,10 @@ const PopupSignup = (props) => {
                         <span />
                         <span>{ 'Twitter' }</span>
                     </button>
-                    <button className = { Styles.telegram_btn }>
-                        <span />
-                        <span>{ 'Telegram' }</span>
-                    </button>
+                    <TelegramLoginBtn
+                        dataOnauth = { handleTelegramResponse }
+                        botName = { process.env.REACT_APP_BOT_NAME }
+                        requestAccess = 'white' />
                     <button
                         disabled
                         className = { Styles.confirm_btn }>{ 'Confirm' }</button>
