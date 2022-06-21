@@ -14,6 +14,12 @@ export const authSlice = createSlice({
         setWallet: (state, action) => {
             state.wallet = action.payload;
         },
+        setTelegramData: (state, action) => {
+            state.telegramData = action.payload;
+        },
+        setTwitterData: (state, action) => {
+            state.twitterData = action.payload;
+        },
         setLoading: (state, action) => {
             state.loading = action.payload;
         },
@@ -27,7 +33,8 @@ export const authSlice = createSlice({
 });
 
 export const {
-    setWallet, setLoading, setError, clearError,
+    setWallet, setTelegramData, setTwitterData,
+    setLoading, setError, clearError,
 } = authSlice.actions;
 
 export default authSlice.reducer;

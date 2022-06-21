@@ -2,6 +2,8 @@
 import { useDispatch, useSelector } from 'react-redux';
 // Utils
 import { cutLine } from '../../utils';
+// Actions
+import { setTwitterData, setTelegramData } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -16,7 +18,7 @@ const PopupSignup = (props) => {
     const error = useSelector((state) => state.auth.error);
 
     const handleTelegramResponse = (res) => {
-        console.log(res);
+        dispatch(setTelegramData(res));
     };
 
     return (
