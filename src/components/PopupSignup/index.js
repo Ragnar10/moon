@@ -11,7 +11,7 @@ import Loader from '../Loader';
 import Message from '../Message';
 import TelegramLoginBtn from '../TelegramLoginBtn';
 
-const PopupSignup = (props) => {
+const PopupSignup = () => {
     const dispatch = useDispatch();
     const wallet = useSelector((state) => state.auth.wallet);
     const loading = useSelector((state) => state.auth.loading);
