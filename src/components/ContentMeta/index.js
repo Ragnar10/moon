@@ -24,7 +24,8 @@ const ContentMeta = () => {
         if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
     }, []);
 
-    const metamaskAppDeepLink = 'https://metamask.app.link/dapp/lvrgd-moon.web.app';
+    const baseUrl = 'lvrgd-moon.web.app';
+    const metamaskAppDeepLink = `https://metamask.app.link/dapp/${baseUrl}`;
 
     const metaBtn = isMobileDevice()
         ? <a
