@@ -1,0 +1,25 @@
+.nav {
+    width: fit-content;
+    height: fit-content;
+
+    ul {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        height: fit-content;
+
+        li {
+            margin-right: 26px;
+
+            a {
+                font-size: var(--label-font-size);
+                line-height: 1;
+                color: var(--main-color);
+            }
+        }
+
+        li:last-child {
+            margin-right: 0;
+        }
+    }
+}

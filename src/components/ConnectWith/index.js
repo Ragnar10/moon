@@ -4,6 +4,7 @@ import Styles from './styles.module.scss';
 import Header from '../Header';
 import ContentMeta from '../ContentMeta';
 import ContentLogin from '../ContentLogin';
+import Auth from '../Auth';
 
 const ConnectWithWallet = () => {
     return (
@@ -27,4 +28,15 @@ const ConnectWithLogin = () => {
     );
 };
 
-export { ConnectWithWallet, ConnectWithLogin };
+const ConnectWithAuth = () => {
+    return (
+        <div className = { Styles.wrapper }>
+            <Header auth = 'auth' />
+            <main className = { Styles.main }>
+                <Auth />
+            </main>
+        </div>
+    );
+};
+
+export { ConnectWithWallet, ConnectWithLogin, ConnectWithAuth };

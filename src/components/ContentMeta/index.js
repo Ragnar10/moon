@@ -1,6 +1,7 @@
 // Core
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
+import { useEffect } from 'react';
 import { authActions } from '../../actions';
 // Styles
 import Styles from './styles.module.scss';
@@ -14,6 +15,24 @@ const ContentMeta = () => {
     const wallet = useSelector((state) => state.auth.wallet);
     const loading = useSelector((state) => state.auth.loading);
     const error = useSelector((state) => state.auth.error);
+
+    const isMobileDevice = () => {
+        return 'ontouchstart' in window || 'onmsgesturechange' in window;
+    };
+
+    useEffect(() => {
+        if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
+    }, []);
+
+    const metamaskAppDeepLink = 'https://metamask.app.link/dapp/lvrgd-moon.web.app';
+
+    const metaBtn = isMobileDevice()
+        ? <a
+            href = { metamaskAppDeepLink }
+            className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</a>
+        : <button
+            onClick = { () => dispatch(authActions.connectMeta()) }
+            className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</button>;
 
     return (
         <>
@@ -32,9 +51,7 @@ const ContentMeta = () => {
                 {
                     loading
                         ? <Loader />
-                        : <button
-                            onClick = { () => dispatch(authActions.connectMeta()) }
-                            className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</button>
+                        : metaBtn
                 }
             </section>
         </>

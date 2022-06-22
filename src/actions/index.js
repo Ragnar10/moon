@@ -32,4 +32,18 @@ export const authActions = {
             dispatch(setError('Install metamask extension!'));
         }
     },
+
+    connectMetaMobile: () => (dispatch) => {
+        if (window.ethereum) {
+            window.ethereum
+                .request({ method: 'eth_requestAccounts' })
+                .then((res) => {
+                    return  dispatch(setWallet(res[ 0 ]));
+                })
+                .catch(() => {
+                    dispatch(clearError(''));
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        }
+    },
 };

@@ -7,6 +7,7 @@
     z-index: 100;
     width: 100%;
     min-height: 100vh;
+    overflow: auto;
 }
 
 .shadow {
@@ -22,7 +23,7 @@
 
 .popup_content {
     position: absolute;
-    top: 100px;
+    top: 20px;
     left: calc((100% - 332px) / 2);
     z-index: 2;
     width: 332px;
@@ -38,12 +39,14 @@
     margin-bottom: 20px;
     font-size: var(--label-font-size);
     line-height: 1;
+    font-weight: 700;
 }
 
 .content_info {
     margin-bottom: 24px;
     font-size: var(--text-font-size);
     line-height: 20px;
+    font-weight: 400;
 }
 
 .popup_content {

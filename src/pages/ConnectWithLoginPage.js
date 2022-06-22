@@ -1,5 +1,5 @@
 // Components
-import { Main, ConnectWithLogin } from '../components';
+import { Main, ConnectWithLogin, ConnectWithAuth } from '../components';
 
 export const ConnectWithLoginPage = () => {
     return (

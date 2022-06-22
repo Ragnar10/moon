@@ -4,47 +4,47 @@
     width: fit-content;
     height: fit-content;
 
-    & li:last-child {
-        margin-right: 0;
-    }
-}
-
-li {
-    width: 14px;
-    height: 14px;
-    margin-right: 15px;
-
-    a {
-        display: inline-block;
+    li {
         width: 14px;
         height: 14px;
-        filter: invert(100%) brightness(200%);
-        -webkit-filter: invert(100%) brightness(200%);
+        margin-right: 15px;
+
+        a {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            filter: invert(100%) brightness(200%);
+            -webkit-filter: invert(100%) brightness(200%);
+        }
+
+        .socials_telegram {
+            background: url('../../theme/assets/icons/telegram.svg') no-repeat;
+            background-size: cover;
+        }
+
+        .socials_twitter {
+            background: url('../../theme/assets/icons/twitter.svg') no-repeat;
+            background-size: cover;
+        }
+
+        .socials_discord {
+            background: url('../../theme/assets/icons/discord.svg') no-repeat;
+            background-size: cover;
+        }
+
+        .socials_reddit {
+            background: url('../../theme/assets/icons/reddit.svg') no-repeat;
+            background-size: cover;
+        }
+
+        .socials_medium {
+            background: url('../../theme/assets/icons/medium.svg') no-repeat;
+            background-size: cover;
+        }
     }
 
-    .socials_telegram {
-        background: url('../../theme/assets/icons/telegram.svg') no-repeat;
-        background-size: cover;
-    }
-
-    .socials_twitter {
-        background: url('../../theme/assets/icons/twitter.svg') no-repeat;
-        background-size: cover;
-    }
-
-    .socials_discord {
-        background: url('../../theme/assets/icons/discord.svg') no-repeat;
-        background-size: cover;
-    }
-
-    .socials_reddit {
-        background: url('../../theme/assets/icons/reddit.svg') no-repeat;
-        background-size: cover;
-    }
-
-    .socials_medium {
-        background: url('../../theme/assets/icons/medium.svg') no-repeat;
-        background-size: cover;
+    & li:last-child {
+        margin-right: 0;
     }
 }
 

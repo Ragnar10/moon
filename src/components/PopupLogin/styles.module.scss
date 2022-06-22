@@ -38,6 +38,7 @@
     margin-bottom: 25px;
     font-size: var(--label-font-size);
     line-height: 1;
+    font-weight: 700;
 }
 
 .content_form {
@@ -69,7 +70,7 @@
     color: var(--main-color);
 
     &::placeholder {
-        color: var(--grey800-color)
+        color: var(--grey800-color);
     }
 }
 
@@ -86,7 +87,7 @@
     cursor: pointer;
 }
 
-.login_btn {
+.form_login_btn {
     @include button();
     width: 100%;
     margin-top: 16px;

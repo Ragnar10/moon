@@ -45,7 +45,7 @@ const PopupLogin = (props) => {
                     <div className = { Styles.form_forgot }>{ 'Forgot your password?' }</div>
                     <button
                         type = 'submit'
-                        className = { Styles.login_btn }>{ 'Login' }</button>
+                        className = { Styles.form_login_btn }>{ 'Login' }</button>
                 </form>
             </div>
         </section>
