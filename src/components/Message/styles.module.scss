@@ -1,5 +1,6 @@
 .message {
     position: absolute;
+    z-index: 1000;
     top: 50px;
     left: calc(50% - 150px);
     width: 300px;

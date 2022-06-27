@@ -1,46 +1,37 @@
 // Core
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// Instruments
-import queryString from 'query-string';
 // Utils
 import { cutLine } from '../../utils';
 // Actions
-import { setTwitterData, setTelegramData } from '../../reducers/authSlice';
+import { authActions } from '../../actions';
+import { setTelegramData } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
-import Loader from '../Loader';
-import Message from '../Message';
 import TelegramLoginBtn from '../TelegramLoginBtn';
+import Message from '../Message';
 
-const PopupSignup = () => {
+const PopupSignup = (props) => {
     const dispatch = useDispatch();
     const wallet = useSelector((state) => state.auth.wallet);
-    const loading = useSelector((state) => state.auth.loading);
     const error = useSelector((state) => state.auth.error);
 
     const handleTelegramResponse = (res) => {
         dispatch(setTelegramData(res));
     };
 
-    const apiPath = 'http://localhost:4000/api';
+    const twitterLogin = () => {
+        dispatch(authActions.getTwitterOauthToken());
+    };
 
-    const login = () => {
-        fetch(`${apiPath}/twitter/oauth/request_token`, {
-            method: 'GET',
-        })
-            .then((response) => response.json())
-            .then((res) => {
-                console.log(res);
-                window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${res.oauth_token}`;
-            })
-            .catch((errors) => console.log(errors));
+    const confirmAllData = () => {
+        props.setToggle(true);
     };
 
     return (
         <section className = { Styles.popup }>
             <div className = { Styles.shadow } />
+            { error && <Message>{ error }</Message> }
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>
@@ -51,7 +42,7 @@ const PopupSignup = () => {
                 </p>
                 <div className = { Styles.content_btns }>
                     <button
-                        onClick = { () => login() }
+                        onClick = { () => twitterLogin() }
                         className = { Styles.twitter_btn }>
                         <span />
                         <span>{ 'Twitter' }</span>
@@ -62,6 +53,7 @@ const PopupSignup = () => {
                         requestAccess = 'white' />
                     <button
                         disabled
+                        onClick = { () => confirmAllData() }
                         className = { Styles.confirm_btn }>{ 'Confirm' }</button>
                 </div>
             </div>

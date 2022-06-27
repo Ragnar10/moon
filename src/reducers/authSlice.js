@@ -4,11 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
     name:         'auth',
     initialState: {
-        wallet:       '',
-        telegramData: {},
-        twitterData:  {},
-        loading:      false,
-        error:        '',
+        wallet:         '',
+        telegramData:   {},
+        twitterSuccess: '',
+        twitterData:    {},
+        loading:        false,
+        error:          '',
     },
     reducers: {
         setWallet: (state, action) => {
@@ -16,6 +17,9 @@ export const authSlice = createSlice({
         },
         setTelegramData: (state, action) => {
             state.telegramData = action.payload;
+        },
+        setTwitterSuccess: (state, action) => {
+            state.twitterSuccess = action.payload;
         },
         setTwitterData: (state, action) => {
             state.twitterData = action.payload;
@@ -33,7 +37,7 @@ export const authSlice = createSlice({
 });
 
 export const {
-    setWallet, setTelegramData, setTwitterData,
+    setWallet, setTelegramData, setTwitterSuccess, setTwitterData,
     setLoading, setError, clearError,
 } = authSlice.actions;
 
