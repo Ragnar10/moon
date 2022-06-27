@@ -1,7 +1,9 @@
 // Core
 import { useDispatch, useSelector } from 'react-redux';
+// Instruments
+import queryString from 'query-string';
 // Actions
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { authActions } from '../../actions';
 // Styles
 import Styles from './styles.module.scss';
@@ -19,6 +21,64 @@ const ContentMeta = () => {
     const isMobileDevice = () => {
         return 'ontouchstart' in window || 'onmsgesturechange' in window;
     };
+
+    const [success, setSuccess] = useState(false);
+
+    const apiPath = 'http://localhost:4000/api';
+
+    const auth = () => {
+        const { oauth_token, oauth_verifier } = queryString.parse(window.location.search);
+
+        if (oauth_token && oauth_verifier) {
+            const data = {
+                req_oauth_token: oauth_token,
+                oauth_verifier,
+            };
+
+            try {
+                // Oauth Step 3
+                fetch(`${apiPath}/twitter/oauth/access_token`, {
+                    method:  'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then((resp) => resp.json())
+                    .then((res) => setSuccess(res.success))
+                    .catch((errors) => console.log(errors));
+
+                console.log(oauth_token, oauth_verifier);
+            } catch (errors) {
+                console.error(errors);
+            }
+        } else {
+            console.log('Error');
+        }
+    };
+
+    const getData = () => {
+        try {
+            fetch(`${apiPath}/twitter/users/profile_banner`, {
+                method: 'GET',
+            })
+                .then((response) => response.json())
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((errors) => console.log(errors));
+        } catch (errors) {
+            console.error(errors);
+        }
+    };
+
+    useEffect(() => {
+        auth();
+    }, []);
+
+    useEffect(() => {
+        if (success) return getData();
+    }, [success]);
 
     useEffect(() => {
         if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());

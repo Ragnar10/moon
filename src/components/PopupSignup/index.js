@@ -24,62 +24,19 @@ const PopupSignup = () => {
         dispatch(setTelegramData(res));
     };
 
-    const apiPath = process.env.REACT_APP_SERVERLESS;
+    const apiPath = 'http://localhost:4000/api';
 
     const login = () => {
-        (async () => {
-            try {
-                // OAuth Step 1
-                const response = await fetch(`${apiPath}/twitter/oauth/request_token`, {
-                    method:  'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                const { oauth_token } = response.data;
-                // Oauth Step 2
-                window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${oauth_token}`;
-            } catch (errors) {
-                console.error(errors);
-            }
-        })();
+        fetch(`${apiPath}/twitter/oauth/request_token`, {
+            method: 'GET',
+        })
+            .then((response) => response.json())
+            .then((res) => {
+                console.log(res);
+                window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${res.oauth_token}`;
+            })
+            .catch((errors) => console.log(errors));
     };
-
-    useEffect(() => {
-        (async () => {
-            const { oauth_token, oauth_verifier } = queryString.parse(window.location.search);
-
-            if (oauth_token && oauth_verifier) {
-                try {
-                    // Oauth Step 3
-                    await fetch(`${apiPath}/twitter/oauth/access_token`, {
-                        method:  'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: { oauth_token, oauth_verifier },
-                    });
-                } catch (errors) {
-                    console.error(errors);
-                }
-            }
-
-            try {
-                // Authenticated Resource Access
-                const data = await fetch(`${apiPath}/twitter/users/profile_banner`, {
-                    method:  'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                console.log(data);
-            } catch (errors) {
-                console.error(errors);
-            }
-        })();
-    }, []);
 
     return (
         <section className = { Styles.popup }>
