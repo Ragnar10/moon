@@ -17,7 +17,6 @@ import Message from '../Message';
 const ContentMeta = () => {
     const dispatch = useDispatch();
     const wallet = useSelector((state) => state.auth.wallet);
-    const twitterSuccess = useSelector((state) => state.auth.twitterSuccess);
     const loading = useSelector((state) => state.auth.loading);
     const error = useSelector((state) => state.auth.error);
 
@@ -37,16 +36,12 @@ const ContentMeta = () => {
 
         if (oauth_token && oauth_verifier) {
             const data = {
-                req_oauth_token: oauth_token,
+                oauth_token,
                 oauth_verifier,
             };
 
-            dispatch(authActions.requestTwitterAccessToken(data));
+            dispatch(authActions.getTwitterData(data));
         }
-    };
-
-    const getData = () => {
-        dispatch(authActions.getTwitterData());
     };
 
     useEffect(() => {
@@ -56,10 +51,6 @@ const ContentMeta = () => {
     useEffect(() => {
         authTwitter();
     }, []);
-
-    useEffect(() => {
-        if (twitterSuccess) return getData();
-    }, [twitterSuccess]);
 
     const metaBtn = isMobileDevice()
         ? <a
