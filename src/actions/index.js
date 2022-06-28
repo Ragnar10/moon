@@ -80,8 +80,8 @@ export const authActions = {
             .then((res) => {
                 if (res.user_id) {
                     setTwitterData({
-                        user_id: res.user_id,
-                        name:    res.screen_name,
+                        user_id:   res.user_id,
+                        user_name: res.screen_name,
                     });
                 } else {
                     dispatch(clearError(''));
