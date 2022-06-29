@@ -4,13 +4,18 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
     name:         'auth',
     initialState: {
+        user:         {},
         wallet:       '',
-        telegramData: {},
-        twitterData:  {},
+        telegramData: '',
+        twitterData:  '',
+        popupIsOpen:  false,
         loading:      false,
         error:        '',
     },
     reducers: {
+        setUser: (state, action) => {
+            state.user = action.payload;
+        },
         setWallet: (state, action) => {
             state.wallet = action.payload;
         },
@@ -19,6 +24,9 @@ export const authSlice = createSlice({
         },
         setTwitterData: (state, action) => {
             state.twitterData = action.payload;
+        },
+        setPopupIsOpen: (state, action) => {
+            state.popupIsOpen = action.payload;
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
@@ -33,8 +41,8 @@ export const authSlice = createSlice({
 });
 
 export const {
-    setWallet, setTelegramData, setTwitterData,
-    setLoading, setError, clearError,
+    setUser, setWallet, setTelegramData, setTwitterData,
+    setPopupIsOpen, setLoading, setError, clearError,
 } = authSlice.actions;
 
 export default authSlice.reducer;

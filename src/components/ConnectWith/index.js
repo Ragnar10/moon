@@ -1,28 +1,25 @@
+// Core
+import { useSelector } from 'react-redux';
 // Styles
 import Styles from './styles.module.scss';
 // Components
 import Header from '../Header';
-import ContentMeta from '../ContentMeta';
-import ContentLogin from '../ContentLogin';
-import Auth from '../Auth';
+import InfluencerContent from '../InfluencerContent';
+import PresentationContent from '../PresentationContent';
+import AuthContent from '../AuthContent';
 
 const ConnectWithWallet = () => {
+    const user = useSelector((state) => state.auth.user);
+    const popupIsOpen = useSelector((state) => state.auth.popupIsOpen);
+
     return (
         <div className = { Styles.wrapper }>
             <Header />
             <main className = { Styles.main }>
-                <ContentMeta />
-            </main>
-        </div>
-    );
-};
-
-const ConnectWithLogin = () => {
-    return (
-        <div className = { Styles.wrapper }>
-            <Header login = 'login' />
-            <main className = { Styles.main }>
-                <ContentLogin />
+                {
+                    user.metamask && user.twitter && user.telegram && !popupIsOpen
+                        ? <PresentationContent /> : <InfluencerContent />
+                }
             </main>
         </div>
     );
@@ -33,10 +30,10 @@ const ConnectWithAuth = () => {
         <div className = { Styles.wrapper }>
             <Header auth = 'auth' />
             <main className = { Styles.main }>
-                <Auth />
+                <AuthContent />
             </main>
         </div>
     );
 };
 
-export { ConnectWithWallet, ConnectWithLogin, ConnectWithAuth };
+export { ConnectWithWallet, ConnectWithAuth };

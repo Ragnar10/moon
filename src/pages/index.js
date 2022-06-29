@@ -1,2 +1,2 @@
 export * from './ConnectWithWalletPage';
-export * from './ConnectWithLoginPage';
+export * from './ConnectWithAuthPage';

@@ -1,55 +1,56 @@
 // Core
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// Instruments
-import queryString from 'query-string';
 // Actions
+import { set } from 'react-hook-form';
 import { authActions } from '../../actions';
-// Hooks
-import { useToggle } from '../../hooks';
+import { setPopupIsOpen, setUser } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
-import PopupSignup from '../PopupSignup';
+import PopupSignupWithSocials from '../PopupSignupWithSocials';
 import Loader from '../Loader';
 import Message from '../Message';
 
-const ContentMeta = () => {
+const InfluencerContent = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
     const wallet = useSelector((state) => state.auth.wallet);
+    const popupIsOpen = useSelector((state) => state.auth.popupIsOpen);
     const loading = useSelector((state) => state.auth.loading);
     const error = useSelector((state) => state.auth.error);
 
-    const [toggle, setToggle] = useToggle();
-
     const isMobileDevice = () => {
         return 'ontouchstart' in window || 'onmsgesturechange' in window;
-    };
-
-    const connectMetamask = () => {
-        dispatch(authActions.connectMeta());
-        setToggle(true);
-    };
-
-    const authTwitter = () => {
-        const { oauth_token, oauth_verifier } = queryString.parse(window.location.search);
-
-        if (oauth_token && oauth_verifier) {
-            const data = {
-                oauth_token,
-                oauth_verifier,
-            };
-
-            dispatch(authActions.getTwitterData(data));
-        }
     };
 
     useEffect(() => {
         if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
     }, []);
 
+    const connectMetamask = () => {
+        dispatch(authActions.connectMeta());
+    };
+
     useEffect(() => {
-        authTwitter();
+        if (wallet && !user.token) {
+            const userData = {
+                metamask: wallet,
+                ref:      'moon-card',
+                twitter:  '',
+                telegram: '',
+            };
+
+            dispatch(authActions.createUser(userData));
+        }
+    }, [wallet]);
+
+    useEffect(() => {
+        const storageUser = JSON.parse(localStorage.getItem('user'));
+
+        if (storageUser) {
+            dispatch(authActions.getUser(storageUser));
+        }
     }, []);
 
     const metaBtn = isMobileDevice()
@@ -62,7 +63,7 @@ const ContentMeta = () => {
 
     return (
         <>
-            { wallet && toggle && <PopupSignup setToggle = { setToggle } /> }
+            { user.metamask && popupIsOpen && <PopupSignupWithSocials /> }
             { error && <Message>{ error }</Message> }
             <section className = { Styles.content }>
                 <h1 className = { Styles.content_title }>
@@ -80,4 +81,4 @@ const ContentMeta = () => {
     );
 };
 
-export default ContentMeta;
+export default InfluencerContent;

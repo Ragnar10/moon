@@ -1,7 +1,7 @@
 // Styles
 import Styles from './styles.module.scss';
 
-const ContentLogin = () => {
+const PresentationContent = () => {
     return (
         <section className = { Styles.content }>
             <h1 className = { Styles.content_connected_title }>{ 'We ‘re preparing to launch' }</h1>
@@ -18,4 +18,4 @@ const ContentLogin = () => {
     );
 };
 
-export default ContentLogin;
+export default PresentationContent;

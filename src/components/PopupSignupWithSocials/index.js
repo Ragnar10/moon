@@ -1,31 +1,68 @@
 // Core
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+// Instruments
+import queryString from 'query-string';
 // Utils
 import { cutLine } from '../../utils';
 // Actions
 import { authActions } from '../../actions';
-import { setTelegramData } from '../../reducers/authSlice';
+import { setTelegramData, setPopupIsOpen } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
 import TelegramLoginBtn from '../TelegramLoginBtn';
 import Message from '../Message';
 
-const PopupSignup = (props) => {
+const PopupSignupWithSocials = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
     const wallet = useSelector((state) => state.auth.wallet);
+    const twitterData = useSelector((state) => state.auth.twitterData);
+    const telegramData = useSelector((state) => state.auth.telegramData);
     const error = useSelector((state) => state.auth.error);
 
     const handleTelegramResponse = (res) => {
-        dispatch(setTelegramData(res));
+        dispatch(setTelegramData(res.username));
     };
 
     const twitterLogin = () => {
         dispatch(authActions.getTwitterOauthToken());
     };
 
+    const authTwitter = () => {
+        const { oauth_token, oauth_verifier } = queryString.parse(window.location.search);
+
+        if (oauth_token && oauth_verifier) {
+            const data = {
+                oauth_token,
+                oauth_verifier,
+            };
+
+            dispatch(authActions.getTwitterData(data));
+        }
+    };
+
+    useEffect(() => {
+        authTwitter();
+    }, []);
+
+    useEffect(() => {
+        console.log(user, twitterData, telegramData);
+
+        if (user.token && twitterData && telegramData) {
+            const data = {
+                id:     user.id,
+                token:  user.token,
+                update: { twitter: twitterData, telegram: telegramData },
+            };
+
+            dispatch(authActions.updateUser(data));
+        }
+    }, [telegramData, twitterData]);
+
     const confirmAllData = () => {
-        props.setToggle(true);
+        dispatch(setPopupIsOpen(false));
     };
 
     return (
@@ -52,7 +89,7 @@ const PopupSignup = (props) => {
                         botName = { process.env.REACT_APP_BOT_NAME }
                         requestAccess = 'white' />
                     <button
-                        disabled
+                        disabled = { !user.metamask || !user.twitter || !user.telegram ? 'disabled' : null }
                         onClick = { () => confirmAllData() }
                         className = { Styles.confirm_btn }>{ 'Confirm' }</button>
                 </div>
@@ -61,4 +98,4 @@ const PopupSignup = (props) => {
     );
 };
 
-export default PopupSignup;
+export default PopupSignupWithSocials;
