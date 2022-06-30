@@ -29,6 +29,8 @@ const InfluencerContent = () => {
     }, []);
 
     const connectMetamask = () => {
+        if (isMobileDevice()) return null;
+
         dispatch(authActions.connectMeta());
     };
 
@@ -53,7 +55,7 @@ const InfluencerContent = () => {
         }
     }, []);
 
-    const metaBtn = isMobileDevice()
+    const metaBtn = isMobileDevice() && !wallet
         ? <a
             href = { `https://metamask.app.link/dapp/${process.env.REACT_APP_TELEGRAM_API_PATH}` }
             className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</a>
