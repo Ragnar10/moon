@@ -29,13 +29,14 @@ const InfluencerContent = () => {
     };
 
     useEffect(() => {
-        const storageWallet = JSON.stringify(localStorage.getItem('wallet'));
+        const storageWallet = localStorage.getItem('wallet');
+        const data = JSON.parse(storageWallet);
 
         if (storageWallet) {
-            setWallet(storageWallet.wallet);
-            setPopupIsOpen(storageWallet.popupIsOpen);
+            dispatch(setWallet(data.wallet));
+            dispatch(setPopupIsOpen(data.popupIsOpen));
         }
-    }, []);
+    }, [wallet, popupIsOpen]);
 
     const metaBtn = isMobileDevice() && !wallet
         ? <a
