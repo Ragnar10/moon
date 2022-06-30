@@ -34,7 +34,7 @@ const AuthContent = () => {
                     className = { Styles.form_field } />
                 <label
                     htmlFor = { 'email' }
-                    className = { Styles.form_label }>{ 'Email adress' }</label>
+                    className = { Styles.form_label }>{ 'Email address' }</label>
                 <input
                     { ...register('email') }
                     id = 'email'
