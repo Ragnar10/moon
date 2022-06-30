@@ -2,9 +2,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
-import { set } from 'react-hook-form';
 import { authActions } from '../../actions';
-import { setPopupIsOpen, setUser } from '../../reducers/authSlice';
+import { setWallet, setPopupIsOpen } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -14,7 +13,6 @@ import Message from '../Message';
 
 const InfluencerContent = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
     const wallet = useSelector((state) => state.auth.wallet);
     const popupIsOpen = useSelector((state) => state.auth.popupIsOpen);
     const loading = useSelector((state) => state.auth.loading);
@@ -24,34 +22,18 @@ const InfluencerContent = () => {
         return 'ontouchstart' in window || 'onmsgesturechange' in window;
     };
 
-    useEffect(() => {
-        if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
-    }, []);
-
     const connectMetamask = () => {
-        if (isMobileDevice()) return null;
+        if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
 
         dispatch(authActions.connectMeta());
     };
 
     useEffect(() => {
-        if (wallet && !user.token) {
-            const userData = {
-                metamask: wallet,
-                ref:      'moon-card',
-                twitter:  '',
-                telegram: '',
-            };
+        const storageWallet = JSON.stringify(localStorage.getItem('wallet'));
 
-            dispatch(authActions.createUser(userData));
-        }
-    }, [wallet]);
-
-    useEffect(() => {
-        const storageUser = JSON.parse(localStorage.getItem('user'));
-
-        if (storageUser) {
-            dispatch(authActions.getUser(storageUser));
+        if (storageWallet) {
+            setWallet(storageWallet.wallet);
+            setPopupIsOpen(storageWallet.popupIsOpen);
         }
     }, []);
 
@@ -65,7 +47,7 @@ const InfluencerContent = () => {
 
     return (
         <>
-            { user.metamask && popupIsOpen && <PopupSignupWithSocials /> }
+            { wallet && popupIsOpen && <PopupSignupWithSocials /> }
             { error && <Message>{ error }</Message> }
             <section className = { Styles.content }>
                 <h1 className = { Styles.content_title }>

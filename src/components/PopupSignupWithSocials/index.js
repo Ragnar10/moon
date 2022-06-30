@@ -7,7 +7,7 @@ import queryString from 'query-string';
 import { cutLine } from '../../utils';
 // Actions
 import { authActions } from '../../actions';
-import { setTelegramData, setPopupIsOpen, setError } from '../../reducers/authSlice';
+import { setTelegramData } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -16,7 +16,6 @@ import Message from '../Message';
 
 const PopupSignupWithSocials = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
     const wallet = useSelector((state) => state.auth.wallet);
     const twitterData = useSelector((state) => state.auth.twitterData);
     const telegramData = useSelector((state) => state.auth.telegramData);
@@ -24,6 +23,8 @@ const PopupSignupWithSocials = () => {
 
     const handleTelegramResponse = (res) => {
         dispatch(setTelegramData(res.username));
+
+        localStorage.setItem('tg', res.username);
     };
 
     const twitterLogin = () => {
@@ -48,34 +49,28 @@ const PopupSignupWithSocials = () => {
     }, []);
 
     useEffect(() => {
-        console.log(user, twitterData, telegramData);
+        const tg = localStorage.getItem('tg');
 
-        if (user.token && twitterData && telegramData) {
-            const data = {
-                id:     user.id,
-                token:  user.token,
-                update: { twitter: twitterData, telegram: telegramData },
-            };
-
-            dispatch(authActions.updateUser(data));
-        }
-    }, [telegramData, twitterData]);
+        if (tg) return  dispatch(setTelegramData(tg));
+    }, []);
 
     const confirmAllData = () => {
-        dispatch(setPopupIsOpen(false));
-        dispatch(setError('You have successfully registered!'));
+        if (wallet && twitterData && telegramData) {
+            const data = {
+                metamask: wallet,
+                ref:      'moon-card',
+                twitter:  twitterData,
+                telegram: telegramData,
+            };
+
+            dispatch(authActions.createUser(data));
+        }
     };
 
     return (
         <section className = { Styles.popup }>
             <div className = { Styles.shadow } />
-            {
-                error
-                && <Message
-                    class = { user.metamask && user.twitter && user.telegram ? Styles.message : null }>
-                    { error }
-                </Message>
-            }
+            { error && <Message>{ error }</Message> }
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>
@@ -96,7 +91,7 @@ const PopupSignupWithSocials = () => {
                         botName = { process.env.REACT_APP_BOT_NAME }
                         requestAccess = 'white' />
                     <button
-                        disabled = { !user.metamask || !user.twitter || !user.telegram ? 'disabled' : null }
+                        disabled = { !wallet || !twitterData || !telegramData ? 'disabled' : null }
                         onClick = { () => confirmAllData() }
                         className = { Styles.confirm_btn }>{ 'Confirm' }</button>
                 </div>

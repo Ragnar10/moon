@@ -20,7 +20,13 @@ export const authActions = {
                     } else {
                         dispatch(clearError(''));
                         dispatch(setWallet(res[ 0 ]));
+                        dispatch(setPopupIsOpen(true));
                         dispatch(setLoading(false));
+                        const data = {
+                            wallet:      res[ 0 ],
+                            popupIsOpen: true,
+                        };
+                        localStorage.setItem('wallet', JSON.stringify(data));
                     }
 
                     return null;
@@ -40,7 +46,17 @@ export const authActions = {
         if (window.ethereum) {
             window.ethereum
                 .request({ method: 'eth_requestAccounts' })
-                .then((res) =>  dispatch(setWallet(res[ 0 ])))
+                .then((res) => {
+                    dispatch(setWallet(res[ 0 ]));
+                    dispatch(setPopupIsOpen(true));
+                    const data = {
+                        wallet:      res[ 0 ],
+                        popupIsOpen: true,
+                    };
+                    localStorage.setItem('wallet', JSON.stringify(data));
+
+                    return null;
+                })
                 .catch(() => {
                     dispatch(clearError(''));
                     dispatch(setError('Something went wrong, please try again later!'));
@@ -56,64 +72,11 @@ export const authActions = {
                     console.log(res);
                     if (res.id) {
                         dispatch(setUser(res));
-                        const user = {
-                            id:    res.id,
-                            token: res.token,
-                        };
-                        localStorage.setItem('user', JSON.stringify(user));
-                        dispatch(setPopupIsOpen(true));
-                    } else {
+                        dispatch(setPopupIsOpen(false));
                         dispatch(clearError(''));
-                        dispatch(setError('User already exists!'));
-                    }
-
-                    return null;
-                })
-                .catch(() => {
-                    dispatch(clearError(''));
-                    dispatch(setError('Something went wrong, please try again later!'));
-                });
-        } catch {
-            dispatch(clearError(''));
-            dispatch(setError('Something went wrong, please try again later!'));
-        }
-    },
-
-    getUser: (data) => (dispatch) => {
-        try {
-            api.getUser(data)
-                .then((response) => response.json())
-                .then((res) => {
-                    console.log(res);
-                    if (res.id) {
-                        dispatch(setUser(res));
-                        dispatch(setPopupIsOpen(true));
-                        localStorage.removeItem('user');
-                    } else {
-                        dispatch(clearError(''));
-                        dispatch(setError('Something went wrong, please try again later!'));
-                    }
-
-                    return null;
-                })
-                .catch(() => {
-                    dispatch(clearError(''));
-                    dispatch(setError('Something went wrong, please try again later!'));
-                });
-        } catch {
-            dispatch(clearError(''));
-            dispatch(setError('Something went wrong, please try again later!'));
-        }
-    },
-
-    updateUser: (data) => (dispatch) => {
-        try {
-            api.updateUser(data)
-                .then((response) => response.json())
-                .then((res) => {
-                    console.log(res);
-                    if (res.id) {
-                        dispatch(setUser(res));
+                        dispatch(setError('You have successfully registered!'));
+                        localStorage.removeItem('wallet');
+                        localStorage.removeItem('tg');
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
