@@ -25,10 +25,6 @@ const TelegramLoginBtn = (props) => {
         );
         script.async = true;
         btn.current.appendChild(script);
-
-        return () => {
-            btn.current.removeChild(script);
-        };
     }, []);
 
     return (
