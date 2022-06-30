@@ -7,7 +7,7 @@ import queryString from 'query-string';
 import { cutLine } from '../../utils';
 // Actions
 import { authActions } from '../../actions';
-import { setTelegramData, setPopupIsOpen } from '../../reducers/authSlice';
+import { setTelegramData, setPopupIsOpen, setError } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -63,12 +63,19 @@ const PopupSignupWithSocials = () => {
 
     const confirmAllData = () => {
         dispatch(setPopupIsOpen(false));
+        dispatch(setError('You have successfully registered!'));
     };
 
     return (
         <section className = { Styles.popup }>
             <div className = { Styles.shadow } />
-            { error && <Message>{ error }</Message> }
+            {
+                error
+                && <Message
+                    class = { user.metamask && user.twitter && user.telegram ? Styles.message : null }>
+                    { error }
+                </Message>
+            }
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>
