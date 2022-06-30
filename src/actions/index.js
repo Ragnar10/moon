@@ -40,12 +40,7 @@ export const authActions = {
         if (window.ethereum) {
             window.ethereum
                 .request({ method: 'eth_requestAccounts' })
-                .then((res) => {
-                    dispatch(setWallet(res[ 0 ]));
-                    dispatch(setPopupIsOpen(true));
-
-                    return null;
-                })
+                .then((res) =>  dispatch(setWallet(res[ 0 ])))
                 .catch(() => {
                     dispatch(clearError(''));
                     dispatch(setError('Something went wrong, please try again later!'));
