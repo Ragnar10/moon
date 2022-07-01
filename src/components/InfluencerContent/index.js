@@ -23,10 +23,12 @@ const InfluencerContent = () => {
     };
 
     const connectMetamask = () => {
-        if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
-
         dispatch(authActions.connectMeta());
     };
+
+    useEffect(() => {
+        if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
+    }, []);
 
     useEffect(() => {
         const storageWallet = localStorage.getItem('wallet');
