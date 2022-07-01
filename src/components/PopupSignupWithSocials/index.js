@@ -7,7 +7,7 @@ import queryString from 'query-string';
 import { cutLine } from '../../utils';
 // Actions
 import { authActions } from '../../actions';
-import { setTelegramData } from '../../reducers/authSlice';
+import { setTelegramData, setTwitterData } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -50,8 +50,10 @@ const PopupSignupWithSocials = () => {
 
     useEffect(() => {
         const tg = localStorage.getItem('tg');
+        const tw = localStorage.getItem('tw');
 
         if (tg) return  dispatch(setTelegramData(tg));
+        if (tw) return  dispatch(setTwitterData(tw));
     }, []);
 
     const confirmAllData = () => {

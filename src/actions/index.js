@@ -125,6 +125,7 @@ export const authActions = {
                 console.log(res);
                 if (res.screen_name) {
                     dispatch(setTwitterData(res.screen_name));
+                    localStorage.setItem('tw', res.screen_name);
                 } else {
                     dispatch(clearError(''));
                     dispatch(setError('Something went wrong, please try again later!'));
