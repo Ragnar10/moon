@@ -28,7 +28,7 @@ const TelegramLoginBtn = (props) => {
     }, []);
 
     return (
-        <div ref = { btn }>
+        <div ref = { btn } className = { props.class }>
             { props.children }
         </div>
     );

@@ -47,10 +47,13 @@
     }
 }
 
-.content_metamask_btn,
 .content_connected_btn {
     @include button();
     padding: 12px;
+}
+
+.message_success {
+    background: var(--primary200-color);
 }
 
 @media (max-width: 768px) {

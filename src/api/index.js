@@ -1,4 +1,4 @@
-const apiPath = process.env.REACT_APP_TWITTER_API_PATH;
+const apiPath = process.env.REACT_APP_BACK_PATH;
 
 export const api = {
     getTwitterOauthToken: () => {

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 // Styles
 import Styles from './styles.module.scss';
 
-const AuthContent = () => {
+export const SignUpContent = () => {
     const { register, handleSubmit, reset } = useForm({
         mode:          'onSubmit',
         defaultValues: {
@@ -72,5 +72,3 @@ const AuthContent = () => {
         </section>
     );
 };
-
-export default AuthContent;

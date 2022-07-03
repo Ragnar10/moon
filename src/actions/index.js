@@ -75,12 +75,16 @@ export const authActions = {
                         dispatch(setPopupIsOpen(false));
                         dispatch(clearError(''));
                         dispatch(setError('You have successfully registered!'));
-                        localStorage.removeItem('wallet');
-                        localStorage.removeItem('tg');
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
+                        dispatch(setUser({ token: 'exist' }));
                     }
+
+                    localStorage.removeItem('influencer');
+                    localStorage.removeItem('wallet');
+                    localStorage.removeItem('tw');
+                    localStorage.removeItem('tg');
 
                     return null;
                 })

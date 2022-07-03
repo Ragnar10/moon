@@ -12,10 +12,16 @@
     width: 140px;
     height: 20px;
 
-    img {
+    & > a {
         display: inline-block;
         width: 140px;
         height: 20px;
+
+        & > img {
+            display: inline-block;
+            width: 140px;
+            height: 20px;
+        }
     }
 }
 

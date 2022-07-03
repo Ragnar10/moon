@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
     name:         'auth',
     initialState: {
+        influencer:   '',
         user:         {},
         wallet:       '',
         telegramData: '',
@@ -13,6 +14,9 @@ export const authSlice = createSlice({
         error:        '',
     },
     reducers: {
+        setInfluencer: (state, action) => {
+            state.influencer = action.payload;
+        },
         setUser: (state, action) => {
             state.user = action.payload;
         },
@@ -41,7 +45,7 @@ export const authSlice = createSlice({
 });
 
 export const {
-    setUser, setWallet, setTelegramData, setTwitterData,
+    setInfluencer, setUser, setWallet, setTelegramData, setTwitterData,
     setPopupIsOpen, setLoading, setError, clearError,
 } = authSlice.actions;
 

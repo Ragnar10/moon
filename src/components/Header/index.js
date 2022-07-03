@@ -1,3 +1,5 @@
+// Routing
+import { Link } from 'react-router-dom';
 // Styles
 import Styles from './styles.module.scss';
 // Images
@@ -9,20 +11,20 @@ const Header = (props) => {
     return (
         <header className = { Styles.header }>
             <div className = { Styles.header_logo }>
-                <img src = { logo } alt = 'logo' />
+                <Link to = '/'>
+                    <img src = { logo } alt = 'logo' />
+                </Link>
             </div>
             {
-                props.auth
+                props.auth === 'authorized'
                     && <div className = { Styles.header_nav }>
                         <Nav />
                         <button className = { Styles.header_btn_launch }>{ 'Launch application' }</button>
                     </div>
             }
-            { /* { */ }
-            { /*     props.login && <button */ }
-            { /*         onClick = { () => setToggle(true) } */ }
-            { /*         className = { Styles.header_btn_login }>{ 'Login' }</button> */ }
-            { /* } */ }
+            {
+                props.auth === 'login' && <Link to = '/login' className = { Styles.header_btn_login }>{ 'Login' }</Link>
+            }
         </header>
     );
 };

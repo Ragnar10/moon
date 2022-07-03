@@ -1,2 +1,4 @@
 export * from './Main';
-export * from './ConnectWith';
+export * from './InfluencerContent';
+export * from './PresentationContent';
+export * from './SignUpContent';

@@ -1,13 +1,11 @@
 // Core
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// Instruments
-import queryString from 'query-string';
 // Utils
 import { cutLine } from '../../utils';
 // Actions
 import { authActions } from '../../actions';
-import { setTelegramData, setTwitterData } from '../../reducers/authSlice';
+import { clearError, setTelegramData, setTwitterData } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -16,6 +14,8 @@ import Message from '../Message';
 
 const PopupSignupWithSocials = () => {
     const dispatch = useDispatch();
+    const influencer = useSelector((state) => state.auth.influencer);
+    const user = useSelector((state) => state.auth.user);
     const wallet = useSelector((state) => state.auth.wallet);
     const twitterData = useSelector((state) => state.auth.twitterData);
     const telegramData = useSelector((state) => state.auth.telegramData);
@@ -31,28 +31,15 @@ const PopupSignupWithSocials = () => {
         dispatch(authActions.getTwitterOauthToken());
     };
 
-    const authTwitter = () => {
-        const { oauth_token, oauth_verifier } = queryString.parse(window.location.search);
-
-        if (oauth_token && oauth_verifier) {
-            const data = {
-                oauth_token,
-                oauth_verifier,
-            };
-
-            dispatch(authActions.getTwitterData(data));
-        }
-    };
-
     useEffect(() => {
-        authTwitter();
+        const tg = localStorage.getItem('tg');
+
+        if (tg) return  dispatch(setTelegramData(tg));
     }, []);
 
     useEffect(() => {
-        const tg = localStorage.getItem('tg');
         const tw = localStorage.getItem('tw');
 
-        if (tg) return  dispatch(setTelegramData(tg));
         if (tw) return  dispatch(setTwitterData(tw));
     }, []);
 
@@ -69,6 +56,20 @@ const PopupSignupWithSocials = () => {
         }
     };
 
+    useEffect(() => {
+        let timeout;
+
+        if (user.token) {
+            timeout = setTimeout(() => {
+                window.location.href = process.env.REACT_APP_BASE_PATH;
+            }, 5000);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [user]);
+
     return (
         <section className = { Styles.popup }>
             <div className = { Styles.shadow } />
@@ -76,7 +77,8 @@ const PopupSignupWithSocials = () => {
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>
-                    { 'You have successfully been referred by: Influencer Name and you will receive a special Bonus at LVRGD Launch.' }
+                    { `You have successfully been referred by: ${influencer}
+                     and you will receive a special Bonus at LVRGD Launch.` }
                 </p>
                 <p className = { Styles.content_info }>
                     { 'To be eligible for the Bonus connect your twitter and telegram to verify you are a real Human. Collect social points for the free IDO by being active on Telegram and Twitter.' }
@@ -84,6 +86,7 @@ const PopupSignupWithSocials = () => {
                 <div className = { Styles.content_btns }>
                     <button
                         onClick = { () => twitterLogin() }
+                        disabled = { twitterData ? 'disabled' : null }
                         className = { Styles.twitter_btn }>
                         <span />
                         <span>{ 'Twitter' }</span>
@@ -91,7 +94,8 @@ const PopupSignupWithSocials = () => {
                     <TelegramLoginBtn
                         dataOnauth = { handleTelegramResponse }
                         botName = { process.env.REACT_APP_BOT_NAME }
-                        requestAccess = 'white' />
+                        requestAccess = 'white'
+                        class = { telegramData ? Styles.telegram_disabled : null } />
                     <button
                         disabled = { !wallet || !twitterData || !telegramData ? 'disabled' : null }
                         onClick = { () => confirmAllData() }
