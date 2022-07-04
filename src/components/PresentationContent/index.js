@@ -37,7 +37,7 @@ export const PresentationContent = () => {
         const influencer = localStorage.getItem('influencer');
 
         if (twitterData) {
-            navigate(`/influencer/${influencer}`, { replace: true });
+            navigate(`/affiliate/${influencer}`, { replace: true });
         }
     }, [twitterData]);
 
