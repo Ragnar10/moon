@@ -73,7 +73,7 @@ const PopupSignupWithSocials = () => {
     return (
         <section className = { Styles.popup }>
             <div className = { Styles.shadow } />
-            { error && <Message>{ error }</Message> }
+            { error && <Message class = { user.id ? Styles.message : null }>{ error }</Message> }
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>

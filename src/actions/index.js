@@ -72,7 +72,6 @@ export const authActions = {
                     console.log(res);
                     if (res.id) {
                         dispatch(setUser(res));
-                        dispatch(setPopupIsOpen(false));
                         dispatch(clearError(''));
                         dispatch(setError('You have successfully registered!'));
                     } else {
