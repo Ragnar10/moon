@@ -63,7 +63,7 @@ export const SignUpContent = () => {
                         id = 'terms'
                         className = { Styles.checkbox_field } />
                     <label htmlFor = { 'terms' } className = { Styles.checkbox_label } />
-                    <span>{ 'By signing up to leveraged you agree to our Terms of Serivce and privbacy policy' }</span>
+                    <span>{ 'By signing up to leveraged you agree to our Terms of Service and privacy policy' }</span>
                 </div>
                 <button
                     type = 'submit'
