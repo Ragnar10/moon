@@ -63,7 +63,7 @@ const PopupSignupWithSocials = () => {
         if (user.token) {
             timeout = setTimeout(() => {
                 window.location.href = process.env.REACT_APP_BASE_PATH;
-            }, 5000);
+            }, 1000);
         }
 
         return () => {

@@ -13,7 +13,7 @@ const Message = (props) => {
         const timeout = setTimeout(() => {
             dispatch(clearError());
             dispatch(clearMessage());
-        }, 5000);
+        }, 3000);
 
         return () => {
             clearTimeout(timeout);
