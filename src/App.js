@@ -10,7 +10,7 @@ const App = () => {
         <Routes>
             <Route path = '/' element = { <Outlet /> }>
                 <Route index element = { <MainPage /> } />
-                <Route path = 'influencer/:id' element = { <WalletPage /> } />
+                <Route path = 'affiliate/:id' element = { <WalletPage /> } />
                 <Route path = 'login' element = { <SignUpPage /> } />
             </Route>
 
