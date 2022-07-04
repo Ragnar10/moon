@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // Actions
-import { clearError } from '../../reducers/authSlice';
+import { clearError, clearMessage } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 
@@ -10,7 +10,10 @@ const Message = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const timeout = setTimeout(() => dispatch(clearError('')), 5000);
+        const timeout = setTimeout(() => {
+            dispatch(clearError());
+            dispatch(clearMessage());
+        }, 5000);
 
         return () => {
             clearTimeout(timeout);

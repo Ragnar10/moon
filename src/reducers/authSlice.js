@@ -12,6 +12,7 @@ export const authSlice = createSlice({
         popupIsOpen:  false,
         loading:      false,
         error:        '',
+        message:      '',
     },
     reducers: {
         setInfluencer: (state, action) => {
@@ -41,12 +42,18 @@ export const authSlice = createSlice({
         clearError: (state) => {
             state.error = '';
         },
+        setMessage: (state, action) => {
+            state.message = action.payload;
+        },
+        clearMessage: (state) => {
+            state.message = '';
+        },
     },
 });
 
 export const {
     setInfluencer, setUser, setWallet, setTelegramData, setTwitterData,
-    setPopupIsOpen, setLoading, setError, clearError,
+    setPopupIsOpen, setLoading, setError, clearError, setMessage, clearMessage,
 } = authSlice.actions;
 
 export default authSlice.reducer;

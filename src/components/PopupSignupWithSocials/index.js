@@ -20,6 +20,7 @@ const PopupSignupWithSocials = () => {
     const twitterData = useSelector((state) => state.auth.twitterData);
     const telegramData = useSelector((state) => state.auth.telegramData);
     const error = useSelector((state) => state.auth.error);
+    const message = useSelector((state) => state.auth.message);
 
     const handleTelegramResponse = (res) => {
         dispatch(setTelegramData(res.username));
@@ -73,7 +74,8 @@ const PopupSignupWithSocials = () => {
     return (
         <section className = { Styles.popup }>
             <div className = { Styles.shadow } />
-            { error && <Message class = { user.id ? Styles.message : null }>{ error }</Message> }
+            { error && <Message>{ error }</Message> }
+            { message && <Message class = { Styles.message }>{ message }</Message> }
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>
