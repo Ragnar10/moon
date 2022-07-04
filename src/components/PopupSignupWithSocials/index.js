@@ -45,10 +45,10 @@ const PopupSignupWithSocials = () => {
     }, []);
 
     const confirmAllData = () => {
-        if (wallet && twitterData && telegramData) {
+        if (wallet && twitterData && telegramData && influencer) {
             const data = {
                 metamask: wallet,
-                ref:      'moon-card',
+                ref:      influencer,
                 twitter:  twitterData,
                 telegram: telegramData,
             };
