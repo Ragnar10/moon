@@ -17,6 +17,7 @@ const validationSchema = Yup.object().shape({
         .max(30, 'Max 30')
         .required('Fill in all fields'),
     confirm_password: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match')
         .required('Fill in all fields'),
     terms: Yup.bool()
         .oneOf([true]),
