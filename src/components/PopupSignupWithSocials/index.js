@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Utils
 import { cutLine } from '../../utils';
 // Actions
-import { authActions } from '../../actions';
+import { authActions } from '../../actions/authActions';
 import { clearError, setTelegramData, setTwitterData } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';

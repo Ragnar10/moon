@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import Styles from './styles.module.scss';
 // Components
 
-const PopupLogin = (props) => {
+export const PopupLogin = (props) => {
     const { register, handleSubmit, reset } = useForm({
         mode:          'onSubmit',
         defaultValues: {
@@ -51,5 +51,3 @@ const PopupLogin = (props) => {
         </section>
     );
 };
-
-export default PopupLogin;

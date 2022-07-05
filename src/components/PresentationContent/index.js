@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 // Instruments
 import queryString from 'query-string';
 // Actions
-import { authActions } from '../../actions';
+import { authActions } from '../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 

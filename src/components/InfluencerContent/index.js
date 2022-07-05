@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // Routing
 import { useParams } from 'react-router-dom';
 // Actions
-import { authActions } from '../../actions';
+import { authActions } from '../../actions/authActions';
 import { setWallet, setPopupIsOpen, setInfluencer } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';

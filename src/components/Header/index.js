@@ -23,7 +23,11 @@ const Header = (props) => {
                     </div>
             }
             {
-                props.auth === 'login' && <Link to = '/login' className = { Styles.header_btn_login }>{ 'Login' }</Link>
+                props.auth === 'auth'
+                && <div className = { Styles.header_nav }>
+                    <Link to = '/signup' className = { Styles.header_btn_signup }>{ 'Sign up' }</Link>
+                    <Link to = '/login' className = { Styles.header_btn_login }>{ 'Login' }</Link>
+                </div>
             }
         </header>
     );
