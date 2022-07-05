@@ -26,10 +26,18 @@
 }
 
 .form_label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 4px;
     font-size: var(--label-font-size);
     line-height: 1;
     color: var(--grey800-color);
+
+    & > .form_error {
+        font-size: var(--text-font-size);
+        color: var(--error-color);
+    }
 }
 
 .form_field {
@@ -49,7 +57,7 @@
     color: var(--main-color);
 
     &::placeholder {
-        color: var(--main-color);
+        color: var(--grey800-color);
     }
 }
 
@@ -122,6 +130,11 @@
     width: 100%;
     padding: 16px 12px;
     font-weight: 700;
+
+    &:disabled {
+        pointer-events: none;
+        filter: grayscale(70%);
+    }
 }
 
 

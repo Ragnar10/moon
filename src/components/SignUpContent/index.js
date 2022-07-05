@@ -1,11 +1,33 @@
 // Instruments
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 // Styles
 import Styles from './styles.module.scss';
 
+const validationSchema = Yup.object().shape({
+    name: Yup.string()
+        .min(2, 'Min 2')
+        .max(30, 'Max 30')
+        .required('Fill in all fields'),
+    email: Yup.string()
+        .required('Fill in all fields'),
+    password: Yup.string()
+        .min(6, 'Min 6')
+        .max(30, 'Max 30')
+        .required('Fill in all fields'),
+    confirm_password: Yup.string()
+        .required('Fill in all fields'),
+    terms: Yup.bool()
+        .oneOf([true]),
+});
+
 export const SignUpContent = () => {
-    const { register, handleSubmit, reset } = useForm({
-        mode:          'onSubmit',
+    const {
+        register, handleSubmit, reset, formState: { errors, isValid },
+    } = useForm({
+        mode:          'all',
+        resolver:      yupResolver(validationSchema),
         defaultValues: {
             name:             '',
             email:            '',
@@ -26,7 +48,10 @@ export const SignUpContent = () => {
             <form onSubmit = { submitForm } className = { Styles.auth_form }>
                 <label
                     htmlFor = { 'name' }
-                    className = { Styles.form_label }>{ 'Name' }</label>
+                    className = { Styles.form_label }>
+                    <span>{ 'Name' }</span>
+                    { errors.name && <span className = { Styles.form_error }>{ errors.name.message }</span> }
+                </label>
                 <input
                     { ...register('name') }
                     id = 'name'
@@ -34,7 +59,10 @@ export const SignUpContent = () => {
                     className = { Styles.form_field } />
                 <label
                     htmlFor = { 'email' }
-                    className = { Styles.form_label }>{ 'Email address' }</label>
+                    className = { Styles.form_label }>
+                    <span>{ 'Email address' }</span>
+                    { errors.email && <span className = { Styles.form_error }>{ errors.email.message }</span> }
+                </label>
                 <input
                     { ...register('email') }
                     id = 'email'
@@ -42,7 +70,10 @@ export const SignUpContent = () => {
                     className = { Styles.form_field } />
                 <label
                     htmlFor = { 'password' }
-                    className = { Styles.form_label }>{ 'Password' }</label>
+                    className = { Styles.form_label }>
+                    <span>{ 'Password' }</span>
+                    { errors.password && <span className = { Styles.form_error }>{ errors.password.message }</span> }
+                </label>
                 <input
                     { ...register('password') }
                     id = 'password'
@@ -50,7 +81,13 @@ export const SignUpContent = () => {
                     className = { Styles.form_field } />
                 <label
                     htmlFor = { 'confirm_password' }
-                    className = { Styles.form_label }>{ 'Confirm password' }</label>
+                    className = { Styles.form_label }>
+                    <span>{ 'Confirm password' }</span>
+                    {
+                        errors.confirm_password
+                        && <span className = { Styles.form_error }>{ errors.confirm_password.message }</span>
+                    }
+                </label>
                 <input
                     { ...register('confirm_password') }
                     id = 'confirm_password'
@@ -67,6 +104,7 @@ export const SignUpContent = () => {
                 </div>
                 <button
                     type = 'submit'
+                    disabled = { !isValid }
                     className = { Styles.form_sign_btn }>{ 'Sign up' }</button>
             </form>
         </section>

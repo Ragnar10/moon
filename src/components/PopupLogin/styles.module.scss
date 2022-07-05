@@ -49,9 +49,17 @@
 }
 
 .form_label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 9px;
     font-size: var(--tinylabel-font-size);
     line-height: 16px;
+
+    & > .form_error {
+        font-size: var(--text-font-size);
+        color: var(--error-color);
+    }
 }
 
 .form_field {
@@ -92,6 +100,11 @@
     width: 100%;
     margin-top: 16px;
     padding: 12px;
+
+    &:disabled {
+        pointer-events: none;
+        filter: grayscale(70%);
+    }
 }
 
 @media (max-width: 360px) {
