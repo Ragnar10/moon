@@ -1,9 +1,19 @@
+// Core
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+// Routing
+import { useNavigate } from 'react-router-dom';
 // Instruments
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+// Actions
+import { signupActions } from '../../actions/signupActions';
 // Styles
 import Styles from './styles.module.scss';
+// Components
+import Message from '../Message';
+import Loader from '../Loader';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -27,6 +37,14 @@ const validationSchema = Yup.object().shape({
 });
 
 export const SignUpContent = () => {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.signup.user);
+    const loading = useSelector((state) => state.signup.loading);
+    const error = useSelector((state) => state.signup.error);
+    const message = useSelector((state) => state.signup.message);
+
+    const navigate = useNavigate();
+
     const {
         register, handleSubmit, reset, formState: { errors, isValid },
     } = useForm({
@@ -42,78 +60,109 @@ export const SignUpContent = () => {
     });
 
     const submitForm = handleSubmit((values) => {
-        console.log(values);
+        const regData = {
+            name:      values.name,
+            email:     values.email,
+            password:  values.password,
+            password2: values.confirm_password,
+        };
+        dispatch(signupActions.signupUser(regData));
         reset();
     });
 
+    useEffect(() => {
+        let timeout;
+
+        if (user.email) {
+            timeout = setTimeout(() => {
+                navigate('/');
+            }, 1000);
+        }
+
+        return () => {
+            clearTimeout(timeout);
+        };
+    }, [user]);
+
     return (
-        <section className = { Styles.signup }>
-            <h3 className = { Styles.signup_title }>{ 'You have been invited to create your affiliate account' }</h3>
-            <form onSubmit = { submitForm } className = { Styles.signup_form }>
-                <label
-                    htmlFor = { 'name' }
-                    className = { Styles.form_label }>
-                    <span>{ 'Name' }</span>
-                    { errors.name && <span className = { Styles.form_error }>{ errors.name.message }</span> }
-                </label>
-                <input
-                    { ...register('name') }
-                    id = 'name'
-                    placeholder = { 'Your name' }
-                    className = { Styles.form_field } />
-                <label
-                    htmlFor = { 'email' }
-                    className = { Styles.form_label }>
-                    <span>{ 'Email address' }</span>
-                    { errors.email && <span className = { Styles.form_error }>{ errors.email.message }</span> }
-                </label>
-                <input
-                    type = 'email'
-                    { ...register('email') }
-                    id = 'email'
-                    placeholder = { 'Email' }
-                    className = { Styles.form_field } />
-                <label
-                    htmlFor = { 'password' }
-                    className = { Styles.form_label }>
-                    <span>{ 'Password' }</span>
-                    { errors.password && <span className = { Styles.form_error }>{ errors.password.message }</span> }
-                </label>
-                <input
-                    type = 'password'
-                    { ...register('password') }
-                    id = 'password'
-                    placeholder = { 'Password' }
-                    className = { Styles.form_field } />
-                <label
-                    htmlFor = { 'confirm_password' }
-                    className = { Styles.form_label }>
-                    <span>{ 'Confirm password' }</span>
-                    {
-                        errors.confirm_password
-                        && <span className = { Styles.form_error }>{ errors.confirm_password.message }</span>
-                    }
-                </label>
-                <input
-                    type = 'password'
-                    { ...register('confirm_password') }
-                    id = 'confirm_password'
-                    placeholder = { 'Repeat your password' }
-                    className = { Styles.form_field } />
-                <div className = { Styles.form_checkbox }>
+        <>
+            { error && <Message>{ error }</Message> }
+            { message && <Message class = { Styles.message }>{ message }</Message> }
+            <section className = { Styles.signup }>
+                <h3 className = { Styles.signup_title }>{ 'You have been invited to create your affiliate account' }</h3>
+                <form onSubmit = { submitForm } className = { Styles.signup_form }>
+                    <label
+                        htmlFor = { 'name' }
+                        className = { Styles.form_label }>
+                        <span>{ 'Name' }</span>
+                        { errors.name && <span className = { Styles.form_error }>{ errors.name.message }</span> }
+                    </label>
                     <input
-                        type = 'checkbox'
-                        { ...register('terms') }
-                        id = 'terms'
-                        className = { Styles.checkbox_field } />
-                    <label htmlFor = { 'terms' } className = { Styles.checkbox_label } />
-                    <span>{ 'By signing up to leveraged you agree to our Terms of Service and privacy policy' }</span>
-                </div>
-                <button
-                    type = 'submit'
-                    disabled = { !isValid }
-                    className = { Styles.form_sign_btn }>{ 'Sign up' }</button>
-            </form>
-        </section>
+                        { ...register('name') }
+                        id = 'name'
+                        placeholder = { 'Your name' }
+                        className = { Styles.form_field } />
+                    <label
+                        htmlFor = { 'email' }
+                        className = { Styles.form_label }>
+                        <span>{ 'Email address' }</span>
+                        { errors.email && <span className = { Styles.form_error }>{ errors.email.message }</span> }
+                    </label>
+                    <input
+                        type = 'email'
+                        { ...register('email') }
+                        id = 'email'
+                        placeholder = { 'Email' }
+                        className = { Styles.form_field } />
+                    <label
+                        htmlFor = { 'password' }
+                        className = { Styles.form_label }>
+                        <span>{ 'Password' }</span>
+                        {
+                            errors.password
+                            && <span className = { Styles.form_error }>{ errors.password.message }</span>
+                        }
+                    </label>
+                    <input
+                        type = 'password'
+                        { ...register('password') }
+                        id = 'password'
+                        placeholder = { 'Password' }
+                        className = { Styles.form_field } />
+                    <label
+                        htmlFor = { 'confirm_password' }
+                        className = { Styles.form_label }>
+                        <span>{ 'Confirm password' }</span>
+                        {
+                            errors.confirm_password
+                            && <span className = { Styles.form_error }>{ errors.confirm_password.message }</span>
+                        }
+                    </label>
+                    <input
+                        type = 'password'
+                        { ...register('confirm_password') }
+                        id = 'confirm_password'
+                        placeholder = { 'Repeat your password' }
+                        className = { Styles.form_field } />
+                    <div className = { Styles.form_checkbox }>
+                        <input
+                            type = 'checkbox'
+                            { ...register('terms') }
+                            id = 'terms'
+                            className = { Styles.checkbox_field } />
+                        <label htmlFor = { 'terms' } className = { Styles.checkbox_label } />
+                        <span>{ 'By signing up to leveraged you agree to our Terms of Service and privacy policy' }</span>
+                    </div>
+                    {
+                        loading
+                            ? <Loader />
+                            : <button
+                                type = 'submit'
+                                disabled = { !isValid }
+                                className = { Styles.form_signup_btn }>{ 'Sign up' }</button>
+                    }
+                </form>
+            </section>
+        </>
     );
 };

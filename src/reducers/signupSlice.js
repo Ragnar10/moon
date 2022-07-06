@@ -4,18 +4,14 @@ import { createSlice } from '@reduxjs/toolkit';
 export const signupSlice = createSlice({
     name:         'signup',
     initialState: {
-        user:        {},
-        popupIsOpen: false,
-        loading:     false,
-        error:       '',
-        message:     '',
+        user:    {},
+        loading: false,
+        error:   '',
+        message: '',
     },
     reducers: {
         setUser: (state, action) => {
             state.user = action.payload;
-        },
-        setPopupIsOpen: (state, action) => {
-            state.popupIsOpen = action.payload;
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
@@ -36,7 +32,7 @@ export const signupSlice = createSlice({
 });
 
 export const {
-    setUser, setPopupIsOpen, setLoading, setError, clearError, setMessage, clearMessage,
+    setUser, setLoading, setError, clearError, setMessage, clearMessage,
 } = signupSlice.actions;
 
 export default signupSlice.reducer;

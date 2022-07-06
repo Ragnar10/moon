@@ -125,7 +125,7 @@
 
 }
 
-.form_sign_btn {
+.form_signup_btn {
     @include button();
     width: 100%;
     padding: 16px 12px;
@@ -135,6 +135,10 @@
         pointer-events: none;
         filter: grayscale(70%);
     }
+}
+
+.message {
+    background: var(--primary200-color) !important;
 }
 
 
