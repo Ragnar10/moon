@@ -16,8 +16,8 @@ import Message from '../Message';
 import Loader from '../Loader';
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string()
-        .matches(/^[a-zA-Z0-9!@#$%^&*.]+$/, 'Wrong format')
+    email: Yup.string()
+        .email('Wrong format')
         .required('Fill in all fields'),
     password: Yup.string()
         .matches(/^[a-zA-Z0-9!@#$%^&*]+$/, 'Wrong format')
@@ -39,14 +39,14 @@ export const PopupLogin = () => {
         mode:          'all',
         resolver:      yupResolver(validationSchema),
         defaultValues: {
-            name:     '',
+            email:    '',
             password: '',
         },
     });
 
     const submitForm = handleSubmit((values) => {
         const logData = {
-            username: values.name,
+            username: values.email,
             password: values.password,
         };
         dispatch(signupActions.loginUser(logData));
@@ -79,9 +79,10 @@ export const PopupLogin = () => {
                         htmlFor = { 'email' }
                         className = { Styles.form_label }>
                         <span>{ 'Email' }</span>
-                        { errors.name && <span className = { Styles.form_error }>{ errors.name.message }</span> }
+                        { errors.email && <span className = { Styles.form_error }>{ errors.email.message }</span> }
                     </label>
                     <input
+                        type = 'email'
                         { ...register('email') }
                         id = 'email'
                         placeholder = { 'Email' }
