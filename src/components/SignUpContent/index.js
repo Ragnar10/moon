@@ -7,14 +7,17 @@ import Styles from './styles.module.scss';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
-        .min(2, 'Min 2')
-        .max(30, 'Max 30')
+        .min(2, 'Min length 2')
+        .max(30, 'Max length 30')
+        .matches(/^[a-zA-Z0-9!@#$%^&*]+$/, 'Only uppercase and lowercase Latin letters, numbers, special characters')
         .required('Fill in all fields'),
     email: Yup.string()
+        .email('Invalid email format')
         .required('Fill in all fields'),
     password: Yup.string()
-        .min(6, 'Min 6')
-        .max(30, 'Max 30')
+        .min(6, 'Min length 6')
+        .max(20, 'Max length 20')
+        .matches(/^[a-zA-Z0-9!@#$%^&*]+$/, 'Only latin letters, numbers, special characters')
         .required('Fill in all fields'),
     confirm_password: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -65,6 +68,7 @@ export const SignUpContent = () => {
                     { errors.email && <span className = { Styles.form_error }>{ errors.email.message }</span> }
                 </label>
                 <input
+                    type = 'email'
                     { ...register('email') }
                     id = 'email'
                     placeholder = { 'Email' }
@@ -76,6 +80,7 @@ export const SignUpContent = () => {
                     { errors.password && <span className = { Styles.form_error }>{ errors.password.message }</span> }
                 </label>
                 <input
+                    type = 'password'
                     { ...register('password') }
                     id = 'password'
                     placeholder = { 'Password' }
@@ -90,6 +95,7 @@ export const SignUpContent = () => {
                     }
                 </label>
                 <input
+                    type = 'password'
                     { ...register('confirm_password') }
                     id = 'confirm_password'
                     placeholder = { 'Repeat your password' }

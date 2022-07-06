@@ -1,3 +1,5 @@
+// Routing
+import { Link } from 'react-router-dom';
 // Instruments
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -8,8 +10,10 @@ import Styles from './styles.module.scss';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
+        .matches(/^[a-zA-Z0-9!@#$%^&*]+$/, 'Wrong format')
         .required('Fill in all fields'),
     password: Yup.string()
+        .matches(/^[a-zA-Z0-9!@#$%^&*]+$/, 'Wrong format')
         .required('Fill in all fields'),
 });
 
@@ -17,7 +21,7 @@ export const PopupLogin = () => {
     const {
         register, handleSubmit, reset, formState: { errors, isValid },
     } = useForm({
-        mode:          'all',
+        mode:          'onSubmit',
         resolver:      yupResolver(validationSchema),
         defaultValues: {
             name:     '',
@@ -32,7 +36,7 @@ export const PopupLogin = () => {
 
     return (
         <section className = { Styles.popup }>
-            <div className = { Styles.shadow } />
+            <Link to = '/' className = { Styles.shadow } />
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ 'Login' }</h3>
                 <form onSubmit = { submitForm } className = { Styles.content_form }>

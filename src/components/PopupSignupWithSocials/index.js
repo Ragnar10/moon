@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cutLine } from '../../utils';
 // Actions
 import { authActions } from '../../actions/authActions';
-import { clearError, setTelegramData, setTwitterData } from '../../reducers/authSlice';
+import { setTelegramData, setTwitterData } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
