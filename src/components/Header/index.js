@@ -8,8 +8,10 @@ import logo from '../../theme/assets/images/logo.svg';
 import Nav from '../Nav';
 
 const Header = (props) => {
+    const headerClass = props.auth === 'signup' ? Styles.header_signup : Styles.header;
+
     return (
-        <header className = { Styles.header }>
+        <header className = { headerClass }>
             <div className = { Styles.header_logo }>
                 <Link to = '/'>
                     <img src = { logo } alt = 'logo' />

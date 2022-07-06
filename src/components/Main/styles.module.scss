@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    background: #252F45;
+    background: var(--grey100-color);
     overflow: hidden;
 }
 
@@ -33,6 +33,18 @@
     width: 100%;
     height: calc(100% - 240px);
     background: url('../../theme/assets/images/main_bg.jpeg') no-repeat;
+    background-size: cover;
+    transform: rotate(180deg);
+}
+
+.background_signup {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 0;
+    width: 50%;
+    height: calc(100% - 240px);
+    background: url('../../theme/assets/images/auth_bg.jpeg') no-repeat;
     background-size: cover;
     transform: rotate(180deg);
 }

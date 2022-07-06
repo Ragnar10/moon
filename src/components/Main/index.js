@@ -5,6 +5,8 @@ import Footer from '../Footer';
 import Header from '../Header';
 
 const Main = (props) => {
+    const bgClass = props.auth === 'signup' ? Styles.background_signup : Styles.background;
+
     return (
         <div className = { Styles.container }>
             <div className = { Styles.wrapper }>
@@ -14,7 +16,7 @@ const Main = (props) => {
                 </main>
             </div>
             <Footer />
-            <div className = { Styles.background } />
+            <div className = { bgClass } />
         </div>
     );
 };
