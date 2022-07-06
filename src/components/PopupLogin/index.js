@@ -76,15 +76,15 @@ export const PopupLogin = () => {
                 <h3 className = { Styles.content_title }>{ 'Login' }</h3>
                 <form onSubmit = { submitForm } className = { Styles.content_form }>
                     <label
-                        htmlFor = { 'name' }
+                        htmlFor = { 'email' }
                         className = { Styles.form_label }>
-                        <span>{ 'Username' }</span>
+                        <span>{ 'Email' }</span>
                         { errors.name && <span className = { Styles.form_error }>{ errors.name.message }</span> }
                     </label>
                     <input
-                        { ...register('name') }
-                        id = 'name'
-                        placeholder = { 'Username' }
+                        { ...register('email') }
+                        id = 'email'
+                        placeholder = { 'Email' }
                         className = { Styles.form_field } />
                     <label
                         htmlFor = { 'password' }

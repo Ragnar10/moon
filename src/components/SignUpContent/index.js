@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, 'Min length 2')
         .max(30, 'Max length 30')
-        .matches(/^[a-zA-Z0-9!@#$%^&*]+$/, 'Only uppercase and lowercase Latin letters, numbers, special characters')
+        .matches(/^(?! )[a-zA-Z0-9!@#$%^&*\s]+$/, 'Only latin letters, numbers, special characters')
         .required('Fill in all fields'),
     email: Yup.string()
         .email('Invalid email format')
@@ -61,7 +61,7 @@ export const SignUpContent = () => {
 
     const submitForm = handleSubmit((values) => {
         const regData = {
-            name:      values.name,
+            name:      values.name.trim(),
             email:     values.email,
             password:  values.password,
             password2: values.confirm_password,
