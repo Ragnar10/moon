@@ -1,6 +1,6 @@
 @import '../../theme/scss/mixins';
 
-.auth {
+.signup {
     display: flex;
     flex-direction: column;
     width: 380px;
@@ -8,7 +8,7 @@
     margin: 50px 0;
 }
 
-.auth_title {
+.signup_title {
     width: 100%;
     height: fit-content;
     margin-bottom: 50px;
@@ -18,7 +18,7 @@
     color: var(--main-color);
 }
 
-.auth_form {
+.signup_form {
     display: flex;
     flex-direction: column;
     width: 100%;

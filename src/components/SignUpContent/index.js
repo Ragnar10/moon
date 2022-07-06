@@ -47,9 +47,9 @@ export const SignUpContent = () => {
     });
 
     return (
-        <section className = { Styles.auth }>
-            <h3 className = { Styles.auth_title }>{ 'You have been invited to create your affiliate account' }</h3>
-            <form onSubmit = { submitForm } className = { Styles.auth_form }>
+        <section className = { Styles.signup }>
+            <h3 className = { Styles.signup_title }>{ 'You have been invited to create your affiliate account' }</h3>
+            <form onSubmit = { submitForm } className = { Styles.signup_form }>
                 <label
                     htmlFor = { 'name' }
                     className = { Styles.form_label }>
