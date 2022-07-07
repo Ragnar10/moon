@@ -1,131 +1,88 @@
+// Utils
+import { setCookie } from '../utils';
 // Actions
 import {
-    setWallet, setLoading, setError, clearError, setTwitterData, setPopupIsOpen, setUser, clearMessage, setMessage,
+    setUser, setLoading, setError, clearError, setMessage, clearMessage, setAccess,
 } from '../reducers/authSlice';
 // Api
 import { api } from '../api';
 
 export const authActions = {
-    connectMeta: () => (dispatch) => {
-        if (window.ethereum) {
-            dispatch(clearError());
-            dispatch(setLoading(true));
-            window.ethereum
-                .request({ method: 'eth_requestAccounts' })
+    signupUser: (data) => (dispatch) => {
+        dispatch(setLoading(true));
+        try {
+            api.signupUser(data)
+                .then((response) => response.json())
                 .then((res) => {
-                    if (res.code) {
+                    if (typeof res.email === 'string') {
+                        dispatch(setUser(res));
                         dispatch(setLoading(false));
-                        dispatch(setError('Check your extension!'));
+                        dispatch(clearMessage());
+                        dispatch(setMessage('Your request has successfully been submitted, we will be in contact shortly!'));
                     } else {
-                        dispatch(clearError());
-                        dispatch(setWallet(res[ 0 ]));
-                        dispatch(setPopupIsOpen(true));
                         dispatch(setLoading(false));
-                        const data = {
-                            wallet:      res[ 0 ],
-                            popupIsOpen: true,
-                        };
-                        localStorage.setItem('wallet', JSON.stringify(data));
+                        dispatch(clearError());
+                        dispatch(setError('User already exists!'));
                     }
                 })
                 .catch(() => {
-                    dispatch(clearError());
                     dispatch(setLoading(false));
-                    dispatch(setError('Something went wrong, please try again later!'));
-                });
-        } else {
-            dispatch(clearError());
-            dispatch(setError('Install metamask extension!'));
-        }
-    },
-
-    connectMetaMobile: () => (dispatch) => {
-        if (window.ethereum) {
-            window.ethereum
-                .request({ method: 'eth_requestAccounts' })
-                .then((res) => {
-                    dispatch(setWallet(res[ 0 ]));
-                    dispatch(setPopupIsOpen(true));
-                    const data = {
-                        wallet:      res[ 0 ],
-                        popupIsOpen: true,
-                    };
-                    localStorage.setItem('wallet', JSON.stringify(data));
-                })
-                .catch(() => {
                     dispatch(clearError());
                     dispatch(setError('Something went wrong, please try again later!'));
                 });
+        } catch {
+            dispatch(setLoading(false));
+            dispatch(clearError());
+            dispatch(setError('Something went wrong, please try again later!'));
         }
     },
 
-    getTwitterOauthToken: () => (dispatch) => {
+    loginUser: (data) => (dispatch) => {
+        dispatch(setLoading(true));
         try {
-            api.getTwitterOauthToken()
+            api.loginUser(data)
                 .then((response) => response.json())
                 .then((res) => {
-                    if (res.oauth_token) {
-                        window.location.href = `https://api.twitter.com/oauth/authenticate?oauth_token=${res.oauth_token}`;
+                    if (res.access) {
+                        dispatch(setAccess(res));
+                        setCookie('refresh', res.refresh, {
+                            secure: true, samesite: true, 'max-age': 3600,
+                        });
+                        dispatch(setLoading(false));
+                        dispatch(clearMessage());
+                        dispatch(setMessage('You have successfully logged in!'));
                     } else {
+                        dispatch(setLoading(false));
                         dispatch(clearError());
                         dispatch(setError('Something went wrong, please try again later!'));
                     }
                 })
                 .catch(() => {
+                    dispatch(setLoading(false));
                     dispatch(clearError());
                     dispatch(setError('Something went wrong, please try again later!'));
                 });
         } catch {
+            dispatch(setLoading(false));
             dispatch(clearError());
             dispatch(setError('Something went wrong, please try again later!'));
         }
     },
 
-    getTwitterData: (data) => (dispatch) => {
-        api.requestTwitterAccessToken(data)
-            .then((response) => response.json())
-            .then((res) => {
-                if (res.screen_name) {
-                    dispatch(setTwitterData(res.screen_name));
-                    localStorage.setItem('tw', res.screen_name);
-                } else {
-                    dispatch(clearError());
-                    dispatch(setError('Something went wrong, please try again later!'));
-                }
-            })
-            .catch(() => {
-                dispatch(clearError());
-                dispatch(setError('Something went wrong, please try again later!'));
-            });
-    },
-
-    createUser: (data) => (dispatch) => {
+    refreshLogin: (data) => (dispatch) => {
         try {
-            api.createUser(data)
+            api.refreshLogin(data)
                 .then((response) => response.json())
                 .then((res) => {
-                    if (res.id) {
-                        dispatch(setUser(res));
-                        dispatch(clearMessage());
-                        dispatch(setMessage('You have successfully registered!'));
-                    } else {
-                        dispatch(clearError());
-                        dispatch(setError('User already exists!'));
-                        dispatch(setUser({ token: 'exist' }));
+                    if (res.access) {
+                        dispatch(setAccess(res));
                     }
-
-                    localStorage.removeItem('influencer');
-                    localStorage.removeItem('wallet');
-                    localStorage.removeItem('tw');
-                    localStorage.removeItem('tg');
                 })
-                .catch(() => {
-                    dispatch(clearError());
-                    dispatch(setError('Something went wrong, please try again later!'));
+                .catch((error) => {
+                    console.log(error);
                 });
-        } catch {
-            dispatch(clearError());
-            dispatch(setError('Something went wrong, please try again later!'));
+        } catch (error) {
+            console.log(error);
         }
     },
 };

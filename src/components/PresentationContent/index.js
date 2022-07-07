@@ -6,14 +6,18 @@ import { useNavigate } from 'react-router-dom';
 // Instruments
 import queryString from 'query-string';
 // Actions
-import { authActions } from '../../actions/authActions';
+import { authWalletActions } from '../../actions/authWalletActions';
 // Styles
 import Styles from './styles.module.scss';
+// Components
+import Message from '../Message';
 
 export const PresentationContent = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const twitterData = useSelector((state) => state.auth.twitterData);
+    const twitterData = useSelector((state) => state.authSocial.twitterData);
+    const error = useSelector((state) => state.auth.error);
+    const message = useSelector((state) => state.auth.message);
 
     const authTwitter = () => {
         const { oauth_token, oauth_verifier } = queryString.parse(window.location.search);
@@ -24,7 +28,7 @@ export const PresentationContent = () => {
                 oauth_verifier,
             };
 
-            dispatch(authActions.getTwitterData(data));
+            dispatch(authWalletActions.getTwitterData(data));
         }
     };
 
@@ -42,17 +46,21 @@ export const PresentationContent = () => {
     }, [twitterData]);
 
     return (
-        <section className = { Styles.content }>
-            <h1 className = { Styles.content_connected_title }>{ 'We ‘re preparing to launch' }</h1>
-            <p className = { Styles.content_info }>
-                <span>{ 'Our team is working very hard to make leveraged ready for launch.' }</span>
-                <span>{ 'Don’t want to miss out on updates? Follow our social medias.' }</span>
-            </p>
-            <a
-                href = { 'https://bit.ly/LVRGD_public' }
-                target = '_blank'
-                rel = 'noreferrer'
-                className = { Styles.content_connected_btn }>{ 'Investor Deck' }</a>
-        </section>
+        <>
+            { error && <Message>{ error }</Message> }
+            { message && <Message class = { Styles.message }>{ message }</Message> }
+            <section className = { Styles.content }>
+                <h1 className = { Styles.content_connected_title }>{ 'We ‘re preparing to launch' }</h1>
+                <p className = { Styles.content_info }>
+                    <span>{ 'Our team is working very hard to make leveraged ready for launch.' }</span>
+                    <span>{ 'Don’t want to miss out on updates? Follow our social medias.' }</span>
+                </p>
+                <a
+                    href = { 'https://bit.ly/LVRGD_public' }
+                    target = '_blank'
+                    rel = 'noreferrer'
+                    className = { Styles.content_connected_btn }>{ 'Investor Deck' }</a>
+            </section>
+        </>
     );
 };

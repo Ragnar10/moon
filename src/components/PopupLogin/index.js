@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 // Actions
-import { signupActions } from '../../actions/signupActions';
+import { authActions } from '../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -26,10 +26,10 @@ const validationSchema = Yup.object().shape({
 
 export const PopupLogin = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.signup.user);
-    const loading = useSelector((state) => state.signup.loading);
-    const error = useSelector((state) => state.signup.error);
-    const message = useSelector((state) => state.signup.message);
+    const access = useSelector((state) => state.auth.access);
+    const loading = useSelector((state) => state.auth.loading);
+    const error = useSelector((state) => state.auth.error);
+    const message = useSelector((state) => state.auth.message);
 
     const navigate = useNavigate();
 
@@ -49,14 +49,14 @@ export const PopupLogin = () => {
             username: values.email,
             password: values.password,
         };
-        dispatch(signupActions.loginUser(logData));
+        dispatch(authActions.loginUser(logData));
         reset();
     });
 
     useEffect(() => {
         let timeout;
 
-        if (user.access) {
+        if (access.access) {
             timeout = setTimeout(() => {
                 navigate('/');
             }, 1000);
@@ -65,7 +65,7 @@ export const PopupLogin = () => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [user]);
+    }, [access]);
 
     return (
         <section className = { Styles.popup }>

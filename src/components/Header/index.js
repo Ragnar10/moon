@@ -3,8 +3,11 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Routing
 import { Link } from 'react-router-dom';
+// Utils
+import { deleteCookie, getCookie } from '../../utils';
 // Actions
-import { setUser } from '../../reducers/signupSlice';
+import { setAccess } from '../../reducers/authSlice';
+import { authActions } from '../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 // Images
@@ -14,15 +17,23 @@ import Nav from '../Nav';
 
 const Header = (props) => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.signup.user);
+    const access = useSelector((state) => state.auth.access);
 
     useEffect(() => {
-        const data = JSON.parse(sessionStorage.getItem('access'));
+        const refresh = getCookie('refresh');
 
-        if (data && data.access) {
-            dispatch(setUser(data));
+        if (refresh) {
+            const data = {
+                refresh,
+            };
+            dispatch(authActions.refreshLogin(data));
         }
     }, []);
+
+    const logout = () => {
+        dispatch(setAccess({}));
+        deleteCookie('refresh');
+    };
 
     const headerClass = props.auth === 'signup' ? Styles.header_signup : Styles.header;
 
@@ -41,7 +52,9 @@ const Header = (props) => {
                     </div>
             }
             {
-                props.auth === 'auth' && !user.access && <Link to = '/login' className = { Styles.header_btn_login }>{ 'Login' }</Link>
+                props.auth === 'auth' && !access.access
+                    ? <Link to = '/login' className = { Styles.header_btn_login }>{ 'Login' }</Link>
+                    : <button onClick = { () => logout() } className = { Styles.header_btn_login }>{ 'Logout' }</button>
             }
         </header>
     );

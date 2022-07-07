@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 // Actions
-import { signupActions } from '../../actions/signupActions';
+import { authActions } from '../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -25,7 +25,7 @@ const validationSchema = Yup.object().shape({
         .email('Invalid email format')
         .required('Fill in all fields'),
     password: Yup.string()
-        .min(6, 'Min length 6')
+        .min(8, 'Min length 8')
         .max(20, 'Max length 20')
         .matches(/^[a-zA-Z0-9!@#$%^&*]+$/, 'Only latin letters, numbers, special characters')
         .required('Fill in all fields'),
@@ -38,10 +38,10 @@ const validationSchema = Yup.object().shape({
 
 export const SignUpContent = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.signup.user);
-    const loading = useSelector((state) => state.signup.loading);
-    const error = useSelector((state) => state.signup.error);
-    const message = useSelector((state) => state.signup.message);
+    const user = useSelector((state) => state.auth.user);
+    const loading = useSelector((state) => state.auth.loading);
+    const error = useSelector((state) => state.auth.error);
+    const message = useSelector((state) => state.auth.message);
 
     const navigate = useNavigate();
 
@@ -61,12 +61,12 @@ export const SignUpContent = () => {
 
     const submitForm = handleSubmit((values) => {
         const regData = {
-            name:      values.name.trim(),
-            email:     values.email,
-            password:  values.password,
-            password2: values.confirm_password,
+            first_name: values.name.trim(),
+            email:      values.email,
+            password:   values.password,
+            password2:  values.confirm_password,
         };
-        dispatch(signupActions.signupUser(regData));
+        dispatch(authActions.signupUser(regData));
         reset();
     });
 

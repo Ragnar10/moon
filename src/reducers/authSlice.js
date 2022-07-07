@@ -4,34 +4,18 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
     name:         'auth',
     initialState: {
-        influencer:   '',
-        user:         {},
-        wallet:       '',
-        telegramData: '',
-        twitterData:  '',
-        popupIsOpen:  false,
-        loading:      false,
-        error:        '',
-        message:      '',
+        access:  {},
+        user:    {},
+        loading: false,
+        error:   '',
+        message: '',
     },
     reducers: {
-        setInfluencer: (state, action) => {
-            state.influencer = action.payload;
+        setAccess: (state, action) => {
+            state.access = action.payload;
         },
         setUser: (state, action) => {
             state.user = action.payload;
-        },
-        setWallet: (state, action) => {
-            state.wallet = action.payload;
-        },
-        setTelegramData: (state, action) => {
-            state.telegramData = action.payload;
-        },
-        setTwitterData: (state, action) => {
-            state.twitterData = action.payload;
-        },
-        setPopupIsOpen: (state, action) => {
-            state.popupIsOpen = action.payload;
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
@@ -52,8 +36,7 @@ export const authSlice = createSlice({
 });
 
 export const {
-    setInfluencer, setUser, setWallet, setTelegramData, setTwitterData,
-    setPopupIsOpen, setLoading, setError, clearError, setMessage, clearMessage,
+    setAccess, setUser, setLoading, setError, clearError, setMessage, clearMessage,
 } = authSlice.actions;
 
 export default authSlice.reducer;

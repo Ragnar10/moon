@@ -20,7 +20,7 @@ export const api = {
         });
     },
 
-    createUser: (data) => {
+    createSocialUser: (data) => {
         return fetch(`${apiPath}/v1/users/`, {
             method:  'POST',
             headers: {
@@ -42,6 +42,16 @@ export const api = {
 
     loginUser: (data) => {
         return fetch(`${apiPath}/api/token/`, {
+            method:  'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+    },
+
+    refreshLogin: (data) => {
+        return fetch(`${apiPath}/api/token/refresh/`, {
             method:  'POST',
             headers: {
                 'Content-Type': 'application/json',

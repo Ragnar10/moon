@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 // Utils
 import { cutLine, nameTransform } from '../../utils';
 // Actions
-import { authActions } from '../../actions/authActions';
-import { setTelegramData, setTwitterData } from '../../reducers/authSlice';
+import { authWalletActions } from '../../actions/authWalletActions';
+import { setTelegramData, setTwitterData } from '../../reducers/authSocialSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -14,13 +14,13 @@ import Message from '../Message';
 
 const PopupSignupWithSocials = () => {
     const dispatch = useDispatch();
-    const influencer = useSelector((state) => state.auth.influencer);
-    const user = useSelector((state) => state.auth.user);
-    const wallet = useSelector((state) => state.auth.wallet);
-    const twitterData = useSelector((state) => state.auth.twitterData);
-    const telegramData = useSelector((state) => state.auth.telegramData);
-    const error = useSelector((state) => state.auth.error);
-    const message = useSelector((state) => state.auth.message);
+    const influencer = useSelector((state) => state.authSocial.influencer);
+    const user = useSelector((state) => state.authSocial.user);
+    const wallet = useSelector((state) => state.authSocial.wallet);
+    const twitterData = useSelector((state) => state.authSocial.twitterData);
+    const telegramData = useSelector((state) => state.authSocial.telegramData);
+    const error = useSelector((state) => state.authSocial.error);
+    const message = useSelector((state) => state.authSocial.message);
 
     const handleTelegramResponse = (res) => {
         dispatch(setTelegramData(res.username));
@@ -29,7 +29,7 @@ const PopupSignupWithSocials = () => {
     };
 
     const twitterLogin = () => {
-        dispatch(authActions.getTwitterOauthToken());
+        dispatch(authWalletActions.getTwitterOauthToken());
     };
 
     useEffect(() => {
@@ -53,7 +53,7 @@ const PopupSignupWithSocials = () => {
                 telegram: telegramData,
             };
 
-            dispatch(authActions.createUser(data));
+            dispatch(authWalletActions.createSocialUser(data));
         }
     };
 

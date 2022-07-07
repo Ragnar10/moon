@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 // Utils
 import { nameTransform } from '../../utils';
 // Actions
-import { authActions } from '../../actions/authActions';
-import { setWallet, setPopupIsOpen, setInfluencer } from '../../reducers/authSlice';
+import { authWalletActions } from '../../actions/authWalletActions';
+import { setWallet, setPopupIsOpen, setInfluencer } from '../../reducers/authSocialSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -17,11 +17,11 @@ import Message from '../Message';
 
 export const InfluencerContent = () => {
     const dispatch = useDispatch();
-    const influencer = useSelector((state) => state.auth.influencer);
-    const wallet = useSelector((state) => state.auth.wallet);
-    const popupIsOpen = useSelector((state) => state.auth.popupIsOpen);
-    const loading = useSelector((state) => state.auth.loading);
-    const error = useSelector((state) => state.auth.error);
+    const influencer = useSelector((state) => state.authSocial.influencer);
+    const wallet = useSelector((state) => state.authSocial.wallet);
+    const popupIsOpen = useSelector((state) => state.authSocial.popupIsOpen);
+    const loading = useSelector((state) => state.authSocial.loading);
+    const error = useSelector((state) => state.authSocial.error);
 
     const { id } = useParams();
 
@@ -30,7 +30,7 @@ export const InfluencerContent = () => {
     };
 
     const connectMetamask = () => {
-        dispatch(authActions.connectMeta());
+        dispatch(authWalletActions.connectMeta());
     };
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export const InfluencerContent = () => {
     }, []);
 
     useEffect(() => {
-        if (isMobileDevice()) return dispatch(authActions.connectMetaMobile());
+        if (isMobileDevice()) return dispatch(authWalletActions.connectMetaMobile());
     }, []);
 
     useEffect(() => {

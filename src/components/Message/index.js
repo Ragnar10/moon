@@ -2,8 +2,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 // Actions
-import { clearError, clearMessage } from '../../reducers/authSlice';
-import { clearError as clearErrorSignup, clearMessage as clearMessageSignup } from '../../reducers/signupSlice';
+import { clearError as clearErrorSocial, clearMessage as clearMessageSocial } from '../../reducers/authSocialSlice';
+import { clearError as clearErrorAuth, clearMessage as clearMessageAuth } from '../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 
@@ -12,10 +12,10 @@ const Message = (props) => {
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            dispatch(clearError());
-            dispatch(clearMessage());
-            dispatch(clearErrorSignup());
-            dispatch(clearMessageSignup());
+            dispatch(clearErrorSocial());
+            dispatch(clearMessageSocial());
+            dispatch(clearErrorAuth());
+            dispatch(clearMessageAuth());
         }, 3000);
 
         return () => {
