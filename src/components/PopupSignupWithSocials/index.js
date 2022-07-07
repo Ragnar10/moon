@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Utils
-import { cutLine } from '../../utils';
+import { cutLine, nameTransform } from '../../utils';
 // Actions
 import { authActions } from '../../actions/authActions';
 import { setTelegramData, setTwitterData } from '../../reducers/authSlice';
@@ -79,7 +79,7 @@ const PopupSignupWithSocials = () => {
             <div className = { Styles.popup_content }>
                 <h3 className = { Styles.content_title }>{ `Congratulations, ${cutLine(wallet, 12)} !` }</h3>
                 <p className = { Styles.content_info }>
-                    { `You have successfully been referred by: ${influencer}
+                    { `You have successfully been referred by: ${nameTransform(influencer)}
                      and you will receive a special Bonus at LVRGD Launch.` }
                 </p>
                 <p className = { Styles.content_info }>

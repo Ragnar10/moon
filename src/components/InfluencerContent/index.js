@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Routing
 import { useParams } from 'react-router-dom';
+// Utils
+import { nameTransform } from '../../utils';
 // Actions
 import { authActions } from '../../actions/authActions';
 import { setWallet, setPopupIsOpen, setInfluencer } from '../../reducers/authSlice';
@@ -72,10 +74,10 @@ export const InfluencerContent = () => {
                 <h1 className = { Styles.content_title }>
                     <span>{ 'Leveraged' }</span>
                     <span>{ 'x' }</span>
-                    <span>{ influencer }</span>
+                    <span>{ nameTransform(influencer) }</span>
                 </h1>
                 <p className = { Styles.content_info }>
-                    <span>{ `Welcome to Referral Page of The ${influencer}.` }</span>
+                    <span>{ `Welcome to Referral Page of The ${nameTransform(influencer)}.` }</span>
                     <span>{ 'To receive a special Bonus at LVRGD Launch please connect your Meta mask!' }</span>
                 </p>
                 { loading ? <Loader /> : metaBtn }
