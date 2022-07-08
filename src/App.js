@@ -18,7 +18,7 @@ const App = () => {
             <Route path = '/' element = { <Outlet /> }>
                 <Route index element = { <MainPage /> } />
                 <Route path = 'affiliate/:id' element = { <WalletPage /> } />
-                <Route path = 'registration/affiliate' element = { <SignUpPage /> } />
+                { !access.access && <Route path = 'registration/affiliate' element = { <SignUpPage /> } /> }
                 <Route path = 'login' element = { <LoginPage /> } />
                 { access.access && <Route path = 'dashboard' element = { <DashboardPage /> } /> }
             </Route>
