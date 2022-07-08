@@ -58,7 +58,7 @@ export const PopupLogin = () => {
 
         if (access.access) {
             timeout = setTimeout(() => {
-                navigate('/');
+                navigate('/dashboard');
             }, 1000);
         }
 

@@ -2,7 +2,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Routing
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Utils
 import { deleteCookie, getCookie } from '../../utils';
 // Actions
@@ -19,6 +19,8 @@ const Header = (props) => {
     const dispatch = useDispatch();
     const access = useSelector((state) => state.auth.access);
 
+    const navigate = useNavigate('/');
+
     useEffect(() => {
         const refresh = getCookie('refresh');
 
@@ -33,6 +35,7 @@ const Header = (props) => {
     const logout = () => {
         dispatch(setAccess({}));
         deleteCookie('refresh');
+        navigate('/');
     };
 
     const headerClass = props.auth === 'signup' ? Styles.header_signup : Styles.header;
