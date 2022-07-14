@@ -17,11 +17,11 @@ const Footer = () => {
                     <div className = { Styles.footer_rights }>{ '©2022-2023. All rights reserved' }</div>
                 </div>
                 <Socials class = { Styles.footer_socials } />
-                <div className = { Styles.footer_counter_buy }>
-                    <span className = { Styles.footer_counter_icon } />
-                    <span className = { Styles.footer_counter }>{ '98.22M' }</span>
-                    <button className = { Styles.footer_buy_btn }>{ 'Buy' }</button>
-                </div>
+                { /* <div className = { Styles.footer_counter_buy }> */ }
+                { /*     <span className = { Styles.footer_counter_icon } /> */ }
+                { /*     <span className = { Styles.footer_counter }>{ '98.22M' }</span> */ }
+                { /*     <button className = { Styles.footer_buy_btn }>{ 'Buy' }</button> */ }
+                { /* </div> */ }
             </div>
         </footer>
     );

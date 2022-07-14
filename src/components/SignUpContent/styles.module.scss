@@ -141,4 +141,11 @@
     background: var(--primary200-color) !important;
 }
 
+@media (max-width: 768px) {
+    .signup {
+        width: 280px;
+        margin: 20px 0;
+    }
+}
+
 
