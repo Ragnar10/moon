@@ -77,7 +77,7 @@ export const InfluencerContent = () => {
                     <span>{ nameTransform(influencer) }</span>
                 </h1>
                 <p className = { Styles.content_info }>
-                    <span>{ `Welcome to Referral Page of The ${nameTransform(influencer)}.` }</span>
+                    <span>{ `Welcome to the Referral Page of ${nameTransform(influencer)}.` }</span>
                     <span>{ 'To receive a special Bonus at LVRGD Launch please connect your Meta mask!' }</span>
                 </p>
                 { loading ? <Loader /> : metaBtn }

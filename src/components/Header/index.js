@@ -56,7 +56,7 @@ const Header = (props) => {
             }
             {
                 (props.auth === 'auth' || props.auth === 'signup') && !access.access
-                    ? <Link to = '/login' className = { Styles.header_btn_login }>{ 'Login' }</Link>
+                    ? <Link to = '/login' className = { Styles.header_btn_login }>{ 'Affiliate login' }</Link>
                     : <button onClick = { () => logout() } className = { Styles.header_btn_login }>{ 'Logout' }</button>
             }
         </header>
