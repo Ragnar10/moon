@@ -40,6 +40,10 @@ const Header = (props) => {
 
     const headerClass = props.auth === 'signup' ? Styles.header_signup : Styles.header;
 
+    const loginBtn = (props.auth === 'auth' || props.auth === 'signup') && !access.access
+        ? <Link to = '/login' className = { Styles.header_btn_login }>{ 'Affiliate login' }</Link>
+        : <button onClick = { () => logout() } className = { Styles.header_btn_login }>{ 'Logout' }</button>;
+
     return (
         <header className = { headerClass }>
             <div className = { Styles.header_logo }>
@@ -55,9 +59,7 @@ const Header = (props) => {
                     </div>
             }
             {
-                (props.auth === 'auth' || props.auth === 'signup') && !access.access
-                    ? <Link to = '/login' className = { Styles.header_btn_login }>{ 'Affiliate login' }</Link>
-                    : <button onClick = { () => logout() } className = { Styles.header_btn_login }>{ 'Logout' }</button>
+                props.auth !== 'wallet' ? loginBtn : null
             }
         </header>
     );

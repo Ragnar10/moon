@@ -3,7 +3,7 @@ import { Main, InfluencerContent } from '../components';
 
 export const WalletPage = () => {
     return (
-        <Main>
+        <Main  auth = 'wallet'>
             <InfluencerContent />
         </Main>
     );

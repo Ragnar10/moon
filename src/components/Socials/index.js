@@ -6,7 +6,7 @@ const Socials = (props) => {
         <ul className = { `${Styles.socials} ${props.class}` }>
             <li>
                 <a
-                    href = { 'https://t.me/leveragedIO' } target = { '_blank' }
+                    href = { 'https://t.me/lvrgd' } target = { '_blank' }
                     rel = 'noreferrer'
                     className = { Styles.socials_telegram } />
             </li>

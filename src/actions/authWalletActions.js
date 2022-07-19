@@ -6,6 +6,27 @@ import {
 import { api } from '../api';
 
 export const authWalletActions = {
+    checkRef: (data) => () => {
+        try {
+            api.checkRef(data)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+
+                    window.location.href = process.env.REACT_APP_BASE_PATH;
+                })
+                .then((res) => {
+                    return null;
+                })
+                .catch(() => {
+                    window.location.href = process.env.REACT_APP_BASE_PATH;
+                });
+        } catch {
+            window.location.href = process.env.REACT_APP_BASE_PATH;
+        }
+    },
+
     connectMeta: () => (dispatch) => {
         if (window.ethereum) {
             dispatch(clearError());

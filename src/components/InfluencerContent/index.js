@@ -14,6 +14,7 @@ import Styles from './styles.module.scss';
 import PopupSignupWithSocials from '../PopupSignupWithSocials';
 import Loader from '../Loader';
 import Message from '../Message';
+import Socials from '../Socials';
 
 export const InfluencerContent = () => {
     const dispatch = useDispatch();
@@ -32,6 +33,10 @@ export const InfluencerContent = () => {
     const connectMetamask = () => {
         dispatch(authWalletActions.connectMeta());
     };
+
+    useEffect(() => {
+        dispatch(authWalletActions.checkRef(id));
+    }, []);
 
     useEffect(() => {
         const storageInfluencer = localStorage.getItem('influencer');
@@ -81,6 +86,7 @@ export const InfluencerContent = () => {
                     <span>{ 'To receive a special Bonus at LVRGD Launch please connect your Meta mask!' }</span>
                 </p>
                 { loading ? <Loader /> : metaBtn }
+                <Socials class = { Styles.content_socials } />
             </section>
         </>
     );
