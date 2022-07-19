@@ -13,17 +13,17 @@ export const authWalletActions = {
                     if (response.ok) {
                         return response.json();
                     }
-
+                    localStorage.removeItem('influencer');
                     window.location.href = process.env.REACT_APP_BASE_PATH;
                 })
                 .then((res) => {
                     return null;
                 })
                 .catch(() => {
-                    window.location.href = process.env.REACT_APP_BASE_PATH;
+                    return null;
                 });
         } catch {
-            window.location.href = process.env.REACT_APP_BASE_PATH;
+            return null;
         }
     },
 

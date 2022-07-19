@@ -2,7 +2,7 @@ const apiPath = process.env.REACT_APP_BACK_PATH;
 
 export const api = {
     checkRef: (data) => {
-        return fetch(`${apiPath}/v1/users/check_ref?ref=${data}/`, {
+        return fetch(`${apiPath}/v1/users/check_ref/?ref=${data}`, {
             method:  'GET',
             headers: {
                 'Content-Type': 'application/json',
