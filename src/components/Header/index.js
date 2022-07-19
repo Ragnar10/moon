@@ -19,7 +19,7 @@ const Header = (props) => {
     const dispatch = useDispatch();
     const access = useSelector((state) => state.auth.access);
 
-    const navigate = useNavigate('/');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const refresh = getCookie('refresh');
