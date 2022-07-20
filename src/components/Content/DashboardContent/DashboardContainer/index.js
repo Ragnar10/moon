@@ -10,6 +10,7 @@ import Styles from './styles.module.scss';
 
 // Components
 import Message from '../../../Message';
+import DashboardHeader from '../DashboardHeader';
 
 export const DashboardContent = () => {
     const message = useSelector((state) => state.auth.message);
@@ -25,6 +26,7 @@ export const DashboardContent = () => {
                         <TabUnstyled className = { Styles.nav_item }>Bonus Rewards</TabUnstyled>
                     </TabsListUnstyled>
                     <div className = { Styles.tabs_content }>
+                        <DashboardHeader />
                         <TabPanelUnstyled value = { 0 } className = { Styles.content_item }>
                             Dashboard
                         </TabPanelUnstyled>

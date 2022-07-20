@@ -1,0 +1,99 @@
+.dashboard_header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: fit-content;
+    padding: 8px 0 22px;
+    margin-bottom: 50px;
+}
+
+.header_crypto_btn {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 40px;
+    margin-right: 12px;
+    padding: 12px 8px;
+    border: none;
+    outline: none;
+    border-radius: var(--button-border-radius);
+    font-size: var(--text-font-size);
+    font-weight: 700;
+    text-align: left;
+    color: var(--main-color);
+    background: var(--grey600-color);
+    cursor: pointer;
+
+    .crypto_btn_img {}
+
+    .crypto_btn_name {}
+
+    .crypto_btn_arrow {}
+}
+
+.header_localization_btn {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 40px;
+    margin-right: 12px;
+    padding: 12px 8px;
+    border: none;
+    outline: none;
+    border-radius: var(--button-border-radius);
+    font-size: var(--text-font-size);
+    font-weight: 700;
+    text-align: left;
+    color: var(--main-color);
+    background: var(--grey600-color);
+    cursor: pointer;
+
+    .localization_btn_name {}
+
+    .localization_btn_arrow {}
+}
+
+.header_theme_btn {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 40px;
+    margin-right: 12px;
+    padding: 12px 8px;
+    border: none;
+    outline: none;
+    border-radius: var(--button-border-radius);
+    font-size: var(--text-font-size);
+    font-weight: 700;
+    text-align: left;
+    color: var(--main-color);
+    background: var(--grey750-color);
+    cursor: pointer;
+
+    .crypto_btn_img {}
+}
+
+.header_settings_btn {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 40px;
+    margin-right: 12px;
+    padding: 12px 8px;
+    border: none;
+    outline: none;
+    border-radius: var(--button-border-radius);
+    font-size: var(--text-font-size);
+    font-weight: 700;
+    text-align: left;
+    color: var(--grey100-color);
+    background: var(--main-color);
+    cursor: pointer;
+
+    .settings_btn_img {}
+
+    .settings_btn_name {}
+
+    .settings_btn_arrow {}
+}
