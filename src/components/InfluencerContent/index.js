@@ -65,7 +65,7 @@ export const InfluencerContent = () => {
 
     const metaBtn = isMobileDevice() && !wallet
         ? <a
-            href = { `https://metamask.app.link/dapp/${process.env.REACT_APP_TELEGRAM_API_PATH}` }
+            href = { `https://metamask.app.link/dapp/${process.env.REACT_APP_METAMASK_API_PATH}` }
             className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</a>
         : <button
             onClick = { () => connectMetamask() }
