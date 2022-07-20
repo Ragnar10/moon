@@ -1,7 +1,7 @@
 // Styles
 import Styles from './styles.module.scss';
 // Images
-import logo from '../../theme/assets/images/logo_white.svg';
+import logo from '../../theme/assets/images/main/logo_white.svg';
 // Components
 import Socials from '../Socials';
 

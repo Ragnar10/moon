@@ -11,7 +11,7 @@ import { authActions } from '../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 // Images
-import logo from '../../theme/assets/images/logo.svg';
+import logo from '../../theme/assets/images/main/logo.svg';
 // Components
 import Nav from '../Nav';
 

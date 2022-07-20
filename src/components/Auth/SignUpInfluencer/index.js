@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 // Actions
-import { authActions } from '../../actions/authActions';
+import { authActions } from '../../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 // Components
-import Message from '../Message';
-import Loader from '../Loader';
+import Message from '../../Message';
+import Loader from '../../Loader';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -36,7 +36,7 @@ const validationSchema = Yup.object().shape({
         .oneOf([true]),
 });
 
-export const SignUpContent = () => {
+export const SignUpInfluencer = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const loading = useSelector((state) => state.auth.loading);

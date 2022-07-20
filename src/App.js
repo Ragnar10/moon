@@ -20,7 +20,7 @@ const App = () => {
                 <Route path = 'affiliate/:id' element = { <WalletPage /> } />
                 { !access.access && <Route path = 'registration/affiliate' element = { <SignUpPage /> } /> }
                 <Route path = 'login' element = { <LoginPage /> } />
-                { access.access && <Route path = 'dashboard' element = { <DashboardPage /> } /> }
+                { !access.access && <Route path = 'dashboard' element = { <DashboardPage /> } /> }
             </Route>
 
             <Route path = '*' element = { <Navigate to = '/' replace /> } />

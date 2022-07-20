@@ -1,10 +1,10 @@
 // Components
-import { Main, SignUpContent } from '../components';
+import { Main, SignUpInfluencer } from '../components';
 
 export const SignUpPage = () => {
     return (
         <Main auth = 'signup'>
-            <SignUpContent />
+            <SignUpInfluencer />
         </Main>
     );
 };

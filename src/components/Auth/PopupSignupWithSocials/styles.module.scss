@@ -1,4 +1,4 @@
-@import '../../theme/scss/mixins';
+@import '../../../theme/scss/mixins';
 
 .popup {
     position: fixed;
@@ -72,7 +72,7 @@
         width: 16px;
         height: 16px;
         margin-right: 8px;
-        background: url('../../theme/assets/icons/twitter.svg') no-repeat;
+        background: url('../../../theme/assets/icons/twitter.svg') no-repeat;
         background-size: cover;
         filter: invert(100%) brightness(200%);
         -webkit-filter: invert(100%) brightness(200%);

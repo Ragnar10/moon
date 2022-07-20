@@ -8,12 +8,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 // Actions
-import { authActions } from '../../actions/authActions';
+import { authActions } from '../../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 // Components
-import Message from '../Message';
-import Loader from '../Loader';
+import Message from '../../Message';
+import Loader from '../../Loader';
 
 const validationSchema = Yup.object().shape({
     email: Yup.string()

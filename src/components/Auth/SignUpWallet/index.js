@@ -4,19 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 // Routing
 import { useParams } from 'react-router-dom';
 // Utils
-import { nameTransform } from '../../utils';
+import { nameTransform } from '../../../utils';
 // Actions
-import { authWalletActions } from '../../actions/authWalletActions';
-import { setWallet, setPopupIsOpen, setInfluencer } from '../../reducers/authSocialSlice';
+import { authWalletActions } from '../../../actions/authWalletActions';
+import { setWallet, setPopupIsOpen, setInfluencer } from '../../../reducers/authSocialSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
 import PopupSignupWithSocials from '../PopupSignupWithSocials';
-import Loader from '../Loader';
-import Message from '../Message';
-import Socials from '../Socials';
+import Loader from '../../Loader';
+import Message from '../../Message';
+import Socials from '../../Socials';
 
-export const InfluencerContent = () => {
+export const SignUpWallet = () => {
     const dispatch = useDispatch();
     const influencer = useSelector((state) => state.authSocial.influencer);
     const wallet = useSelector((state) => state.authSocial.wallet);
@@ -66,27 +66,27 @@ export const InfluencerContent = () => {
     const metaBtn = isMobileDevice() && !wallet
         ? <a
             href = { `https://metamask.app.link/dapp/${process.env.REACT_APP_TELEGRAM_API_PATH}` }
-            className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</a>
+            className = { Styles.signup_metamask_btn }>{ 'Connect Metamask' }</a>
         : <button
             onClick = { () => connectMetamask() }
-            className = { Styles.content_metamask_btn }>{ 'Connect Metamask' }</button>;
+            className = { Styles.signup_metamask_btn }>{ 'Connect Metamask' }</button>;
 
     return (
         <>
             { wallet && popupIsOpen && <PopupSignupWithSocials /> }
             { error && <Message>{ error }</Message> }
-            <section className = { Styles.content }>
-                <h1 className = { Styles.content_title }>
+            <section className = { Styles.signup }>
+                <h1 className = { Styles.signup_title }>
                     <span>{ 'Leveraged' }</span>
                     <span>{ 'x' }</span>
                     <span>{ nameTransform(influencer) }</span>
                 </h1>
-                <p className = { Styles.content_info }>
+                <p className = { Styles.signup_info }>
                     <span>{ `Welcome to the Referral Page of ${nameTransform(influencer)}.` }</span>
                     <span>{ 'To receive a special Bonus at LVRGD Launch please connect your Meta mask!' }</span>
                 </p>
                 { loading ? <Loader /> : metaBtn }
-                <Socials class = { Styles.content_socials } />
+                <Socials class = { Styles.signup_socials } />
             </section>
         </>
     );

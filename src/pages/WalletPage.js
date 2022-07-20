@@ -1,10 +1,10 @@
 // Components
-import { Main, InfluencerContent } from '../components';
+import { Main, SignUpWallet } from '../components';
 
 export const WalletPage = () => {
     return (
         <Main  auth = 'wallet'>
-            <InfluencerContent />
+            <SignUpWallet />
         </Main>
     );
 };

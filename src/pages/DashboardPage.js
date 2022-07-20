@@ -1,10 +1,10 @@
 // Components
-import { Main, DashboardContent } from '../components';
+import { MainDashboard, DashboardContent } from '../components';
 
 export const DashboardPage = () => {
     return (
-        <Main auth = 'auth'>
+        <MainDashboard>
             <DashboardContent />
-        </Main>
+        </MainDashboard>
     );
 };

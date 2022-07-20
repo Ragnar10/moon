@@ -6,11 +6,11 @@ import { useNavigate } from 'react-router-dom';
 // Instruments
 import queryString from 'query-string';
 // Actions
-import { authWalletActions } from '../../actions/authWalletActions';
+import { authWalletActions } from '../../../actions/authWalletActions';
 // Styles
 import Styles from './styles.module.scss';
 // Components
-import Message from '../Message';
+import Message from '../../Message';
 
 export const PresentationContent = () => {
     const dispatch = useDispatch();

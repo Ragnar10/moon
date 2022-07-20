@@ -2,15 +2,15 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Utils
-import { cutLine, nameTransform } from '../../utils';
+import { cutLine, nameTransform } from '../../../utils';
 // Actions
-import { authWalletActions } from '../../actions/authWalletActions';
-import { setTelegramData, setTwitterData } from '../../reducers/authSocialSlice';
+import { authWalletActions } from '../../../actions/authWalletActions';
+import { setTelegramData, setTwitterData } from '../../../reducers/authSocialSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
 import TelegramLoginBtn from '../TelegramLoginBtn';
-import Message from '../Message';
+import Message from '../../Message';
 
 const PopupSignupWithSocials = () => {
     const dispatch = useDispatch();

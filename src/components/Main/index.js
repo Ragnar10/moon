@@ -21,4 +21,15 @@ const Main = (props) => {
     );
 };
 
-export { Main };
+const MainDashboard = (props) => {
+    return (
+        <div className = { Styles.container }>
+            <main className = { Styles.wrapper }>
+                { props.children }
+            </main>
+            <Footer />
+        </div>
+    );
+};
+
+export { Main, MainDashboard };
