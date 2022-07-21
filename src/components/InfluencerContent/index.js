@@ -14,7 +14,6 @@ import Styles from './styles.module.scss';
 import PopupSignupWithSocials from '../PopupSignupWithSocials';
 import Loader from '../Loader';
 import Message from '../Message';
-import Socials from '../Socials';
 
 export const InfluencerContent = () => {
     const dispatch = useDispatch();
@@ -86,7 +85,22 @@ export const InfluencerContent = () => {
                     <span>{ 'To receive a special Bonus at LVRGD Launch please connect your Meta mask!' }</span>
                 </p>
                 { loading ? <Loader /> : metaBtn }
-                <Socials class = { Styles.content_socials } />
+                <div className = { Styles.content_socials }>
+                    <a
+                        href = { 'https://t.me/lvrgd' } target = { '_blank' }
+                        rel = 'noreferrer'
+                        className = { Styles.socials_telegram }>
+                        <span />
+                        <span>{ 'Telegram' }</span>
+                    </a>
+                    <a
+                        href = { 'https://twitter.com/LeveragedIO' } target = { '_blank' }
+                        rel = 'noreferrer'
+                        className = { Styles.socials_twitter }>
+                        <span />
+                        <span>{ 'Twitter' }</span>
+                    </a>
+                </div>
             </section>
         </>
     );
