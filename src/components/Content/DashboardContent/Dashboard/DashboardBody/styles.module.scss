@@ -1,0 +1,17 @@
+.title {
+    font-size: var(--h4-font-size);
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.pagination {
+    li button {
+        width: 20px;
+        min-width: auto;
+        height: 20px;
+        line-height: 20;
+        color: white;
+        background-color: var(--grey500-color);
+        margin: 0 5px;
+    }
+}

@@ -11,6 +11,8 @@ import Styles from './styles.module.scss';
 // Components
 import Message from '../../../Message';
 import DashboardHeader from '../DashboardHeader';
+import RewardCard from '../BonusRewards/RewardCard';
+import Dashboard from '../Dashboard/DashboardBody';
 
 export const DashboardContent = () => {
     const message = useSelector((state) => state.auth.message);
@@ -28,13 +30,13 @@ export const DashboardContent = () => {
                     <div className = { Styles.tabs_content }>
                         <DashboardHeader />
                         <TabPanelUnstyled value = { 0 } className = { Styles.content_item }>
-                            Dashboard
+                            <Dashboard />
                         </TabPanelUnstyled>
                         <TabPanelUnstyled value = { 1 } className = { Styles.content_item }>
-                            Affiliates
+                            <Dashboard />
                         </TabPanelUnstyled>
                         <TabPanelUnstyled value = { 2 } className = { Styles.content_item }>
-                            Bonus Rewards
+                            <RewardCard />
                         </TabPanelUnstyled>
                     </div>
                 </TabsUnstyled>

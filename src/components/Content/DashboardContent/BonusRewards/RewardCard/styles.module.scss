@@ -1,0 +1,110 @@
+.card_wrapper {
+    width: 100%;
+    max-width: 552px;
+    height: 206px;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 24px 21px;
+    background: var(--grey400-color);
+    box-shadow: var(--box-shadow);
+    border-radius: 8px;
+    overflow: hidden;
+
+    .left_block {
+        
+        .card_title {
+            font-size: var(--h4-font-size);
+            line-height: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .description {
+            max-width: 262px;
+            font-size: var(--text-font-size);
+            line-height: 16px;
+            color: var(--grey900-color);
+            margin-bottom: 16px;
+        }
+
+        .reward_amount {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            background-color: var(--grey200-color);
+            border-radius: 8px;
+            padding: 8px;
+
+            .coin {
+                width: 20px;
+                height: 20px;
+                background: url('../../../../../theme/assets/icons/kol.svg');
+                background-size: cover;
+                margin-right: 8px;
+            }
+
+            span {
+                font-size: var(--text-font-size);
+                line-height: 16px;
+                color: var(--main-color);
+            }
+        }
+
+        .timeline {
+            display: flex;
+            align-items: center;
+            margin-top: 12px;
+
+            .clock {
+                width: 14px;
+                height: 14px;
+                background: url('../../../../../theme/assets/icons/time.svg');
+                background-size: cover;
+                margin-right: 8px;
+            }
+
+            span {
+                font-size: var(--text-font-size);
+                line-height: 16px;
+                color: var(--grey900-color);
+            }
+        }
+    }
+
+    .right_block {
+        position: relative;
+
+        .gradient {
+            width: 350px;
+            height: 350px;
+            position: absolute;
+            right: -60px;
+            top: -60px;
+            background: radial-gradient(50% 50% at 50% 50%, #32CD8B 0%, rgba(50, 205, 139, 0) 100%);
+            opacity: 0.4;
+            filter: blur(32px);
+        }
+
+        .chest {
+            width: 148px;
+            height: 148px;
+            background-image: url('../../../../../theme/assets/images/dashboard/bonus.png');
+            background-size: cover;
+            position: absolute;
+            right: 10px;
+            top: -10px;
+        }
+
+        Button {
+            background-color: var(--primary200-color);
+            padding: 12px 49px;
+            font-size: var(--label-font-size);
+            line-height: 16px;
+            text-transform: none;
+            box-shadow: 0px 4px 4px 0px #16234180;
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+        }
+    }
+}
