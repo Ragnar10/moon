@@ -3,32 +3,34 @@ import { Button } from '@mui/material';
 // Styles
 import Styles from './styles.module.scss';
 
-const RewardCard = () => {
+const RewardCard = ({props}) => {
     return (
-        <section className = { Styles.card_wrapper }>
+        <div className = {`${Styles.card_wrapper} ${props.isExpired ? Styles.expired_card : null}` }>
             <div className = { Styles.left_block }>
-                <h4 className = { Styles.card_title }>Like instagram post</h4>
-                <p className = { Styles.description }>
-          Like our post on instagram to enter this giveaway and have a chance to
-          win awesome prizes
-                </p>
+                <h4 className = { Styles.card_title }>{props.title}</h4>
+                <p className = { Styles.description }>{props.description}</p>
                 <div className = { Styles.reward_amount }>
                     <div className = { Styles.coin } />
-                    <span>100.00</span>
+                    <span>{props.rewardAmount}</span>
                 </div>
 
                 <div className = { Styles.timeline }>
                     <div className = { Styles.clock } />
-                    <span>Till 24 June 20:00</span>
+                    {props.isExpired 
+                        ?
+                        <span>Expired</span>
+                        :
+                        <span>Till {props.time}</span>
+                    }
                 </div>
             </div>
 
             <div className = { Styles.right_block }>
                 <div className = { Styles.gradient } />
                 <div className = { Styles.chest } />
-                <Button variant = 'contained'>Submit</Button>
+                <Button variant = 'contained' disabled={props.isExpired}>Submit</Button>
             </div>
-        </section>
+        </div>
     );
 };
 

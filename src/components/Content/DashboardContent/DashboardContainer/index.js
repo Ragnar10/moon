@@ -11,8 +11,8 @@ import Styles from './styles.module.scss';
 // Components
 import Message from '../../../Message';
 import DashboardHeader from '../DashboardHeader';
-import RewardCard from '../BonusRewards/RewardCard';
 import Dashboard from '../Dashboard/DashboardBody';
+import BonusRewards from '../BonusRewards';
 
 export const DashboardContent = () => {
     const message = useSelector((state) => state.auth.message);
@@ -36,7 +36,7 @@ export const DashboardContent = () => {
                             <Dashboard fullFuncional={true} />
                         </TabPanelUnstyled>
                         <TabPanelUnstyled value = { 2 } className = { Styles.content_item }>
-                            <RewardCard />
+                            <BonusRewards />
                         </TabPanelUnstyled>
                     </div>
                 </TabsUnstyled>

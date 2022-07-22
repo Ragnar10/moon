@@ -108,3 +108,27 @@
         }
     }
 }
+
+.expired_card {
+    // opacity: 0.32;
+    color: var(--grey800-color);
+    
+    .coin {
+        background: url('/theme/assets/icons/kol_disabled.svg') !important;
+    }
+    
+    .gradient {
+        display: none;
+    }
+
+    .chest {
+        width: 124px !important;
+        height: 144px !important;
+        background-image: url('/theme/assets/images/dashboard/expired.png') !important;
+    }
+
+    Button {
+        background-color: var(--grey700-color) !important;
+        color: var(--grey800-color) !important;
+    }
+}

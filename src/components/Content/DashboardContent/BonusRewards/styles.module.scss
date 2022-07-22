@@ -1,0 +1,12 @@
+.title {
+    font-size: var(--h3-font-size);
+    margin-bottom: 25px;
+}
+
+.cards_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 552px);
+    column-gap: 12px;
+    row-gap: 16px;
+    margin-bottom: 47px;
+}
