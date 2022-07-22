@@ -47,8 +47,7 @@
     }
 }
 
-.content_metamask_btn,
-.content_connected_btn {
+.content_metamask_btn {
     @include button();
     padding: 12px;
 }
