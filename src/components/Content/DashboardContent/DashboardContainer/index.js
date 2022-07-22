@@ -30,10 +30,10 @@ export const DashboardContent = () => {
                     <div className = { Styles.tabs_content }>
                         <DashboardHeader />
                         <TabPanelUnstyled value = { 0 } className = { Styles.content_item }>
-                            <Dashboard />
+                            <Dashboard fullFuncional={false} />
                         </TabPanelUnstyled>
                         <TabPanelUnstyled value = { 1 } className = { Styles.content_item }>
-                            <Dashboard />
+                            <Dashboard fullFuncional={true} />
                         </TabPanelUnstyled>
                         <TabPanelUnstyled value = { 2 } className = { Styles.content_item }>
                             <RewardCard />

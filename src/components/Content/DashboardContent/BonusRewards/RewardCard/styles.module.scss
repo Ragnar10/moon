@@ -38,7 +38,7 @@
             .coin {
                 width: 20px;
                 height: 20px;
-                background: url('../../../../../theme/assets/icons/kol.svg');
+                background: url('/theme/assets/icons/kol.svg');
                 background-size: cover;
                 margin-right: 8px;
             }
@@ -58,7 +58,7 @@
             .clock {
                 width: 14px;
                 height: 14px;
-                background: url('../../../../../theme/assets/icons/time.svg');
+                background: url('/theme/assets/icons/time.svg');
                 background-size: cover;
                 margin-right: 8px;
             }
@@ -88,7 +88,7 @@
         .chest {
             width: 148px;
             height: 148px;
-            background-image: url('../../../../../theme/assets/images/dashboard/bonus.png');
+            background-image: url('/theme/assets/images/dashboard/bonus.png');
             background-size: cover;
             position: absolute;
             right: 10px;
