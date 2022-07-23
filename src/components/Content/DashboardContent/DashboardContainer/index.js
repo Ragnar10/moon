@@ -13,6 +13,7 @@ import Message from '../../../Message';
 import DashboardHeader from '../DashboardHeader';
 import Dashboard from '../Dashboard/DashboardBody';
 import BonusRewards from '../BonusRewards';
+import Info from '../Info';
 
 export const DashboardContent = () => {
     const message = useSelector((state) => state.auth.message);
@@ -30,6 +31,7 @@ export const DashboardContent = () => {
                     <div className = { Styles.tabs_content }>
                         <DashboardHeader />
                         <TabPanelUnstyled value = { 0 } className = { Styles.content_item }>
+                            <Info />
                             <Dashboard fullFuncional={false} />
                         </TabPanelUnstyled>
                         <TabPanelUnstyled value = { 1 } className = { Styles.content_item }>
