@@ -25,11 +25,28 @@
     background: var(--grey600-color);
     cursor: pointer;
 
-    .crypto_btn_img {}
+    .crypto_btn_img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        filter: brightness(100);
+    }
 
-    .crypto_btn_name {}
+    .crypto_btn_name {
+        display: inline-block;
+        margin-right: 8px;
+    }
 
-    .crypto_btn_arrow {}
+    .crypto_btn_arrow {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: url('../../../../theme/assets/icons/arrow_left.svg') no-repeat;
+        background-size: cover;
+        transform: rotate(-90deg);
+        filter: brightness(100);
+    }
 }
 
 .header_localization_btn {
@@ -49,9 +66,20 @@
     background: var(--grey600-color);
     cursor: pointer;
 
-    .localization_btn_name {}
+    .localization_btn_name {
+        display: inline-block;
+        margin-right: 8px;
+    }
 
-    .localization_btn_arrow {}
+    .localization_btn_arrow {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: url('../../../../theme/assets/icons/arrow_left.svg') no-repeat;
+        background-size: cover;
+        transform: rotate(-90deg);
+        filter: brightness(100);
+    }
 }
 
 .header_theme_btn {
@@ -60,7 +88,7 @@
     width: fit-content;
     height: 40px;
     margin-right: 12px;
-    padding: 12px 8px;
+    padding: 12px;
     border: none;
     outline: none;
     border-radius: var(--button-border-radius);
@@ -71,7 +99,12 @@
     background: var(--grey750-color);
     cursor: pointer;
 
-    .crypto_btn_img {}
+    .theme_btn_img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        filter: brightness(100);
+    }
 }
 
 .header_settings_btn {
@@ -91,9 +124,24 @@
     background: var(--main-color);
     cursor: pointer;
 
-    .settings_btn_img {}
+    .settings_btn_img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+    }
 
-    .settings_btn_name {}
+    .settings_btn_name {
+        display: inline-block;
+        margin-right: 8px;
+    }
 
-    .settings_btn_arrow {}
+    .settings_btn_arrow {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: url('../../../../theme/assets/icons/arrow_left.svg') no-repeat;
+        background-size: cover;
+        transform: rotate(-90deg);
+    }
 }

@@ -37,17 +37,30 @@
         box-shadow: none;
         border-radius: 0;
     }
-    
+
     .pagination {
-    
+
         li button {
             width: 20px;
             min-width: auto;
             height: 20px;
             line-height: 20;
-            color: white;
-            background-color: #37425980;
+            color: var(--main-color);
+            background: rgba(55, 66, 89, 0.5);
             margin: 0 5px;
+
+            &:hover {
+                background: var(--primary900-color);
+            }
         }
+
+        li button[aria-current="true"] {
+            background: var(--grey500-color);
+
+            &:hover {
+                background: var(--primary900-color);
+            }
+        }
+
     }
 }

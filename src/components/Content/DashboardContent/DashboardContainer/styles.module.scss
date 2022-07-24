@@ -33,12 +33,28 @@
     color: var(--main-color);
     background: inherit;
     cursor: pointer;
+
+    & > img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        filter: brightness(100);
+    }
+
+    & > span {
+        display: inline-block;
+    }
 }
 
 .nav_item[aria-selected='true'] {
     border-radius: 4px;
     color: var(--grey100-color);
     background: var(--main-color);
+
+    & > img {
+        filter: brightness(0);
+    }
 }
 
 .tabs_content {
