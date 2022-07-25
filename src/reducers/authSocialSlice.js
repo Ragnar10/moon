@@ -8,7 +8,7 @@ export const authSocialSlice = createSlice({
         user:         {},
         wallet:       '',
         telegramData: '',
-        twitterData:  '',
+        twitterData:  {},
         step:         'one',
         popupIsOpen:  false,
         loading:      false,

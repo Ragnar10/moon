@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Routing
 import { useParams } from 'react-router-dom';
+// Instruments
+import queryString from 'query-string';
 // Utils
 import { nameTransform } from '../../../utils';
 // Actions
@@ -23,6 +25,20 @@ export const SignUpWallet = () => {
 
     useEffect(() => {
         dispatch(authWalletActions.checkRef(id));
+    }, []);
+
+    useEffect(() => {
+        const { userId, token } = queryString.parse(window.location.search);
+
+        const data = {
+            id: userId,
+            token,
+        };
+
+        if (userId && token) {
+            dispatch(authWalletActions.getSocialUser(data));
+            dispatch(setPopupIsOpen(true));
+        }
     }, []);
 
     useEffect(() => {

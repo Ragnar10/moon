@@ -29,7 +29,7 @@ export const api = {
         });
     },
 
-    createUser: (data) => {
+    createSocialUser: (data) => {
         return fetch(`${apiPath}/users/`, {
             method:  'POST',
             headers: {
@@ -39,7 +39,7 @@ export const api = {
         });
     },
 
-    getUser: (data) => {
+    getSocialUser: (data) => {
         return fetch(`${apiPath}/users/${data.id}/`, {
             method:  'GET',
             headers: {
@@ -49,7 +49,7 @@ export const api = {
         });
     },
 
-    updateUser: (data) => {
+    updateSocialUser: (data) => {
         return fetch(`${apiPath}/users/${data.id}/`, {
             method:  'PATCH',
             headers: {

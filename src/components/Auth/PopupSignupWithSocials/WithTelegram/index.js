@@ -12,6 +12,9 @@ import TelegramLoginBtn from '../../TelegramLoginBtn';
 
 const WithTelegram = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.authSocial.user);
+    const wallet = useSelector((state) => state.authSocial.wallet);
+    const twitterData = useSelector((state) => state.authSocial.twitterData);
     const telegramData = useSelector((state) => state.authSocial.telegramData);
     const loading = useSelector((state) => state.authSocial.loading);
 
@@ -22,7 +25,16 @@ const WithTelegram = () => {
     };
 
     const updateUser = () => {
-        dispatch(authWalletActions.updateUser(telegramData));
+        const data = {
+            id:     user.id,
+            token:  user.token,
+            update: {
+                metamask: wallet,
+                twitter:  twitterData,
+                telegram: telegramData,
+            },
+        };
+        dispatch(authWalletActions.updateTelegramUser(data));
     };
 
     return (

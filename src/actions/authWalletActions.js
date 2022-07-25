@@ -76,13 +76,68 @@ export const authWalletActions = {
         }
     },
 
-    createUser: (data) => (dispatch) => {
+    createMetamaskUser: (data) => (dispatch) => {
         try {
-            api.createUser(data)
+            api.createSocialUser(data)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.id) {
                         dispatch(setUser(res));
+                        dispatch(setStep('two'));
+
+                        const user = {
+                            id:    res.id,
+                            token: res.token,
+                        };
+                        localStorage.setItem('user', JSON.stringify(user));
+
+                        window.location.href = `${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?userId=${user.id}&token=${user.token}`;
+                    } else {
+                        dispatch(clearError(''));
+                        dispatch(setError('User already exists!'));
+                    }
+                })
+                .catch(() => {
+                    dispatch(clearError(''));
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        } catch {
+            dispatch(clearError(''));
+            dispatch(setError('Something went wrong, please try again later!'));
+        }
+    },
+
+    getSocialUser: (data) => (dispatch) => {
+        try {
+            api.getSocialUser(data)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.id) {
+                        dispatch(setUser(res));
+                    } else {
+                        dispatch(clearError(''));
+                        dispatch(setError('Something went wrong, please try again later!'));
+                    }
+                })
+                .catch(() => {
+                    dispatch(clearError(''));
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        } catch {
+            dispatch(clearError(''));
+            dispatch(setError('Something went wrong, please try again later!'));
+        }
+    },
+
+    updateTwitterUser: (data) => (dispatch) => {
+        try {
+            api.updateSocialUser(data)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.id) {
+                        dispatch(setUser(res));
+                        dispatch(setStep('three'));
+
                         const user = {
                             id:    res.id,
                             token: res.token,
@@ -103,36 +158,14 @@ export const authWalletActions = {
         }
     },
 
-    getUser: (data) => (dispatch) => {
+    updateTelegramUser: (data) => (dispatch) => {
         try {
-            api.getUser(data)
+            api.updateSocialUser(data)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.id) {
                         dispatch(setUser(res));
-                        localStorage.removeItem('user');
-                    } else {
-                        dispatch(clearError(''));
-                        dispatch(setError('Something went wrong, please try again later!'));
-                    }
-                })
-                .catch(() => {
-                    dispatch(clearError(''));
-                    dispatch(setError('Something went wrong, please try again later!'));
-                });
-        } catch {
-            dispatch(clearError(''));
-            dispatch(setError('Something went wrong, please try again later!'));
-        }
-    },
 
-    updateUser: (data) => (dispatch) => {
-        try {
-            api.updateUser(data)
-                .then((response) => response.json())
-                .then((res) => {
-                    if (res.id) {
-                        dispatch(setUser(res));
                         const user = {
                             id:    res.id,
                             token: res.token,
@@ -180,8 +213,12 @@ export const authWalletActions = {
             .then((response) => response.json())
             .then((res) => {
                 if (res.screen_name) {
-                    dispatch(setTwitterData(res.screen_name));
-                    localStorage.setItem('tw', res.screen_name);
+                    const twitterData = {
+                        id:       res.id,
+                        username: res.screen_name,
+                    };
+                    dispatch(setTwitterData(twitterData));
+                    localStorage.setItem('tw', JSON.stringify(twitterData));
                 } else {
                     dispatch(clearError());
                     dispatch(setError('Something went wrong, please try again later!'));
@@ -193,7 +230,7 @@ export const authWalletActions = {
             });
     },
 
-    createSocialUser: (data) => (dispatch) => {
+    createSocialUserFinish: (data) => (dispatch) => {
         try {
             api.createSocialUser(data)
                 .then((response) => response.json())

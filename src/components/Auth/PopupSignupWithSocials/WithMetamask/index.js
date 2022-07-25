@@ -30,11 +30,16 @@ const WithMetamask = () => {
     };
 
     const saveUser = () => {
-        dispatch(authWalletActions.createUser(wallet));
-        dispatch(setStep('two'));
+        const data = {
+            metamask: wallet,
+            ref:      influencer,
+            twitter:  '',
+            telegram: '',
+        };
+        dispatch(authWalletActions.createMetamaskUser(data));
     };
 
-    const metaBtn = isMobileDevice()
+    const metaBtn = isMobileDevice() && !wallet
         ?  <a
             href = { `https://metamask.app.link/dapp/${process.env.REACT_APP_METAMASK_API_PATH}` }
             className = { Styles.connect_metamask_btn }>{ 'Connect Metamask' }</a>
