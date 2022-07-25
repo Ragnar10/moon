@@ -31,10 +31,11 @@ const WithMetamask = () => {
 
     const saveUser = () => {
         const data = {
-            metamask: wallet,
-            ref:      influencer,
-            twitter:  '',
-            telegram: '',
+            metamask:   wallet,
+            ref:        influencer,
+            twitter:    '',
+            twitter_id: '',
+            telegram:   '',
         };
         dispatch(authWalletActions.createMetamaskUser(data));
     };

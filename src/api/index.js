@@ -60,6 +60,24 @@ export const api = {
         });
     },
 
+    checkTwitterFollow: (data) => {
+        return fetch(`${apiPath}//v1/users/is_twitter_subscribed/?twitter_id=${data.twitter_id}`, {
+            method:  'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    },
+
+    checkTelegramFollow: (data) => {
+        return fetch(`${apiPath}//v1/users/is_telegram_subscribed/?username=${data.username}`, {
+            method:  'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    },
+
     signupUser: (data) => {
         return fetch(`${apiPath}/api/register/`, {
             method:  'POST',

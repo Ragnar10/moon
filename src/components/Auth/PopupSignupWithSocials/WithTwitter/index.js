@@ -14,10 +14,18 @@ const WithTwitter = () => {
     const user = useSelector((state) => state.authSocial.user);
     const wallet = useSelector((state) => state.authSocial.wallet);
     const twitterData = useSelector((state) => state.authSocial.twitterData);
+    const twitterDescribe = useSelector((state) => state.authSocial.twitterDescribe);
     const loading = useSelector((state) => state.authSocial.loading);
 
     const twitterLogin = () => {
         dispatch(authWalletActions.getTwitterOauthToken());
+    };
+
+    const twitterFollow = () => {
+        const data = {
+            twitter_id: twitterData.id,
+        };
+        dispatch(authWalletActions.checkTwitterFollow(data));
     };
 
     const updateUser = () => {
@@ -25,9 +33,10 @@ const WithTwitter = () => {
             id:     user.id,
             token:  user.token,
             update: {
-                metamask: wallet,
-                twitter:  twitterData,
-                telegram: '',
+                metamask:   wallet,
+                twitter:    twitterData.username,
+                twitter_id: twitterData.id,
+                telegram:   '',
             },
         };
         dispatch(authWalletActions.updateTwitterUser(data));
@@ -43,14 +52,14 @@ const WithTwitter = () => {
                 <div>
                     <button
                         onClick = { () => twitterLogin() }
-                        disabled = { twitterData ? 'disabled' : null }
+                        disabled = { twitterData.username ? 'disabled' : null }
                         className = { Styles.twitter_btn }>
                         <span />
                         <span>{ 'Twitter' }</span>
                     </button>
                     <button
-                        onClick = { () => twitterLogin() }
-                        disabled = { !twitterData ? 'disabled' : null }
+                        onClick = { () => twitterFollow() }
+                        disabled = { !twitterData.username || twitterDescribe ? 'disabled' : null }
                         className = { Styles.follow_twitter_btn }>
                         <span />
                         <span>{ 'Follow' }</span>
@@ -60,7 +69,7 @@ const WithTwitter = () => {
                     loading
                         ? <Loader />
                         : <button
-                            disabled = { !twitterData ? 'disabled' : null }
+                            disabled = { !twitterData.username && !twitterDescribe ? 'disabled' : null }
                             onClick = { () => updateUser() }
                             className = { Styles.next_btn }>{ !twitterData ? 'Waiting for accounts...' : 'Next step' }</button>
                 }

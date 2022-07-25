@@ -16,6 +16,7 @@ const WithTelegram = () => {
     const wallet = useSelector((state) => state.authSocial.wallet);
     const twitterData = useSelector((state) => state.authSocial.twitterData);
     const telegramData = useSelector((state) => state.authSocial.telegramData);
+    const telegramDescribe = useSelector((state) => state.authSocial.telegramDescribe);
     const loading = useSelector((state) => state.authSocial.loading);
 
     const handleTelegramResponse = (res) => {
@@ -24,14 +25,22 @@ const WithTelegram = () => {
         localStorage.setItem('tg', res.username);
     };
 
+    const telegramFollow = () => {
+        const data = {
+            username: telegramData,
+        };
+        dispatch(authWalletActions.checkTelegramFollow(data));
+    };
+
     const updateUser = () => {
         const data = {
             id:     user.id,
             token:  user.token,
             update: {
-                metamask: wallet,
-                twitter:  twitterData,
-                telegram: telegramData,
+                metamask:   wallet,
+                twitter:    twitterData.username,
+                twitter_id: twitterData.id,
+                telegram:   telegramData,
             },
         };
         dispatch(authWalletActions.updateTelegramUser(data));
@@ -51,7 +60,8 @@ const WithTelegram = () => {
                         requestAccess = 'white'
                         class = { telegramData ? Styles.telegram_disabled : null } />
                     <button
-                        disabled = { !telegramData ? 'disabled' : null }
+                        onClick = { () => telegramFollow() }
+                        disabled = { !telegramData || telegramDescribe ? 'disabled' : null }
                         className = { Styles.follow_telegram_btn }>
                         <span />
                         <span>{ 'Join' }</span>
@@ -61,7 +71,7 @@ const WithTelegram = () => {
                     loading
                         ? <Loader />
                         : <button
-                            disabled = { !telegramData ? 'disabled' : null }
+                            disabled = { !telegramData || !telegramDescribe ? 'disabled' : null }
                             onClick = { () => updateUser() }
                             className = { Styles.next_btn }>{ !telegramData ? 'Waiting for accounts...' : 'Finish Setup' }</button>
                 }

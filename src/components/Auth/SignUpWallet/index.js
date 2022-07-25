@@ -9,7 +9,7 @@ import queryString from 'query-string';
 import { nameTransform } from '../../../utils';
 // Actions
 import { authWalletActions } from '../../../actions/authWalletActions';
-import { setPopupIsOpen, setInfluencer } from '../../../reducers/authSocialSlice';
+import { setPopupIsOpen, setInfluencer, setStep } from '../../../reducers/authSocialSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -38,6 +38,7 @@ export const SignUpWallet = () => {
         if (userId && token) {
             dispatch(authWalletActions.getSocialUser(data));
             dispatch(setPopupIsOpen(true));
+            dispatch(setStep('two'));
         }
     }, []);
 
@@ -46,6 +47,7 @@ export const SignUpWallet = () => {
 
         if (storageInfluencer) {
             dispatch(setInfluencer(storageInfluencer));
+            dispatch(setPopupIsOpen(true));
         } else {
             dispatch(setInfluencer(id));
             localStorage.setItem('influencer', id);

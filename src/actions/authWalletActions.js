@@ -1,6 +1,15 @@
 // Actions
 import {
-    setWallet, setLoading, setError, clearError, setTwitterData, setStep, setUser, clearMessage, setMessage,
+    setWallet,
+    setLoading,
+    setError,
+    clearError,
+    setTwitterData,
+    setStep,
+    setUser,
+    clearMessage,
+    setMessage,
+    setPopupIsOpen, setTwitterDescribe, setTelegramDescribe,
 } from '../reducers/authSocialSlice';
 // Api
 import { api } from '../api';
@@ -82,16 +91,7 @@ export const authWalletActions = {
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.id) {
-                        dispatch(setUser(res));
-                        dispatch(setStep('two'));
-
-                        const user = {
-                            id:    res.id,
-                            token: res.token,
-                        };
-                        localStorage.setItem('user', JSON.stringify(user));
-
-                        window.location.href = `${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?userId=${user.id}&token=${user.token}`;
+                        window.location.href = `${process.env.REACT_APP_BASE_PATH}/affiliate/${res.ref}?userId=${res.id}&token=${res.token}`;
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
@@ -114,6 +114,13 @@ export const authWalletActions = {
                 .then((res) => {
                     if (res.id) {
                         dispatch(setUser(res));
+                        dispatch(setWallet(res.metamask));
+
+                        const metamask = {
+                            wallet: res.metamask,
+                        };
+                        localStorage.setItem('wallet', JSON.stringify(metamask));
+                        localStorage.setItem('user', JSON.stringify(res));
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('Something went wrong, please try again later!'));
@@ -129,6 +136,48 @@ export const authWalletActions = {
         }
     },
 
+    checkTwitterFollow: (data) => (dispatch) => {
+        try {
+            api.checkTwitterFollow(data)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    dispatch(clearError(''));
+                    dispatch(setError('Describe!'));
+                })
+                .then((res) => {
+                    dispatch(setTwitterDescribe(true));
+                })
+                .catch(() => {
+                    return null;
+                });
+        } catch {
+            return null;
+        }
+    },
+
+    checkTelegramFollow: (data) => (dispatch) => {
+        try {
+            api.checkTelegramFollow(data)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    dispatch(clearError(''));
+                    dispatch(setError('Describe!'));
+                })
+                .then((res) => {
+                    dispatch(setTelegramDescribe(true));
+                })
+                .catch(() => {
+                    return null;
+                });
+        } catch {
+            return null;
+        }
+    },
+
     updateTwitterUser: (data) => (dispatch) => {
         try {
             api.updateSocialUser(data)
@@ -137,12 +186,7 @@ export const authWalletActions = {
                     if (res.id) {
                         dispatch(setUser(res));
                         dispatch(setStep('three'));
-
-                        const user = {
-                            id:    res.id,
-                            token: res.token,
-                        };
-                        localStorage.setItem('user', JSON.stringify(user));
+                        localStorage.setItem('user', JSON.stringify(res));
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
@@ -219,6 +263,11 @@ export const authWalletActions = {
                     };
                     dispatch(setTwitterData(twitterData));
                     localStorage.setItem('tw', JSON.stringify(twitterData));
+                    const user = JSON.parse(localStorage.getItem('user'));
+                    const wallet = JSON.parse(localStorage.getItem('wallet'));
+                    dispatch(setUser(user));
+                    dispatch(setWallet(wallet.wallet));
+                    dispatch(setStep('two'));
                 } else {
                     dispatch(clearError());
                     dispatch(setError('Something went wrong, please try again later!'));
