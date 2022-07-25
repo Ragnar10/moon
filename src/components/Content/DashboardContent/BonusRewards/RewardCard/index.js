@@ -1,5 +1,3 @@
-// Mui
-import { Button } from '@mui/material';
 // Styles
 import Styles from './styles.module.scss';
 
@@ -28,7 +26,7 @@ const RewardCard = ({props}) => {
             <div className = { Styles.right_block }>
                 <div className = { Styles.gradient } />
                 <div className = { Styles.chest } />
-                <Button variant = 'contained' disabled={props.isExpired}>Submit</Button>
+                <button className={ Styles.submit_btn } disabled={props.isExpired}>Submit</button>
             </div>
         </div>
     );
