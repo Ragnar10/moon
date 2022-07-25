@@ -1,6 +1,6 @@
 // Actions
 import {
-    setWallet, setLoading, setError, clearError, setTwitterData, setPopupIsOpen, setUser, clearMessage, setMessage,
+    setWallet, setLoading, setError, clearError, setTwitterData, setStep, setUser, clearMessage, setMessage,
 } from '../reducers/authSocialSlice';
 // Api
 import { api } from '../api';
@@ -40,11 +40,9 @@ export const authWalletActions = {
                     } else {
                         dispatch(clearError());
                         dispatch(setWallet(res[ 0 ]));
-                        dispatch(setPopupIsOpen(true));
                         dispatch(setLoading(false));
                         const data = {
-                            wallet:      res[ 0 ],
-                            popupIsOpen: true,
+                            wallet: res[ 0 ],
                         };
                         localStorage.setItem('wallet', JSON.stringify(data));
                     }
@@ -66,10 +64,8 @@ export const authWalletActions = {
                 .request({ method: 'eth_requestAccounts' })
                 .then((res) => {
                     dispatch(setWallet(res[ 0 ]));
-                    dispatch(setPopupIsOpen(true));
                     const data = {
-                        wallet:      res[ 0 ],
-                        popupIsOpen: true,
+                        wallet: res[ 0 ],
                     };
                     localStorage.setItem('wallet', JSON.stringify(data));
                 })
@@ -77,6 +73,83 @@ export const authWalletActions = {
                     dispatch(clearError());
                     dispatch(setError('Something went wrong, please try again later!'));
                 });
+        }
+    },
+
+    createUser: (data) => (dispatch) => {
+        try {
+            api.createUser(data)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.id) {
+                        dispatch(setUser(res));
+                        const user = {
+                            id:    res.id,
+                            token: res.token,
+                        };
+                        localStorage.setItem('user', JSON.stringify(user));
+                    } else {
+                        dispatch(clearError(''));
+                        dispatch(setError('User already exists!'));
+                    }
+                })
+                .catch(() => {
+                    dispatch(clearError(''));
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        } catch {
+            dispatch(clearError(''));
+            dispatch(setError('Something went wrong, please try again later!'));
+        }
+    },
+
+    getUser: (data) => (dispatch) => {
+        try {
+            api.getUser(data)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.id) {
+                        dispatch(setUser(res));
+                        localStorage.removeItem('user');
+                    } else {
+                        dispatch(clearError(''));
+                        dispatch(setError('Something went wrong, please try again later!'));
+                    }
+                })
+                .catch(() => {
+                    dispatch(clearError(''));
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        } catch {
+            dispatch(clearError(''));
+            dispatch(setError('Something went wrong, please try again later!'));
+        }
+    },
+
+    updateUser: (data) => (dispatch) => {
+        try {
+            api.updateUser(data)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res.id) {
+                        dispatch(setUser(res));
+                        const user = {
+                            id:    res.id,
+                            token: res.token,
+                        };
+                        localStorage.setItem('user', JSON.stringify(user));
+                    } else {
+                        dispatch(clearError(''));
+                        dispatch(setError('User already exists!'));
+                    }
+                })
+                .catch(() => {
+                    dispatch(clearError(''));
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        } catch {
+            dispatch(clearError(''));
+            dispatch(setError('Something went wrong, please try again later!'));
         }
     },
 

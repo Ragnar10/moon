@@ -1,5 +1,15 @@
 // Core
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+// Routing
+import { useNavigate } from 'react-router-dom';
+// Hooks
+import { useToggle } from '../../../../hooks';
+// Utils
+import { deleteCookie, getCookie } from '../../../../utils';
+// Actions
+import { authActions } from '../../../../actions/authActions';
+import { setAccess } from '../../../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Images
@@ -8,6 +18,31 @@ import night from '../../../../theme/assets/icons/night.svg';
 import blockchain from '../../../../theme/assets/icons/blockchain.svg';
 
 const DashboardHeader = () => {
+    const dispatch = useDispatch();
+    const user = useSelector((state) => state.auth.user);
+    const navigate = useNavigate();
+    const [toggle, setToggle] = useToggle();
+
+    useEffect(() => {
+        const refresh = getCookie('refresh');
+
+        if (refresh) {
+            const data = {
+                refresh,
+            };
+            dispatch(authActions.refreshLogin(data));
+        }
+    }, []);
+
+    const onLogout = () => {
+        dispatch(setAccess({}));
+        deleteCookie('refresh');
+        navigate('/');
+    };
+
+    const arrowClass = !toggle ? Styles.settings_btn_arrow : Styles.settings_btn_arrow_open;
+    const dropdownList = !toggle ? Styles.user_menu_list : Styles.user_menu_list_open;
+
     return (
         <div className = { Styles.dashboard_header }>
             <div className = { Styles.header_crypto_btn }>
@@ -26,12 +61,26 @@ const DashboardHeader = () => {
                     src = { night } className = { Styles.theme_btn_img }
                     alt = 'icon image' />
             </div>
-            <div className = { Styles.header_settings_btn }>
-                <img
-                    src = { blockchain } className = { Styles.settings_btn_img }
-                    alt = 'icon image' />
-                <span className = { Styles.settings_btn_name }>{ '1234567890' }</span>
-                <span className = { Styles.settings_btn_arrow } />
+            <div className = { Styles.header_user_menu }>
+                <div
+                    onClick = { () => setToggle(!toggle) }
+                    className = { Styles.user_menu_settings_btn }>
+                    <img
+                        src = { blockchain } className = { Styles.settings_btn_img }
+                        alt = 'icon image' />
+                    <span className = { Styles.settings_btn_name }>{ user.name || 'Full name' }</span>
+                    <span className = { arrowClass } />
+                </div>
+                <ul className = { dropdownList }>
+                    <li className = { Styles.list_item }>
+                        <span>{ user.name || 'Full name' }</span>
+                    </li>
+                    <li
+                        onClick = { () => onLogout() }
+                        className = { Styles.list_item }>
+                        <span>{ 'Log out' }</span>
+                    </li>
+                </ul>
             </div>
         </div>
     );

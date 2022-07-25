@@ -31,9 +31,7 @@ export const DashboardContent = () => {
                             <span>{ 'Dashboard' }</span>
                         </TabUnstyled>
                         <TabUnstyled className = { Styles.nav_item }>
-                            <img
-                                src = { affiliate } className = { Styles.affiliate_img }
-                                alt = 'icon image' />
+                            <span className = { Styles.affiliate_img } />
                             <span>{ 'Affiliates' }</span>
                         </TabUnstyled>
                         <TabUnstyled className = { Styles.nav_item }>

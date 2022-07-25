@@ -47,8 +47,7 @@
     }
 }
 
-.signup_metamask_btn,
-.signup_connected_btn {
+.signup_open_popup_btn, {
     @include button();
     padding: 12px;
 }

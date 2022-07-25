@@ -42,6 +42,16 @@
         filter: brightness(100);
     }
 
+    & > .affiliate_img {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        background: url('../../../../theme/assets/icons/affiliate.svg') no-repeat;
+        background-size: cover;
+        filter: invert(100);
+    }
+
     & > span {
         display: inline-block;
     }
@@ -54,6 +64,10 @@
 
     & > img {
         filter: brightness(0);
+    }
+
+    & > .affiliate_img {
+        filter: invert(0);
     }
 }
 

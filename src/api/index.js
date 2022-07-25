@@ -29,13 +29,34 @@ export const api = {
         });
     },
 
-    createSocialUser: (data) => {
-        return fetch(`${apiPath}/v1/users/`, {
+    createUser: (data) => {
+        return fetch(`${apiPath}/users/`, {
             method:  'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
+        });
+    },
+
+    getUser: (data) => {
+        return fetch(`${apiPath}/users/${data.id}/`, {
+            method:  'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:  `Bearer ${data.token}`,
+            },
+        });
+    },
+
+    updateUser: (data) => {
+        return fetch(`${apiPath}/users/${data.id}/`, {
+            method:  'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:  `Bearer ${data.token}`,
+            },
+            body: JSON.stringify(data.update),
         });
     },
 

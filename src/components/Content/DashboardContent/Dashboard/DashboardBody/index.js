@@ -57,11 +57,11 @@ const StyledTableRow = styled(TableRow)(() => ({
     },
 }));
 
-function createData(userId, address, farming, total, active, closed, earned) {
+const createData = (userId, address, farming, total, active, closed, earned) => {
     return {
         userId, address, farming, total, active, closed, earned,
     };
-}
+};
 
 const rows = [
     createData(
@@ -344,21 +344,23 @@ const Dashboard = (props) => {
                         sorting = { props.fullFuncional } />
                     <TableBody>
                         {
-                            paginationData.slice(0, page * count).map((row) => {
-                                return (
-                                    <StyledTableRow key = { row.userId }>
-                                        <StyledTableCell component = 'th' scope = 'row'>
-                                            { row.userId }
-                                        </StyledTableCell>
-                                        <StyledTableCell align = 'right'>{ row.address }</StyledTableCell>
-                                        <StyledTableCell align = 'right'>{ row.farming }</StyledTableCell>
-                                        <StyledTableCell align = 'right'>{ row.total }</StyledTableCell>
-                                        <StyledTableCell align = 'right'>{ row.active }</StyledTableCell>
-                                        <StyledTableCell align = 'right'>{ row.closed }</StyledTableCell>
-                                        <StyledTableCell align = 'right'>{ row.earned }</StyledTableCell>
-                                    </StyledTableRow>
-                                );
-                            })
+                            paginationData
+                                .slice(0, page * count)
+                                .map((row) => {
+                                    return (
+                                        <StyledTableRow key = { row.userId }>
+                                            <StyledTableCell component = 'th' scope = 'row'>
+                                                { row.userId }
+                                            </StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ row.address }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ row.farming }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ row.total }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ row.active }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ row.closed }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ row.earned }</StyledTableCell>
+                                        </StyledTableRow>
+                                    );
+                                })
                         }
                     </TableBody>
                 </Table>

@@ -24,7 +24,7 @@ const Main = (props) => {
 const MainDashboard = (props) => {
     return (
         <div className = { Styles.container }>
-            <main className = { Styles.wrapper }>
+            <main className = { Styles.main_dashboard }>
                 { props.children }
             </main>
             <Footer />

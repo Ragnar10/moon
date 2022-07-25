@@ -9,6 +9,7 @@ export const authSocialSlice = createSlice({
         wallet:       '',
         telegramData: '',
         twitterData:  '',
+        step:         'one',
         popupIsOpen:  false,
         loading:      false,
         error:        '',
@@ -29,6 +30,9 @@ export const authSocialSlice = createSlice({
         },
         setTwitterData: (state, action) => {
             state.twitterData = action.payload;
+        },
+        setStep: (state, action) => {
+            state.step = action.payload;
         },
         setPopupIsOpen: (state, action) => {
             state.popupIsOpen = action.payload;
@@ -52,8 +56,8 @@ export const authSocialSlice = createSlice({
 });
 
 export const {
-    setInfluencer, setUser, setWallet, setTelegramData, setTwitterData,
-    setPopupIsOpen, setLoading, setError, clearError, setMessage, clearMessage,
+    setInfluencer, setUser, setWallet, setTelegramData, setTwitterData, setPopupIsOpen, setStep,
+    setLoading, setError, clearError, setMessage, clearMessage,
 } = authSocialSlice.actions;
 
 export default authSocialSlice.reducer;

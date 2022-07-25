@@ -11,7 +11,7 @@
     overflow: hidden;
 
     .left_block {
-        
+
         .card_title {
             font-size: var(--h4-font-size);
             line-height: 20px;
@@ -112,11 +112,11 @@
 .expired_card {
     // opacity: 0.32;
     color: var(--grey800-color);
-    
+
     .coin {
         background: url('/theme/assets/icons/kol_disabled.svg') !important;
     }
-    
+
     .gradient {
         display: none;
     }
