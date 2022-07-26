@@ -2,7 +2,7 @@
 import { setCookie } from '../utils';
 // Actions
 import {
-    setUser, setLoading, setError, clearError, setMessage, clearMessage, setAccess,
+    setUser, setLoading, setError, clearError, setMessage, clearMessage, setAccess, setAffiliates,
 } from '../reducers/authSlice';
 // Api
 import { api } from '../api';
@@ -83,6 +83,32 @@ export const authActions = {
                 });
         } catch (error) {
             console.log(error);
+        }
+    },
+
+    getAffiliates: (data) => (dispatch) => {
+        dispatch(setLoading(true));
+        try {
+            api.loginUser(data)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res) {
+                        dispatch(setAffiliates(res));
+                    } else {
+                        dispatch(setLoading(false));
+                        dispatch(clearError());
+                        dispatch(setError('Something went wrong, please try again later!'));
+                    }
+                })
+                .catch(() => {
+                    dispatch(setLoading(false));
+                    dispatch(clearError());
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        } catch {
+            dispatch(setLoading(false));
+            dispatch(clearError());
+            dispatch(setError('Something went wrong, please try again later!'));
         }
     },
 };

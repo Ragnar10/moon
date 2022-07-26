@@ -107,5 +107,14 @@ export const api = {
             body: JSON.stringify(data),
         });
     },
+
+    getAffiliates: (data) => {
+        return fetch(`${apiPath}/v1/users/?referral__ref=${data.username}`, {
+            method:  'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+    },
 };
 

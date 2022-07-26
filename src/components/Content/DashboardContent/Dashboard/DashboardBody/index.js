@@ -75,7 +75,7 @@ const rows = [
     ),
     createData(
         '#0000002',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xy794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -111,7 +111,7 @@ const rows = [
     ),
     createData(
         '#0000006',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xd794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -120,7 +120,7 @@ const rows = [
     ),
     createData(
         '#0000007',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xd794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -138,7 +138,7 @@ const rows = [
     ),
     createData(
         '#0000009',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xj794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -156,7 +156,7 @@ const rows = [
     ),
     createData(
         '#0000011',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xc794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -165,7 +165,7 @@ const rows = [
     ),
     createData(
         '#0000012',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xr794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -219,7 +219,7 @@ const rows = [
     ),
     createData(
         '#0000018',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xc794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -237,7 +237,7 @@ const rows = [
     ),
     createData(
         '#0000020',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
+        '0xa794f5ea0ba39494ce839613fffba74279579268',
         'N/A',
         'N/A',
         'N/A',
@@ -296,12 +296,10 @@ const Dashboard = (props) => {
 
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
-
-    const count = props.fullFuncional ? 10 : 7;
-    const paginationData = page === 1 ? rows.slice(0, page * count) : rows.slice(page * count - count, page * count);
+    const [list, setList] = useState(rows);
 
     // useEffect(() => {
-    //     fetch('https://back.leveraged.io/v1/users/?referral__ref=CryptoMo', {
+    //     fetch(`${process.env.REACT_APP_BACK_PATH}/v1/users/?referral__ref=ref-test`, {
     //         method:  'GET',
     //         headers: {
     //             'Content-Type': 'application/json',
@@ -322,6 +320,30 @@ const Dashboard = (props) => {
         setOrderBy(property);
     };
 
+    const onSearch = (event) => {
+        let filteredList = [];
+
+        const text = event.target.value;
+
+        if (text.length > 0) {
+            filteredList = rows.filter((item) => {
+                const regex = new RegExp(`${text}`, 'gi');
+
+                return item.address.match(regex);
+            });
+        }
+
+        if (text.length === 0) {
+            setList(rows);
+        } else {
+            setList(filteredList);
+        }
+    };
+
+    const count = props.fullFuncional ? 10 : 7;
+    const paginationData = page === 1 ? list.slice(0, page * count) : list.slice(page * count - count, page * count);
+
+
     return (
         <section className = { Styles.wrapper }>
             { !props.fullFuncional && <h4 className = { Styles.title }>Recent Signups</h4> }
@@ -331,8 +353,9 @@ const Dashboard = (props) => {
                     type = { 'text' }
                     id = 'searchInput'
                     name = 'search'
+                    onChange = { (event) => onSearch(event) }
                     placeholder = 'Search...'
-                    className = { Styles.search }></input>
+                    className = { Styles.search } />
             }
             <TableContainer component = { Paper } className = { Styles.table_wrapper }>
                 <Table sx = { { minWidth: 800 } } aria-label = 'customized table'>
@@ -372,7 +395,7 @@ const Dashboard = (props) => {
                     alignItems = 'center'>
                     <Pagination
                         className = { Styles.pagination }
-                        count = { rows.length ? Math.ceil(rows.length / count) : 1 }
+                        count = { list.length ? Math.ceil(list.length / count) : 1 }
                         shape = 'rounded'
                         variant = 'outlined'
                         page = { page }
