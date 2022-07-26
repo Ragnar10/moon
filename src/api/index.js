@@ -30,7 +30,7 @@ export const api = {
     },
 
     createSocialUser: (data) => {
-        return fetch(`${apiPath}/users/`, {
+        return fetch(`${apiPath}/v1/users/`, {
             method:  'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export const api = {
     },
 
     getSocialUser: (data) => {
-        return fetch(`${apiPath}/users/${data.id}/`, {
+        return fetch(`${apiPath}/v1/users/${data.meta}/`, {
             method:  'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const api = {
     },
 
     updateSocialUser: (data) => {
-        return fetch(`${apiPath}/users/${data.id}/`, {
+        return fetch(`${apiPath}/v1/users/${data.meta}/`, {
             method:  'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export const api = {
     },
 
     checkTwitterFollow: (data) => {
-        return fetch(`${apiPath}//v1/users/is_twitter_subscribed/?twitter_id=${data.twitter_id}`, {
+        return fetch(`${apiPath}/v1/users/is_twitter_subscribed/?twitter_id=${data.twitter_id}`, {
             method:  'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export const api = {
     },
 
     checkTelegramFollow: (data) => {
-        return fetch(`${apiPath}//v1/users/is_telegram_subscribed/?username=${data.username}`, {
+        return fetch(`${apiPath}/v1/users/is_telegram_subscribed/?username=${data.username}`, {
             method:  'GET',
             headers: {
                 'Content-Type': 'application/json',

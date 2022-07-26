@@ -91,7 +91,10 @@ export const authWalletActions = {
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.id) {
-                        window.location.href = `${process.env.REACT_APP_BASE_PATH}/affiliate/${res.ref}?userId=${res.id}&token=${res.token}`;
+                        dispatch(setUser(res));
+                        localStorage.setItem('user', JSON.stringify(res));
+
+                        window.location.href = `${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`;
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
@@ -147,7 +150,9 @@ export const authWalletActions = {
                     dispatch(setError('Describe!'));
                 })
                 .then((res) => {
-                    dispatch(setTwitterDescribe(true));
+                    if (res) {
+                        dispatch(setTwitterDescribe(true));
+                    }
                 })
                 .catch(() => {
                     return null;
@@ -168,7 +173,9 @@ export const authWalletActions = {
                     dispatch(setError('Describe!'));
                 })
                 .then((res) => {
-                    dispatch(setTelegramDescribe(true));
+                    if (res) {
+                        dispatch(setTelegramDescribe(true));
+                    }
                 })
                 .catch(() => {
                     return null;
@@ -209,12 +216,7 @@ export const authWalletActions = {
                 .then((res) => {
                     if (res.id) {
                         dispatch(setUser(res));
-
-                        const user = {
-                            id:    res.id,
-                            token: res.token,
-                        };
-                        localStorage.setItem('user', JSON.stringify(user));
+                        localStorage.setItem('user', JSON.stringify(res));
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
@@ -258,7 +260,7 @@ export const authWalletActions = {
             .then((res) => {
                 if (res.screen_name) {
                     const twitterData = {
-                        id:       res.id,
+                        id:       res.user_id,
                         username: res.screen_name,
                     };
                     dispatch(setTwitterData(twitterData));

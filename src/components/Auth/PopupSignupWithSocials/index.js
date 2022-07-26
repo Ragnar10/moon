@@ -31,8 +31,8 @@ const PopupSignupWithSocials = () => {
         }
     }, [user]);
 
-    const stepsTwoClass = wallet || step === 'two' ? `${Styles.steps_two} ${Styles.wallet_ready}` : Styles.steps_two;
-    const stepsThreeClass = twitterData.username  || step === 'three' ? `${Styles.steps_three} ${Styles.wallet_ready}` : Styles.steps_three;
+    const stepsTwoClass = user.metamask || step === 'two' ? `${Styles.steps_two} ${Styles.wallet_ready}` : Styles.steps_two;
+    const stepsThreeClass = user.twitter || step === 'three' ? `${Styles.steps_three} ${Styles.wallet_ready}` : Styles.steps_three;
 
     return (
         <section className = { Styles.popup }>

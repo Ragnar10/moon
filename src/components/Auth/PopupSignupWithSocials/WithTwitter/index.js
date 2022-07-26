@@ -30,13 +30,11 @@ const WithTwitter = () => {
 
     const updateUser = () => {
         const data = {
-            id:     user.id,
+            meta:   user.metamask,
             token:  user.token,
             update: {
-                metamask:   wallet,
                 twitter:    twitterData.username,
                 twitter_id: twitterData.id,
-                telegram:   '',
             },
         };
         dispatch(authWalletActions.updateTwitterUser(data));
@@ -57,21 +55,22 @@ const WithTwitter = () => {
                         <span />
                         <span>{ 'Twitter' }</span>
                     </button>
-                    <button
+                    <a
+                        href = ''
                         onClick = { () => twitterFollow() }
                         disabled = { !twitterData.username || twitterDescribe ? 'disabled' : null }
                         className = { Styles.follow_twitter_btn }>
                         <span />
                         <span>{ 'Follow' }</span>
-                    </button>
+                    </a>
                 </div>
                 {
                     loading
                         ? <Loader />
                         : <button
-                            disabled = { !twitterData.username && !twitterDescribe ? 'disabled' : null }
+                            disabled = { !twitterData.username || !twitterDescribe ? 'disabled' : null }
                             onClick = { () => updateUser() }
-                            className = { Styles.next_btn }>{ !twitterData ? 'Waiting for accounts...' : 'Next step' }</button>
+                            className = { Styles.next_btn }>{ !twitterData.username || !twitterDescribe ? 'Waiting for accounts...' : 'Next step' }</button>
                 }
             </div>
         </>

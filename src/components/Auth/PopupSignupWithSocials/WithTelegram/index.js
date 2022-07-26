@@ -37,10 +37,7 @@ const WithTelegram = () => {
             id:     user.id,
             token:  user.token,
             update: {
-                metamask:   wallet,
-                twitter:    twitterData.username,
-                twitter_id: twitterData.id,
-                telegram:   telegramData,
+                telegram: telegramData,
             },
         };
         dispatch(authWalletActions.updateTelegramUser(data));
@@ -73,7 +70,7 @@ const WithTelegram = () => {
                         : <button
                             disabled = { !telegramData || !telegramDescribe ? 'disabled' : null }
                             onClick = { () => updateUser() }
-                            className = { Styles.next_btn }>{ !telegramData ? 'Waiting for accounts...' : 'Finish Setup' }</button>
+                            className = { Styles.next_btn }>{ !telegramData || !telegramDescribe ? 'Waiting for accounts...' : 'Finish Setup' }</button>
                 }
             </div>
         </>
