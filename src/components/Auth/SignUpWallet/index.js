@@ -90,7 +90,22 @@ export const SignUpWallet = () => {
                 <button
                     onClick = { () => openPopup() }
                     className = { Styles.signup_open_popup_btn }>{ 'Connect Metamask' }</button>;
-                <Socials class = { Styles.signup_socials } />
+                <div className = { Styles.content_socials }>
+                    <a
+                        href = { 'https://t.me/lvrgd' } target = { '_blank' }
+                        rel = 'noreferrer'
+                        className = { Styles.socials_telegram }>
+                        <span />
+                        <span>{ 'Telegram' }</span>
+                    </a>
+                    <a
+                        href = { 'https://twitter.com/LeveragedIO' } target = { '_blank' }
+                        rel = 'noreferrer'
+                        className = { Styles.socials_twitter }>
+                        <span />
+                        <span>{ 'Twitter' }</span>
+                    </a>
+                </div>
             </section>
         </>
     );

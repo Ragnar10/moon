@@ -144,14 +144,10 @@ export const authWalletActions = {
             api.checkTwitterFollow(data)
                 .then((response) => {
                     if (response.ok) {
-                        return response.json();
-                    }
-                    dispatch(clearError(''));
-                    dispatch(setError('Describe!'));
-                })
-                .then((res) => {
-                    if (res) {
                         dispatch(setTwitterDescribe(true));
+                    } else {
+                        dispatch(clearError(''));
+                        dispatch(setError('Subscribe!'));
                     }
                 })
                 .catch(() => {
@@ -167,14 +163,10 @@ export const authWalletActions = {
             api.checkTelegramFollow(data)
                 .then((response) => {
                     if (response.ok) {
-                        return response.json();
-                    }
-                    dispatch(clearError(''));
-                    dispatch(setError('Describe!'));
-                })
-                .then((res) => {
-                    if (res) {
                         dispatch(setTelegramDescribe(true));
+                    } else {
+                        dispatch(clearError(''));
+                        dispatch(setError('Subscribe!'));
                     }
                 })
                 .catch(() => {

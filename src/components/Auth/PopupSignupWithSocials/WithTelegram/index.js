@@ -25,23 +25,25 @@ const WithTelegram = () => {
         localStorage.setItem('tg', res.username);
     };
 
-    const telegramFollow = () => {
-        const data = {
-            username: telegramData,
-        };
-        dispatch(authWalletActions.checkTelegramFollow(data));
+    const updateUser = () => {
+        if (telegramDescribe) {
+            const data = {
+                meta:   user.metamask,
+                token:  user.token,
+                update: {
+                    telegram: telegramData,
+                },
+            };
+            dispatch(authWalletActions.updateTelegramUser(data));
+        } else {
+            const data = {
+                username: telegramData,
+            };
+            dispatch(authWalletActions.checkTelegramFollow(data));
+        }
     };
 
-    const updateUser = () => {
-        const data = {
-            id:     user.id,
-            token:  user.token,
-            update: {
-                telegram: telegramData,
-            },
-        };
-        dispatch(authWalletActions.updateTelegramUser(data));
-    };
+    const isSubscribe = telegramDescribe ? 'Next step' : 'Check subscription';
 
     return (
         <>
@@ -56,21 +58,22 @@ const WithTelegram = () => {
                         botName = { process.env.REACT_APP_BOT_NAME }
                         requestAccess = 'white'
                         class = { telegramData ? Styles.telegram_disabled : null } />
-                    <button
-                        onClick = { () => telegramFollow() }
-                        disabled = { !telegramData || telegramDescribe ? 'disabled' : null }
+                    <a
+                        href = { 'https://t.me/lvrgd' }
+                        target = { '_blank' }
+                        rel = 'noreferrer'
                         className = { Styles.follow_telegram_btn }>
                         <span />
                         <span>{ 'Join' }</span>
-                    </button>
+                    </a>
                 </div>
                 {
                     loading
                         ? <Loader />
                         : <button
-                            disabled = { !telegramData || !telegramDescribe ? 'disabled' : null }
+                            disabled = { !telegramData ? 'disabled' : null }
                             onClick = { () => updateUser() }
-                            className = { Styles.next_btn }>{ !telegramData || !telegramDescribe ? 'Waiting for accounts...' : 'Finish Setup' }</button>
+                            className = { Styles.next_btn }>{ !telegramData ? 'Waiting for accounts...' : isSubscribe }</button>
                 }
             </div>
         </>

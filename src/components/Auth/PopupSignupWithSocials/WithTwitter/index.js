@@ -29,16 +29,25 @@ const WithTwitter = () => {
     };
 
     const updateUser = () => {
-        const data = {
-            meta:   user.metamask,
-            token:  user.token,
-            update: {
-                twitter:    twitterData.username,
+        if (twitterDescribe) {
+            const data = {
+                meta:   user.metamask,
+                token:  user.token,
+                update: {
+                    twitter:    twitterData.username + Date.now(),
+                    twitter_id: twitterData.id,
+                },
+            };
+            dispatch(authWalletActions.updateTwitterUser(data));
+        } else {
+            const data = {
                 twitter_id: twitterData.id,
-            },
-        };
-        dispatch(authWalletActions.updateTwitterUser(data));
+            };
+            dispatch(authWalletActions.checkTwitterFollow(data));
+        }
     };
+
+    const isSubscribe = twitterDescribe ? 'Next step' : 'Check subscription';
 
     return (
         <>
@@ -56,9 +65,9 @@ const WithTwitter = () => {
                         <span>{ 'Twitter' }</span>
                     </button>
                     <a
-                        href = ''
-                        onClick = { () => twitterFollow() }
-                        disabled = { !twitterData.username || twitterDescribe ? 'disabled' : null }
+                        href = { 'https://twitter.com/LeveragedIO' }
+                        target = { '_blank' }
+                        rel = 'noreferrer'
                         className = { Styles.follow_twitter_btn }>
                         <span />
                         <span>{ 'Follow' }</span>
@@ -68,9 +77,10 @@ const WithTwitter = () => {
                     loading
                         ? <Loader />
                         : <button
-                            disabled = { !twitterData.username || !twitterDescribe ? 'disabled' : null }
+                            disabled = { !twitterData.username ? 'disabled' : null }
                             onClick = { () => updateUser() }
-                            className = { Styles.next_btn }>{ !twitterData.username || !twitterDescribe ? 'Waiting for accounts...' : 'Next step' }</button>
+                            className = { Styles.next_btn }>
+                            { !twitterData.username ? 'Waiting for accounts...' : isSubscribe }</button>
                 }
             </div>
         </>
