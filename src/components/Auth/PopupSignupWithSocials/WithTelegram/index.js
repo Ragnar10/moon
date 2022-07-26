@@ -52,7 +52,7 @@ const WithTelegram = () => {
                 { 'In order to qualify for the Free IDO please connect your twitter and telegram and follow us. This will allow us to track your activity and receive a higher Bonus.' }
             </p>
             <div className = { Styles.content_btns }>
-                <div>
+                <div className = { Styles.btns_telegram }>
                     <TelegramLoginBtn
                         dataOnauth = { handleTelegramResponse }
                         botName = { process.env.REACT_APP_BOT_NAME }

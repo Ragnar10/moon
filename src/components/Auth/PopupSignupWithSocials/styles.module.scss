@@ -79,11 +79,21 @@
     align-items: center;
 
     & > div {
-        display: flex;
-        flex-direction: column;
         width: 100%;
         height: fit-content;
         margin-bottom: 16px;
+    }
+
+    & > div.btns_twitter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    & > div.btns_telegram {
+        display: flex;
+        flex-direction: column;
+
     }
 }
 
