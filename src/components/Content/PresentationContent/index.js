@@ -59,7 +59,7 @@ export const PresentationContent = () => {
                     href = { 'https://bit.ly/LVRGD_public' }
                     target = '_blank'
                     rel = 'noreferrer'
-                    className = { Styles.content_connected_btn }>{ 'Investor Deck' }</a>
+                    className = { Styles.content_connected_btn }>{ 'Public Deck' }</a>
                 <div className = { Styles.content_socials }>
                     <a
                         href = { 'https://t.me/lvrgd' } target = { '_blank' }
