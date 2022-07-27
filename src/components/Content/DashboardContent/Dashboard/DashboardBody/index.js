@@ -1,5 +1,5 @@
 // Core
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Mui
 import { styled } from '@mui/material/styles';
@@ -63,13 +63,21 @@ const StyledTableRow = styled(TableRow)(() => ({
 const Dashboard = (props) => {
     const dispatch = useDispatch();
     const affiliateUsers = useSelector((state) => state.auth.affiliateUsers);
+    const affiliateData = useSelector((state) => state.auth.affiliateData);
 
-    if (!affiliateUsers.result) return null;
+    useEffect(() => {
+        if (!affiliateData.ref) {
+            const data = {
+                ref:   affiliateData.ref,
+                token: affiliateData.access,
+            };
+            dispatch(authActions.getAffiliateUsers(data));
+        }
+    }, []);
 
     const [page, setPage] = useState(1);
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
-    const [list, setList] = useState(affiliateUsers.result);
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -77,29 +85,7 @@ const Dashboard = (props) => {
         setOrderBy(property);
     };
 
-    const onSearch = (event) => {
-        let filteredList = [];
-
-        const text = event.target.value;
-
-        if (text.length > 0) {
-            filteredList = affiliateUsers.result.filter((item) => {
-                const regex = new RegExp(`${text}`, 'gi');
-
-                return item.address.match(regex);
-            });
-        }
-
-        if (text.length === 0) {
-            setList(affiliateUsers.result);
-        } else {
-            setList(filteredList);
-        }
-    };
-
-    const count = props.fullFuncional ? 10 : 7;
-    const paginationData = page === 1 ? list.slice(0, page * count) : list.slice(page * count - count, page * count);
-
+    const count = props.fullFuncional ? 25 : 10;
 
     return (
         <section className = { Styles.wrapper }>
@@ -110,7 +96,6 @@ const Dashboard = (props) => {
                     type = { 'text' }
                     id = 'searchInput'
                     name = 'search'
-                    onChange = { (event) => onSearch(event) }
                     placeholder = 'Search...'
                     className = { Styles.search } />
             }
@@ -120,19 +105,22 @@ const Dashboard = (props) => {
                         order = { order }
                         orderBy = { orderBy }
                         onRequestSort = { handleRequestSort }
-                        rowCount = { affiliateUsers.result.length }
+                        rowCount = { 25 }
                         sorting = { props.fullFuncional } />
                     <TableBody>
                         {
-                            paginationData
-                                .slice(0, page * count)
+                            affiliateUsers.results && affiliateUsers.results
+                                .slice(0, count)
                                 .map((row) => {
                                     return (
                                         <StyledTableRow key = { row.id }>
-                                            <StyledTableCell component = 'th' scope = 'row'>
+                                            <StyledTableCell
+                                                component = 'th'
+                                                scope = 'row'
+                                                align = 'left'>
                                                 { row.id }
                                             </StyledTableCell>
-                                            <StyledTableCell align = 'right'>{ row.address }</StyledTableCell>
+                                            <StyledTableCell align = 'left'>{ row.metamask }</StyledTableCell>
                                             <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
                                             <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
                                             <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
@@ -152,7 +140,7 @@ const Dashboard = (props) => {
                     alignItems = 'center'>
                     <Pagination
                         className = { Styles.pagination }
-                        count = { list.length ? Math.ceil(list.length / count) : 1 }
+                        count = { affiliateUsers.count ? Math.ceil(affiliateUsers.count / count) : 1 }
                         shape = 'rounded'
                         variant = 'outlined'
                         page = { page }

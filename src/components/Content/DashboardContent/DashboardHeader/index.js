@@ -6,9 +6,8 @@ import { useNavigate } from 'react-router-dom';
 // Hooks
 import { useToggle } from '../../../../hooks';
 // Utils
-import { deleteCookie, getCookie } from '../../../../utils';
+import { deleteCookie } from '../../../../utils';
 // Actions
-import { authActions } from '../../../../actions/authActions';
 import { setAffiliateData } from '../../../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
@@ -22,16 +21,6 @@ const DashboardHeader = () => {
     const affiliateData = useSelector((state) => state.auth.affiliateData);
     const navigate = useNavigate();
     const [toggle, setToggle] = useToggle();
-
-    useEffect(() => {
-        if (affiliateData.ref) {
-            const data = {
-                ref:   affiliateData.ref,
-                token: affiliateData.access,
-            };
-            dispatch(authActions.getAffiliateUsers(data));
-        }
-    }, []);
 
     const onLogout = () => {
         dispatch(setAffiliateData({}));

@@ -70,7 +70,7 @@ const headCells = [
 
 const DashboardHead = (props) => {
     const {
-        order, orderBy, rowCount, onRequestSort, sorting,
+        order, orderBy, onRequestSort, sorting,
     } = props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
@@ -79,31 +79,35 @@ const DashboardHead = (props) => {
     return (
         <TableHead>
             <TableRow>
-                { headCells.map((headCell) => (
-                    <StyledTableCell
-                        key = { headCell.id }
-                        align = { headCell.id === 'User' ? 'center' : 'left' }
-                        padding = { headCell.disablePadding ? 'none' : 'normal' }
-                        sortDirection = { orderBy === headCell.id ? order : false }>
-                        { !sorting && <>{ headCell.label }</> }
-                        { sorting && (
-                            <TableSortLabel
-                                active = { true }
-                                direction = { orderBy === headCell.id ? order : 'desc' }
-                                onClick = { createSortHandler(headCell.id) }
-                                IconComponent = { KeyboardArrowDownIcon }
-                                className = { Styles.column_title }>
-                                { headCell.label }
+                {
+                    headCells.map((item) => {
+                        return (
+                            <StyledTableCell
+                                key = { item.id }
+                                align = { item.id === 'User' ? 'center' : 'left' }
+                                padding = { item.disablePadding ? 'none' : 'normal' }
+                                sortDirection = { orderBy === item.id ? order : false }>
+                                { !sorting && <>{ item.label }</> }
+                                { sorting && (
+                                    <TableSortLabel
+                                        active = { true }
+                                        direction = { orderBy === item.id ? order : 'desc' }
+                                        onClick = { createSortHandler(item.id) }
+                                        IconComponent = { KeyboardArrowDownIcon }
+                                        className = { Styles.column_title }>
+                                        { item.label }
 
-                                { orderBy === headCell.id ? (
-                                    <Box component = 'span' sx = { visuallyHidden }>
-                                        { order === 'asc' ? 'sorted descending' : 'sorted ascending' }
-                                    </Box>
-                                ) : null }
-                            </TableSortLabel>
-                        ) }
-                    </StyledTableCell>
-                )) }
+                                        { orderBy === item.id ? (
+                                            <Box component = 'span' sx = { visuallyHidden }>
+                                                { order === 'asc' ? 'sorted descending' : 'sorted ascending' }
+                                            </Box>
+                                        ) : null }
+                                    </TableSortLabel>
+                                ) }
+                            </StyledTableCell>
+                        );
+                    })
+                }
             </TableRow>
         </TableHead>
     );
