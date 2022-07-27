@@ -1,5 +1,4 @@
 // Core
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
 import { authWalletActions } from '../../../../actions/authWalletActions';
@@ -13,8 +12,6 @@ import TelegramLoginBtn from '../../TelegramLoginBtn';
 const WithTelegram = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authSocial.user);
-    const wallet = useSelector((state) => state.authSocial.wallet);
-    const twitterData = useSelector((state) => state.authSocial.twitterData);
     const telegramData = useSelector((state) => state.authSocial.telegramData);
     const telegramDescribe = useSelector((state) => state.authSocial.telegramDescribe);
     const loading = useSelector((state) => state.authSocial.loading);
@@ -31,7 +28,7 @@ const WithTelegram = () => {
                 meta:   user.metamask,
                 token:  user.token,
                 update: {
-                    telegram: telegramData,
+                    telegram: telegramData + Date.now(),
                 },
             };
             dispatch(authWalletActions.updateTelegramUser(data));

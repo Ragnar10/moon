@@ -1,5 +1,6 @@
 // Core
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 // Mui
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -9,6 +10,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Pagination, Stack } from '@mui/material';
+// Actions
+import { authActions } from '../../../../../actions/authActions';
 // Styles
 import Styles from './styles.module.scss';
 // Components
@@ -57,262 +60,16 @@ const StyledTableRow = styled(TableRow)(() => ({
     },
 }));
 
-const createData = (userId, address, farming, total, active, closed, earned) => {
-    return {
-        userId, address, farming, total, active, closed, earned,
-    };
-};
-
-const rows = [
-    createData(
-        '#0000001',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000002',
-        '0xy794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000003',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000004',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000005',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000006',
-        '0xd794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000007',
-        '0xd794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000008',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000009',
-        '0xj794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000010',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000011',
-        '0xc794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000012',
-        '0xr794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000013',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000014',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000015',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000016',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000017',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000018',
-        '0xc794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000019',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000020',
-        '0xa794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000021',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000022',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000023',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000024',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-    createData(
-        '#0000025',
-        '0xb794f5ea0ba39494ce839613fffba74279579268',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-        'N/A',
-    ),
-];
-
 const Dashboard = (props) => {
-    const [page, setPage] = useState(1);
+    const dispatch = useDispatch();
+    const affiliateUsers = useSelector((state) => state.auth.affiliateUsers);
 
+    if (!affiliateUsers.result) return null;
+
+    const [page, setPage] = useState(1);
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
-    const [list, setList] = useState(rows);
-
-    // useEffect(() => {
-    //     fetch(`${process.env.REACT_APP_BACK_PATH}/v1/users/?referral__ref=ref-test`, {
-    //         method:  'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((res) => {
-    //             console.log(res);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }, []);
+    const [list, setList] = useState(affiliateUsers.result);
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
@@ -326,7 +83,7 @@ const Dashboard = (props) => {
         const text = event.target.value;
 
         if (text.length > 0) {
-            filteredList = rows.filter((item) => {
+            filteredList = affiliateUsers.result.filter((item) => {
                 const regex = new RegExp(`${text}`, 'gi');
 
                 return item.address.match(regex);
@@ -334,7 +91,7 @@ const Dashboard = (props) => {
         }
 
         if (text.length === 0) {
-            setList(rows);
+            setList(affiliateUsers.result);
         } else {
             setList(filteredList);
         }
@@ -363,7 +120,7 @@ const Dashboard = (props) => {
                         order = { order }
                         orderBy = { orderBy }
                         onRequestSort = { handleRequestSort }
-                        rowCount = { rows.length }
+                        rowCount = { affiliateUsers.result.length }
                         sorting = { props.fullFuncional } />
                     <TableBody>
                         {
@@ -371,16 +128,16 @@ const Dashboard = (props) => {
                                 .slice(0, page * count)
                                 .map((row) => {
                                     return (
-                                        <StyledTableRow key = { row.userId }>
+                                        <StyledTableRow key = { row.id }>
                                             <StyledTableCell component = 'th' scope = 'row'>
-                                                { row.userId }
+                                                { row.id }
                                             </StyledTableCell>
                                             <StyledTableCell align = 'right'>{ row.address }</StyledTableCell>
-                                            <StyledTableCell align = 'right'>{ row.farming }</StyledTableCell>
-                                            <StyledTableCell align = 'right'>{ row.total }</StyledTableCell>
-                                            <StyledTableCell align = 'right'>{ row.active }</StyledTableCell>
-                                            <StyledTableCell align = 'right'>{ row.closed }</StyledTableCell>
-                                            <StyledTableCell align = 'right'>{ row.earned }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
+                                            <StyledTableCell align = 'right'>{ 'N/A' }</StyledTableCell>
                                         </StyledTableRow>
                                     );
                                 })

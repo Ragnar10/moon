@@ -62,3 +62,7 @@ export const deleteCookie = (name) => {
         'max-age': -1,
     });
 };
+
+export const isMobileDevice = () => {
+    return 'ontouchstart' in window || 'onmsgesturechange' in window;
+};

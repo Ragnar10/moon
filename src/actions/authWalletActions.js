@@ -13,6 +13,8 @@ import {
 } from '../reducers/authSocialSlice';
 // Api
 import { api } from '../api';
+// Utils
+import { isMobileDevice } from '../utils';
 
 export const authWalletActions = {
     checkRef: (data) => () => {
@@ -94,7 +96,11 @@ export const authWalletActions = {
                         dispatch(setUser(res));
                         localStorage.setItem('user', JSON.stringify(res));
 
-                        window.location.href = `${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`;
+                        if (isMobileDevice()) {
+                            window.open(`${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
+                        } else {
+                            dispatch(setStep('two'));
+                        }
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
@@ -208,7 +214,14 @@ export const authWalletActions = {
                 .then((res) => {
                     if (res.id) {
                         dispatch(setUser(res));
-                        localStorage.setItem('user', JSON.stringify(res));
+                        localStorage.removeItem('user');
+                        localStorage.removeItem('influencer');
+                        localStorage.removeItem('wallet');
+                        localStorage.removeItem('tw');
+                        localStorage.removeItem('tg');
+                        localStorage.removeItem('popupIsOpen');
+
+                        window.location.href = `${process.env.REACT_APP_BASE_PATH}/`;
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));

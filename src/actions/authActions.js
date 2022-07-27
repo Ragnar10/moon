@@ -2,20 +2,20 @@
 import { setCookie } from '../utils';
 // Actions
 import {
-    setUser, setLoading, setError, clearError, setMessage, clearMessage, setAccess, setAffiliates,
+    setAffiliateData, setAffiliateUsers, setLoading, setError, clearError, setMessage, clearMessage,
 } from '../reducers/authSlice';
 // Api
 import { api } from '../api';
 
 export const authActions = {
-    signupUser: (data) => (dispatch) => {
+    signupAffiliate: (data) => (dispatch) => {
         dispatch(setLoading(true));
         try {
-            api.signupUser(data)
+            api.signupAffiliate(data)
                 .then((response) => response.json())
                 .then((res) => {
                     if (typeof res.email === 'string') {
-                        dispatch(setUser(res));
+                        dispatch(setAffiliateData(res));
                         dispatch(setLoading(false));
                         dispatch(clearMessage());
                         dispatch(setMessage('Your request has successfully been submitted, we will be in contact shortly!'));
@@ -37,14 +37,14 @@ export const authActions = {
         }
     },
 
-    loginUser: (data) => (dispatch) => {
+    loginAffiliate: (data) => (dispatch) => {
         dispatch(setLoading(true));
         try {
-            api.loginUser(data)
+            api.loginAffiliate(data)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.access) {
-                        dispatch(setAccess(res));
+                        dispatch(setAffiliateData(res));
                         setCookie('refresh', res.refresh, {
                             secure: true, samesite: true, 'max-age': 3600,
                         });
@@ -75,7 +75,7 @@ export const authActions = {
                 .then((response) => response.json())
                 .then((res) => {
                     if (res.access) {
-                        dispatch(setAccess(res));
+                        dispatch(setAffiliateData(res));
                     }
                 })
                 .catch((error) => {
@@ -86,14 +86,14 @@ export const authActions = {
         }
     },
 
-    getAffiliates: (data) => (dispatch) => {
+    getAffiliateUsers: (data) => (dispatch) => {
         dispatch(setLoading(true));
         try {
-            api.loginUser(data)
+            api.getAffiliateUsers(data)
                 .then((response) => response.json())
                 .then((res) => {
                     if (res) {
-                        dispatch(setAffiliates(res));
+                        dispatch(setAffiliateUsers(res));
                     } else {
                         dispatch(setLoading(false));
                         dispatch(clearError());

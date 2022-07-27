@@ -38,7 +38,7 @@ const validationSchema = Yup.object().shape({
 
 export const SignUpInfluencer = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
+    const affiliateData = useSelector((state) => state.auth.affiliateData);
     const loading = useSelector((state) => state.auth.loading);
     const error = useSelector((state) => state.auth.error);
     const message = useSelector((state) => state.auth.message);
@@ -66,14 +66,14 @@ export const SignUpInfluencer = () => {
             password:   values.password,
             password2:  values.confirm_password,
         };
-        dispatch(authActions.signupUser(regData));
+        dispatch(authActions.signupAffiliate(regData));
         reset();
     });
 
     useEffect(() => {
         let timeout;
 
-        if (user.email) {
+        if (affiliateData.email) {
             timeout = setTimeout(() => {
                 navigate('/');
             }, 1000);
@@ -82,7 +82,7 @@ export const SignUpInfluencer = () => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [user]);
+    }, [affiliateData]);
 
     return (
         <>

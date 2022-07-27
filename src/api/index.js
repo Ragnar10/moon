@@ -78,7 +78,7 @@ export const api = {
         });
     },
 
-    signupUser: (data) => {
+    signupAffiliate: (data) => {
         return fetch(`${apiPath}/api/register/`, {
             method:  'POST',
             headers: {
@@ -88,7 +88,7 @@ export const api = {
         });
     },
 
-    loginUser: (data) => {
+    loginAffiliate: (data) => {
         return fetch(`${apiPath}/api/token/`, {
             method:  'POST',
             headers: {
@@ -108,8 +108,8 @@ export const api = {
         });
     },
 
-    getAffiliates: (data) => {
-        return fetch(`${apiPath}/v1/users/?referral__ref=${data.username}`, {
+    getAffiliateUsers: (data) => {
+        return fetch(`${apiPath}/v1/users/?referral__ref=${data.ref}`, {
             method:  'GET',
             headers: {
                 'Content-Type': 'application/json',

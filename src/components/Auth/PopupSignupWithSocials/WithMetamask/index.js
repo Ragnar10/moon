@@ -2,10 +2,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Utils
-import { nameTransform } from '../../../../utils';
+import { nameTransform, isMobileDevice } from '../../../../utils';
 // Actions
 import { authWalletActions } from '../../../../actions/authWalletActions';
-import { setStep } from '../../../../reducers/authSocialSlice';
 // Styles
 import Styles from '../styles.module.scss';
 // Components
@@ -16,10 +15,6 @@ const WithMetamask = () => {
     const influencer = useSelector((state) => state.authSocial.influencer);
     const wallet = useSelector((state) => state.authSocial.wallet);
     const loading = useSelector((state) => state.authSocial.loading);
-
-    const isMobileDevice = () => {
-        return 'ontouchstart' in window || 'onmsgesturechange' in window;
-    };
 
     useEffect(() => {
         if (isMobileDevice()) return dispatch(authWalletActions.connectMetaMobile());

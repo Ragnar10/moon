@@ -43,7 +43,7 @@ export const DashboardContent = () => {
                     <div className = { Styles.tabs_content }>
                         <DashboardHeader />
                         <TabPanelUnstyled value = { 0 } className = { Styles.content_item }>
-                            <div style={{display: 'flex'}}>
+                            <div style = { { display: 'flex' } }>
                                 <Info />
                                 <Earnings />
                             </div>

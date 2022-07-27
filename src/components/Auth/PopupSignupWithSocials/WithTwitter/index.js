@@ -1,9 +1,7 @@
 // Core
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Actions
 import { authWalletActions } from '../../../../actions/authWalletActions';
-import { setStep } from '../../../../reducers/authSocialSlice';
 // Styles
 import Styles from '../styles.module.scss';
 // Components
@@ -12,20 +10,12 @@ import Loader from '../../../Loader';
 const WithTwitter = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.authSocial.user);
-    const wallet = useSelector((state) => state.authSocial.wallet);
     const twitterData = useSelector((state) => state.authSocial.twitterData);
     const twitterDescribe = useSelector((state) => state.authSocial.twitterDescribe);
     const loading = useSelector((state) => state.authSocial.loading);
 
     const twitterLogin = () => {
         dispatch(authWalletActions.getTwitterOauthToken());
-    };
-
-    const twitterFollow = () => {
-        const data = {
-            twitter_id: twitterData.id,
-        };
-        dispatch(authWalletActions.checkTwitterFollow(data));
     };
 
     const updateUser = () => {

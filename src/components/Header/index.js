@@ -10,11 +10,11 @@ import logo from '../../theme/assets/images/main/logo.svg';
 import Nav from '../Nav';
 
 const Header = (props) => {
-    const access = useSelector((state) => state.auth.access);
+    const affiliateData = useSelector((state) => state.auth.affiliateData);
 
     const headerClass = props.auth === 'signup' ? Styles.header_signup : Styles.header;
 
-    const loginBtn = (props.auth === 'auth' || props.auth === 'signup') && !access.access
+    const loginBtn = (props.auth === 'auth' || props.auth === 'signup') && !affiliateData.access
         ? <Link to = '/login' className = { Styles.header_btn_login }>{ 'Affiliate login' }</Link>
         : null;
 

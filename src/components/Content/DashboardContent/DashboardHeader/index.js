@@ -9,7 +9,7 @@ import { useToggle } from '../../../../hooks';
 import { deleteCookie, getCookie } from '../../../../utils';
 // Actions
 import { authActions } from '../../../../actions/authActions';
-import { setAccess } from '../../../../reducers/authSlice';
+import { setAffiliateData } from '../../../../reducers/authSlice';
 // Styles
 import Styles from './styles.module.scss';
 // Images
@@ -19,7 +19,7 @@ import blockchain from '../../../../theme/assets/icons/blockchain.svg';
 
 const DashboardHeader = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.auth.user);
+    const affiliateData = useSelector((state) => state.auth.affiliateData);
     const navigate = useNavigate();
     const [toggle, setToggle] = useToggle();
 
@@ -34,8 +34,18 @@ const DashboardHeader = () => {
         }
     }, []);
 
+    useEffect(() => {
+        if (affiliateData.ref) {
+            const data = {
+                ref:   affiliateData.ref,
+                token: affiliateData.access,
+            };
+            dispatch(authActions.getAffiliateUsers(data));
+        }
+    }, []);
+
     const onLogout = () => {
-        dispatch(setAccess({}));
+        dispatch(setAffiliateData({}));
         deleteCookie('refresh');
         navigate('/');
     };
@@ -68,12 +78,12 @@ const DashboardHeader = () => {
                     <img
                         src = { blockchain } className = { Styles.settings_btn_img }
                         alt = 'icon image' />
-                    <span className = { Styles.settings_btn_name }>{ user.name || 'Full name' }</span>
+                    <span className = { Styles.settings_btn_name }>{ affiliateData.first_name || 'Name' }</span>
                     <span className = { arrowClass } />
                 </div>
                 <ul className = { dropdownList }>
                     <li className = { Styles.list_item }>
-                        <span>{ user.name || 'Full name' }</span>
+                        <span>{ affiliateData.first_name || 'Name' }</span>
                     </li>
                     <li
                         onClick = { () => onLogout() }

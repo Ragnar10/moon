@@ -26,7 +26,7 @@ const validationSchema = Yup.object().shape({
 
 export const PopupLogin = () => {
     const dispatch = useDispatch();
-    const access = useSelector((state) => state.auth.access);
+    const affiliateData = useSelector((state) => state.auth.affiliateData);
     const loading = useSelector((state) => state.auth.loading);
     const error = useSelector((state) => state.auth.error);
     const message = useSelector((state) => state.auth.message);
@@ -49,14 +49,14 @@ export const PopupLogin = () => {
             username: values.email,
             password: values.password,
         };
-        dispatch(authActions.loginUser(logData));
+        dispatch(authActions.loginAffiliate(logData));
         reset();
     });
 
     useEffect(() => {
         let timeout;
 
-        if (access.access) {
+        if (affiliateData.access) {
             timeout = setTimeout(() => {
                 navigate('/dashboard');
             }, 1000);
@@ -65,7 +65,7 @@ export const PopupLogin = () => {
         return () => {
             clearTimeout(timeout);
         };
-    }, [access]);
+    }, [affiliateData]);
 
     return (
         <section className = { Styles.popup }>
