@@ -23,7 +23,7 @@ const App = () => {
         }
     }, []);
 
-    return !affiliateData.access ? <Private /> : <Public />;
+    return affiliateData.access ? <Private /> : <Public />;
 };
 
 export default App;

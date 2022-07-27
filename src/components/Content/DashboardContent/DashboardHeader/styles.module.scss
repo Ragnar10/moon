@@ -18,12 +18,17 @@
     border: none;
     outline: none;
     border-radius: var(--button-border-radius);
+    box-shadow: var(--box-shadow);
     font-size: var(--text-font-size);
     font-weight: 700;
     text-align: left;
     color: var(--main-color);
     background: var(--grey600-color);
     cursor: pointer;
+
+    &:active {
+        box-shadow: none;
+    }
 
     .crypto_btn_img {
         display: inline-block;
@@ -59,12 +64,17 @@
     border: none;
     outline: none;
     border-radius: var(--button-border-radius);
+    box-shadow: var(--box-shadow);
     font-size: var(--text-font-size);
     font-weight: 700;
     text-align: left;
     color: var(--main-color);
     background: var(--grey600-color);
     cursor: pointer;
+
+    &:active {
+        box-shadow: none;
+    }
 
     .localization_btn_name {
         display: inline-block;
@@ -92,12 +102,17 @@
     border: none;
     outline: none;
     border-radius: var(--button-border-radius);
+    box-shadow: var(--box-shadow);
     font-size: var(--text-font-size);
     font-weight: 700;
     text-align: left;
     color: var(--main-color);
     background: var(--grey750-color);
     cursor: pointer;
+
+    &:active {
+        box-shadow: none;
+    }
 
     .theme_btn_img {
         display: inline-block;
@@ -126,12 +141,17 @@
     border: none;
     outline: none;
     border-radius: var(--button-border-radius);
+    box-shadow: var(--box-shadow);
     font-size: var(--text-font-size);
     font-weight: 700;
     text-align: left;
     color: var(--grey100-color);
     background: var(--main-color);
     cursor: pointer;
+
+    &:active {
+        box-shadow: none;
+    }
 
     .settings_btn_img {
         display: inline-block;

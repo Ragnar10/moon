@@ -66,6 +66,7 @@ const Dashboard = (props) => {
     const affiliateData = useSelector((state) => state.auth.affiliateData);
 
     const [page, setPage] = useState(1);
+    const [search, setSearch] = useState('');
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('calories');
 
@@ -95,6 +96,16 @@ const Dashboard = (props) => {
         setOrderBy(property);
     };
 
+    const onSearch = () => {
+        const data = {
+            search,
+            token: affiliateData.token,
+        };
+        dispatch(authActions.getSearchAffiliateUsers(data));
+
+        setSearch('');
+    };
+
     const count = props.fullFuncional ? 25 : 10;
 
     return (
@@ -102,12 +113,19 @@ const Dashboard = (props) => {
             { !props.fullFuncional && <h4 className = { Styles.title }>Recent Signups</h4> }
             {
                 props.fullFuncional
-                && <input
-                    type = { 'text' }
-                    id = 'searchInput'
-                    name = 'search'
-                    placeholder = 'Search...'
-                    className = { Styles.search } />
+                && <div className = { Styles.search_wrapper }>
+                    <input
+                        type = { 'text' }
+                        id = 'searchInput'
+                        name = 'search'
+                        value = { search }
+                        onChange = { (event) => setSearch(event.target.value) }
+                        placeholder = 'Search...'
+                        className = { Styles.search_field } />
+                    <button
+                        onClick = { () => onSearch() }
+                        className = { Styles.search_btn }>{ 'Search' }</button>
+                </div>
             }
             <TableContainer component = { Paper } className = { Styles.table_wrapper }>
                 <Table sx = { { minWidth: 800 } } aria-label = 'customized table'>
