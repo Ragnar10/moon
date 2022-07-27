@@ -48,6 +48,7 @@ const WithTwitter = () => {
     };
 
     const isSubscribe = twitterDescribe ? 'Next step' : 'Check subscription';
+    const nextBtn = twitterDescribe ? `${Styles.next_btn} ${Styles.next_btn_available}` : Styles.next_btn;
 
     return (
         <>
@@ -79,7 +80,7 @@ const WithTwitter = () => {
                         : <button
                             disabled = { !twitterData.username ? 'disabled' : null }
                             onClick = { () => updateUser() }
-                            className = { Styles.next_btn }>
+                            className = { nextBtn }>
                             { !twitterData.username ? 'Waiting for accounts...' : isSubscribe }</button>
                 }
             </div>

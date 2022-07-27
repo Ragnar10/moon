@@ -115,6 +115,10 @@
     background: var(--grey600-color);
 }
 
+.next_btn_available {
+    background: var(--primary200-color);
+}
+
 .twitter_btn, .follow_twitter_btn {
     @include button(#1DA1F2);
     width: 48%;

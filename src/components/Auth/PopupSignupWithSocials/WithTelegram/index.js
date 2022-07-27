@@ -43,7 +43,8 @@ const WithTelegram = () => {
         }
     };
 
-    const isSubscribe = telegramDescribe ? 'Next step' : 'Check subscription';
+    const isSubscribe = telegramDescribe ? 'Finish Setup' : 'Check subscription';
+    const nextBtn = telegramDescribe ? `${Styles.next_btn} ${Styles.next_btn_available}` : Styles.next_btn;
 
     return (
         <>
@@ -73,7 +74,7 @@ const WithTelegram = () => {
                         : <button
                             disabled = { !telegramData ? 'disabled' : null }
                             onClick = { () => updateUser() }
-                            className = { Styles.next_btn }>{ !telegramData ? 'Waiting for accounts...' : isSubscribe }</button>
+                            className = { nextBtn }>{ !telegramData ? 'Waiting for accounts...' : isSubscribe }</button>
                 }
             </div>
         </>

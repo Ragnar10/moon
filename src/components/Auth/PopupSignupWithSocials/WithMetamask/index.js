@@ -46,6 +46,8 @@ const WithMetamask = () => {
             disabled = { wallet ? 'disabled' : null }
             className = { Styles.connect_metamask_btn }>{ 'Connect Metamask' }</button>;
 
+    const nextBtn = wallet ? `${Styles.next_btn} ${Styles.next_btn_available}` : Styles.next_btn;
+
     return (
         <>
             <h3 className = { Styles.content_title }>{ 'Lets setup your account' }</h3>
@@ -61,7 +63,7 @@ const WithMetamask = () => {
                         : <button
                             disabled = { !wallet ? 'disabled' : null }
                             onClick = { () => saveUser() }
-                            className = { Styles.next_btn }>{ !wallet ? 'Waiting for accounts...' : 'Next step' }</button>
+                            className = { nextBtn }>{ !wallet ? 'Waiting for accounts...' : 'Next step' }</button>
                 }
             </div>
         </>
