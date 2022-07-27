@@ -117,5 +117,15 @@ export const api = {
             },
         });
     },
+
+    getPartAffiliateUsers: (data) => {
+        return fetch(`${apiPath}/v1/users/?page=${data.page}`, {
+            method:  'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:  `Bearer ${data.token}`,
+            },
+        });
+    },
 };
 

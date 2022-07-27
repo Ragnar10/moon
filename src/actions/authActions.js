@@ -111,4 +111,30 @@ export const authActions = {
             dispatch(setError('Something went wrong, please try again later!'));
         }
     },
+
+    getPartAffiliateUsers: (data) => (dispatch) => {
+        dispatch(setLoading(true));
+        try {
+            api.getPartAffiliateUsers(data)
+                .then((response) => response.json())
+                .then((res) => {
+                    if (res) {
+                        dispatch(setAffiliateUsers(res));
+                    } else {
+                        dispatch(setLoading(false));
+                        dispatch(clearError());
+                        dispatch(setError('Something went wrong, please try again later!'));
+                    }
+                })
+                .catch(() => {
+                    dispatch(setLoading(false));
+                    dispatch(clearError());
+                    dispatch(setError('Something went wrong, please try again later!'));
+                });
+        } catch {
+            dispatch(setLoading(false));
+            dispatch(clearError());
+            dispatch(setError('Something went wrong, please try again later!'));
+        }
+    },
 };

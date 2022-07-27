@@ -65,8 +65,12 @@ const Dashboard = (props) => {
     const affiliateUsers = useSelector((state) => state.auth.affiliateUsers);
     const affiliateData = useSelector((state) => state.auth.affiliateData);
 
+    const [page, setPage] = useState(1);
+    const [order, setOrder] = useState('asc');
+    const [orderBy, setOrderBy] = useState('calories');
+
     useEffect(() => {
-        if (!affiliateData.ref) {
+        if (affiliateData.ref) {
             const data = {
                 ref:   affiliateData.ref,
                 token: affiliateData.access,
@@ -75,9 +79,15 @@ const Dashboard = (props) => {
         }
     }, []);
 
-    const [page, setPage] = useState(1);
-    const [order, setOrder] = useState('asc');
-    const [orderBy, setOrderBy] = useState('calories');
+    useEffect(() => {
+        if (affiliateData.ref) {
+            const data = {
+                page,
+                token: affiliateData.access,
+            };
+            dispatch(authActions.getPartAffiliateUsers(data));
+        }
+    }, [page]);
 
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
