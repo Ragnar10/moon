@@ -10,8 +10,8 @@ import {
 export const Private = () => {
     return (
         <Routes>
-            <Route path = '/' element = { <Outlet /> }>
-                <Route path = 'dashboard' element = { <DashboardPage /> } />
+            <Route path = '/dashboard' element = { <Outlet /> }>
+                <Route index element = { <DashboardPage /> } />
             </Route>
 
             <Route path = '*' element = { <Navigate to = '/dashboard' replace /> } />

@@ -24,17 +24,6 @@ const DashboardHeader = () => {
     const [toggle, setToggle] = useToggle();
 
     useEffect(() => {
-        const refresh = getCookie('refresh');
-
-        if (refresh) {
-            const data = {
-                refresh,
-            };
-            dispatch(authActions.refreshLogin(data));
-        }
-    }, []);
-
-    useEffect(() => {
         if (affiliateData.ref) {
             const data = {
                 ref:   affiliateData.ref,
