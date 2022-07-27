@@ -113,6 +113,7 @@ export const api = {
             method:  'GET',
             headers: {
                 'Content-Type': 'application/json',
+                Authorization:  `Bearer ${data.token}`,
             },
         });
     },
