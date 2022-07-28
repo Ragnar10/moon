@@ -95,6 +95,7 @@
         box-shadow: none;
         border-radius: 0;
         background: var(--grey300-color);
+        user-select: text;
     }
 
     .pagination {
