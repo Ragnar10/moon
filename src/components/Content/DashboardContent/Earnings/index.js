@@ -18,7 +18,7 @@ const Earnings = () => {
 
             <div className = { Styles.bit_coin }>
                 <span />
-                <p>5.0000025</p>
+                <p>5.0000000</p>
                 <p>BTC</p>
             </div>
 

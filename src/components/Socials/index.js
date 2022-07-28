@@ -4,6 +4,7 @@ import Styles from './styles.module.scss';
 const Socials = (props) => {
     return (
         <ul className = { `${Styles.socials} ${props.class}` }>
+
             <li>
                 <a
                     href = { 'https://t.me/lvrgd' } target = { '_blank' }
@@ -15,6 +16,12 @@ const Socials = (props) => {
                     href = { 'https://twitter.com/LeveragedIO' } target = { '_blank' }
                     rel = 'noreferrer'
                     className = { Styles.socials_twitter } />
+            </li>
+            <li>
+                <a
+                    href = { 'https://leveraged-group.gitbook.io/leveraged.io/' } target = { '_blank' }
+                    rel = 'noreferrer'
+                    className ={ Styles.socials_white_paper } />
             </li>
             <li>
                 <a

@@ -55,27 +55,35 @@ export const PresentationContent = () => {
                     <span>{ 'Our team is working very hard to make leveraged ready for launch.' }</span>
                     <span>{ 'Don’t want to miss out on updates? Follow our social medias.' }</span>
                 </p>
+                <div className = { Styles.content_socials }>
                 <a
                     href = { 'https://bit.ly/LVRGD_public' }
                     target = '_blank'
                     rel = 'noreferrer'
                     className = { Styles.content_connected_btn }>{ 'Public Deck' }</a>
-                <div className = { Styles.content_socials }>
-                    <a
-                        href = { 'https://t.me/lvrgd' } target = { '_blank' }
-                        rel = 'noreferrer'
-                        className = { Styles.socials_telegram }>
-                        <span />
-                        <span>{ 'Telegram' }</span>
-                    </a>
-                    <a
-                        href = { 'https://twitter.com/LeveragedIO' } target = { '_blank' }
-                        rel = 'noreferrer'
-                        className = { Styles.socials_twitter }>
-                        <span />
-                        <span>{ 'Twitter' }</span>
-                    </a>
+                <a
+                    href = { 'https://leveraged-group.gitbook.io/leveraged.io/' }
+                    target = '_blank'
+                    rel = 'noreferrer'
+                    className = { Styles.content_connected_btn }>{ 'White Paper' }</a>
                 </div>
+                {/*<div className = { Styles.content_socials }>*/}
+                {/*    <a*/}
+                {/*        href = { 'https://t.me/lvrgd' } */}
+                {/*        target = { '_blank' }*/}
+                {/*        rel = 'noreferrer'*/}
+                {/*        className = { Styles.socials_telegram }>*/}
+                {/*        <span />*/}
+                {/*        <span>{ 'Telegram' }</span>*/}
+                {/*    </a>*/}
+                {/*    <a*/}
+                {/*        href = { 'https://twitter.com/LeveragedIO' } target = { '_blank' }*/}
+                {/*        rel = 'noreferrer'*/}
+                {/*        className = { Styles.socials_twitter }>*/}
+                {/*        <span />*/}
+                {/*        <span>{ 'Twitter' }</span>*/}
+                {/*    </a>*/}
+                {/*</div>*/}
             </section>
         </>
     );

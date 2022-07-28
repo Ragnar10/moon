@@ -1,5 +1,6 @@
 @mixin button($bgcolor: var(--primary200-color), $color: var(--main-color)) {
     position: relative;
+    margin-left: 10px;
     display: flex;
     flex-direction: row;
     justify-content: center;
