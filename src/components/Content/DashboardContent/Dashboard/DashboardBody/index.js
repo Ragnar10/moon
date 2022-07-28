@@ -80,30 +80,39 @@ const Dashboard = (props) => {
         }
     }, []);
 
-    useEffect(() => {
-        if (affiliateData.ref) {
-            const data = {
-                page,
-                token: affiliateData.access,
-            };
-            dispatch(authActions.getPartAffiliateUsers(data));
-        }
-    }, [page]);
-
     const handleRequestSort = (event, property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
         setOrderBy(property);
     };
 
+    const onSetPage = (value) => {
+        if (!affiliateData.ref) return null;
+
+        if (!search) {
+            const data = {
+                page:  value,
+                token: affiliateData.access,
+            };
+            dispatch(authActions.getPartAffiliateUsers(data));
+        } else {
+            const data = {
+                page:  value,
+                search,
+                token: affiliateData.access,
+            };
+            dispatch(authActions.getSearchPartAffiliateUsers(data));
+        }
+
+        setPage(value);
+    };
+
     const onSearch = () => {
         const data = {
             search,
-            token: affiliateData.token,
+            token: affiliateData.access,
         };
         dispatch(authActions.getSearchAffiliateUsers(data));
-
-        setSearch('');
     };
 
     const count = props.fullFuncional ? 25 : 10;
@@ -172,7 +181,7 @@ const Dashboard = (props) => {
                         shape = 'rounded'
                         variant = 'outlined'
                         page = { page }
-                        onChange = { (event, value) => setPage(value) } />
+                        onChange = { (event, value) => onSetPage(value) } />
                 </Stack>
             }
         </section>
