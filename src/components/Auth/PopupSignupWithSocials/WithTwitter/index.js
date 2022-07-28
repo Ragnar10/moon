@@ -24,7 +24,7 @@ const WithTwitter = () => {
                 meta:   user.metamask,
                 token:  user.token,
                 update: {
-                    twitter:    twitterData.username + Date.now(),
+                    twitter:    twitterData.username,
                     twitter_id: twitterData.id,
                 },
             };
