@@ -43,6 +43,7 @@ const StyledTableRow = styled(TableRow)(() => ({
     },
 
     'td, th': {
+        minWidth:   '100px',
         border:     'none',
         color:      '#AEC0CA',
         fontWeight: 700,
@@ -50,9 +51,12 @@ const StyledTableRow = styled(TableRow)(() => ({
     },
 
     '& td:nth-of-type(1)': {
-        color:      '#FFFFFF !important',
-        lineHeight: '20px',
-        fontWeight: '400 !important',
+        maxWidth:     '400px',
+        color:        '#FFFFFF !important',
+        lineHeight:   '20px',
+        fontWeight:   '400 !important',
+        overflow:     'hidden',
+        textOverflow: 'ellipsis',
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -108,11 +112,26 @@ const Dashboard = (props) => {
     };
 
     const onSearch = () => {
+        if (!search) return null;
+
         const data = {
             search,
             token: affiliateData.access,
         };
         dispatch(authActions.getSearchAffiliateUsers(data));
+    };
+
+    const onClearSearch = () => {
+        if (!affiliateData.ref && !search) return null;
+
+        const data = {
+            ref:   affiliateData.ref,
+            token: affiliateData.access,
+        };
+        dispatch(authActions.getAffiliateUsers(data));
+
+        setSearch('');
+        setPage(1);
     };
 
     const count = props.fullFuncional ? 25 : 10;
@@ -134,6 +153,9 @@ const Dashboard = (props) => {
                     <button
                         onClick = { () => onSearch() }
                         className = { Styles.search_btn }>{ 'Search' }</button>
+                    <button
+                        onClick = { () => onClearSearch() }
+                        className = { Styles.clear_search_btn } />
                 </div>
             }
             <TableContainer component = { Paper } className = { Styles.table_wrapper }>

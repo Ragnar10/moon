@@ -84,8 +84,8 @@ const DashboardHead = (props) => {
                         return (
                             <StyledTableCell
                                 key = { item.id }
-                                align = { item.id === 'User' ? 'center' : 'left' }
-                                padding = { item.disablePadding ? 'none' : 'normal' }
+                                align = { 'left' }
+                                padding = { '16px' }
                                 sortDirection = { orderBy === item.id ? order : false }>
                                 { !sorting && <>{ item.label }</> }
                                 { sorting && (

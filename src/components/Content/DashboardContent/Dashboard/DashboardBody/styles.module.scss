@@ -42,6 +42,7 @@
         display: inline-block;
         width: fit-content;
         height: 42px;
+        margin-right: 16px;
         padding: 13px;
         border: none;
         outline: none;
@@ -52,6 +53,37 @@
         color: var(--main-color);
         background: var(--grey600-color);
         cursor: pointer;
+
+        &:active {
+            box-shadow: none;
+        }
+    }
+
+    .clear_search_btn {
+        position: relative;
+        display: inline-block;
+        width: 42px;
+        height: 42px;
+        padding: 13px;
+        border: none;
+        outline: none;
+        box-shadow: var(--box-shadow);
+        border-radius: var(--button-border-radius);
+        background:  var(--grey600-color);
+        cursor: pointer;
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 13px;
+            left: 13px;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background: url('../../../../../theme/assets/icons/cross.svg') no-repeat;
+            background-size: cover;
+            filter: brightness(100);
+        }
 
         &:active {
             box-shadow: none;
@@ -82,11 +114,11 @@
         }
 
         li button[aria-current="true"] {
-            background: var(--grey500-color);
+            background: var(--primary200-color);
+        }
 
-            &:hover {
-                background: var(--primary900-color);
-            }
+        li div {
+            color: var(--main-color);
         }
 
     }
