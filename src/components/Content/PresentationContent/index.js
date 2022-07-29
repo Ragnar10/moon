@@ -56,16 +56,16 @@ export const PresentationContent = () => {
                     <span>{ 'Don’t want to miss out on updates? Follow our social medias.' }</span>
                 </p>
                 <div className = { Styles.content_socials }>
-                <a
-                    href = { 'https://bit.ly/LVRGD_public' }
-                    target = '_blank'
-                    rel = 'noreferrer'
-                    className = { Styles.content_connected_btn }>{ 'Public Deck' }</a>
-                <a
-                    href = { 'https://leveraged-group.gitbook.io/leveraged.io/' }
-                    target = '_blank'
-                    rel = 'noreferrer'
-                    className = { Styles.content_connected_btn }>{ 'White Paper' }</a>
+                    <a
+                        href = { 'https://bit.ly/LVRGD_public' }
+                        target = '_blank'
+                        rel = 'noreferrer'
+                        className = { Styles.content_connected_btn }>{ 'Public Deck' }</a>
+                    <a
+                        href = { 'https://leveraged-group.gitbook.io/leveraged.io/' }
+                        target = '_blank'
+                        rel = 'noreferrer'
+                        className = { Styles.content_connected_btn }>{ 'White Paper' }</a>
                 </div>
             </section>
         </>

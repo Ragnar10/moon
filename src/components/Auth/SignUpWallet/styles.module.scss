@@ -50,11 +50,10 @@
 .signup_open_popup_btn, {
     @include button();
     padding: 12px;
-    left: 20px;
+    margin-left: 0;
 }
 
 .content_socials {
-    margin-left: 55px;
     display: flex;
     align-items: center;
     margin-top: 10px;
@@ -75,13 +74,8 @@
     }
 }
 
-.socials_twitter {
-    color: var(--primary200-color);
+.socials_white_paper {
     margin-right: 0;
-
-    & span:first-child {
-        background-size: cover;
-    }
 }
 
 @media (max-width: 768px) {

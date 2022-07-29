@@ -2,7 +2,8 @@
 import { setCookie } from '../utils';
 // Actions
 import {
-    setAffiliateData, setAffiliateUsers, setLoading, setError, clearError, setMessage, clearMessage,
+    setAffiliateData, setAffiliateUsers, setAffiliateCountUsers, setLoading, setError, clearError, setMessage,
+    clearMessage,
 } from '../reducers/authSlice';
 // Api
 import { api } from '../api';
@@ -94,6 +95,7 @@ export const authActions = {
                 .then((res) => {
                     if (res) {
                         dispatch(setAffiliateUsers(res));
+                        dispatch(setAffiliateCountUsers(res.count));
                     } else {
                         dispatch(setLoading(false));
                         dispatch(clearError());

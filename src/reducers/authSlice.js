@@ -4,11 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 export const authSlice = createSlice({
     name:         'auth',
     initialState: {
-        affiliateData:  {},
-        affiliateUsers: {},
-        loading:        false,
-        error:          '',
-        message:        '',
+        affiliateData:       {},
+        affiliateUsers:      {},
+        affiliateCountUsers: '',
+        loading:             false,
+        error:               '',
+        message:             '',
     },
     reducers: {
         setAffiliateData: (state, action) => {
@@ -16,6 +17,9 @@ export const authSlice = createSlice({
         },
         setAffiliateUsers: (state, action) => {
             state.affiliateUsers = action.payload;
+        },
+        setAffiliateCountUsers: (state, action) => {
+            state.affiliateCountUsers = action.payload;
         },
         setLoading: (state, action) => {
             state.loading = action.payload;
@@ -36,7 +40,8 @@ export const authSlice = createSlice({
 });
 
 export const {
-    setAffiliateData, setAffiliateUsers, setLoading, setError, clearError, setMessage, clearMessage,
+    setAffiliateData, setAffiliateUsers, setAffiliateCountUsers, setLoading, setError, clearError, setMessage,
+    clearMessage,
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Styles from './styles.module.scss';
 
 const Info = () => {
-    const affiliateUsers = useSelector((state) => state.auth.affiliateUsers);
+    const affiliateCountUsers = useSelector((state) => state.auth.affiliateCountUsers);
 
     return (
         <section className = { Styles.wrapper }>
@@ -12,7 +12,7 @@ const Info = () => {
                 <div className = { Styles.cards_wrapper }>
                     <div className = { Styles.active_card }>
                         <div className = { `${Styles.background} ${Styles.affiliate}` } />
-                        <span>{ affiliateUsers.count }</span>
+                        <span>{ affiliateCountUsers }</span>
                         <div className = { Styles.card_description }>
                             <div className = { Styles.affiliates_icon } />
                             <span>Clients</span>
