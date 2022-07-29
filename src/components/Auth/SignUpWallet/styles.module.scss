@@ -50,10 +50,11 @@
 .signup_open_popup_btn, {
     @include button();
     padding: 12px;
+    left: 20px;
 }
 
 .content_socials {
-    margin-left: 10px;
+    margin-left: 55px;
     display: flex;
     align-items: center;
     margin-top: 10px;
