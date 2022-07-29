@@ -53,23 +53,21 @@
 }
 
 .content_socials {
+    margin-left: 10px;
     display: flex;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
-.socials_telegram,
-.socials_twitter {
-    @include button(#0088CC);
+.socials_public_deck,
+.socials_white_paper {
+    @include button(var(--primary200-color));
     width: 150px;
     margin-right: 12px;
 
     & span:first-child {
         display: inline-block;
-        width: 16px;
-        height: 16px;
-        margin-right: 8px;
-        background: url('../../../theme/assets/icons/telegram.svg') no-repeat;
+        margin-right: 6px;
         background-size: cover;
         filter: invert(100%) brightness(200%);
         -webkit-filter: invert(100%) brightness(200%);
@@ -77,11 +75,10 @@
 }
 
 .socials_twitter {
-    background: #1DA1F2;
+    color: var(--primary200-color);
     margin-right: 0;
 
     & span:first-child {
-        background: url('../../../theme/assets/icons/twitter.svg') no-repeat;
         background-size: cover;
     }
 }

@@ -19,9 +19,9 @@ const Socials = (props) => {
             </li>
             <li>
                 <a
-                    href = { 'https://leveraged-group.gitbook.io/leveraged.io/' } target = { '_blank' }
+                    href = { 'https://medium.com/@leveragedIO' } target = { '_blank' }
                     rel = 'noreferrer'
-                    className ={ Styles.socials_white_paper } />
+                    className = { Styles.socials_medium } />
             </li>
             <li>
                 <a
@@ -35,12 +35,7 @@ const Socials = (props) => {
                     rel = 'noreferrer'
                     className = { Styles.socials_reddit } />
             </li>
-            <li>
-                <a
-                    href = { '' } target = { '_blank' }
-                    rel = 'noreferrer'
-                    className = { Styles.socials_medium } />
-            </li>
+
         </ul>
     );
 };

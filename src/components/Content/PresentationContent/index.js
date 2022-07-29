@@ -67,23 +67,6 @@ export const PresentationContent = () => {
                     rel = 'noreferrer'
                     className = { Styles.content_connected_btn }>{ 'White Paper' }</a>
                 </div>
-                {/*<div className = { Styles.content_socials }>*/}
-                {/*    <a*/}
-                {/*        href = { 'https://t.me/lvrgd' } */}
-                {/*        target = { '_blank' }*/}
-                {/*        rel = 'noreferrer'*/}
-                {/*        className = { Styles.socials_telegram }>*/}
-                {/*        <span />*/}
-                {/*        <span>{ 'Telegram' }</span>*/}
-                {/*    </a>*/}
-                {/*    <a*/}
-                {/*        href = { 'https://twitter.com/LeveragedIO' } target = { '_blank' }*/}
-                {/*        rel = 'noreferrer'*/}
-                {/*        className = { Styles.socials_twitter }>*/}
-                {/*        <span />*/}
-                {/*        <span>{ 'Twitter' }</span>*/}
-                {/*    </a>*/}
-                {/*</div>*/}
             </section>
         </>
     );

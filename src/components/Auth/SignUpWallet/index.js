@@ -92,18 +92,18 @@ export const SignUpWallet = () => {
                     className = { Styles.signup_open_popup_btn }>{ 'Connect Metamask' }</button>;
                 <div className = { Styles.content_socials }>
                     <a
-                        href = { 'https://t.me/lvrgd' } target = { '_blank' }
+                        href = { 'https://bit.ly/LVRGD_public' } target = { '_blank' }
                         rel = 'noreferrer'
-                        className = { Styles.socials_telegram }>
+                        className = { Styles.socials_public_deck }>
                         <span />
-                        <span>{ 'Telegram' }</span>
+                        <span>{ 'Public Deck' }</span>
                     </a>
                     <a
-                        href = { 'https://twitter.com/LeveragedIO' } target = { '_blank' }
+                        href = { 'https://leveraged-group.gitbook.io/leveraged.io/'} target = { '_blank' }
                         rel = 'noreferrer'
-                        className = { Styles.socials_twitter }>
+                        className = { Styles.socials_white_paper }>
                         <span />
-                        <span>{ 'Twitter' }</span>
+                        <span>{ 'White Paper' }</span>
                     </a>
                 </div>
             </section>
