@@ -10,6 +10,7 @@
 }
 
 .signup_title {
+    margin-right: 35px;
     margin-bottom: 33px;
     font-size: 48px;
     line-height: 40px;
@@ -62,7 +63,7 @@
 .socials_public_deck,
 .socials_white_paper {
     @include button(var(--primary200-color));
-    width: 150px;
+    width: 170px;
     margin-right: 12px;
 
     & span:first-child {

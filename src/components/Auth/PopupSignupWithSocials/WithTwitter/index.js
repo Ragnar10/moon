@@ -19,7 +19,6 @@ const WithTwitter = () => {
     };
 
     const updateUser = () => {
-        console.log('Twitter Data:', twitterData)
         if (twitterDescribe) {
             const data = {
                 meta:   user.metamask,
