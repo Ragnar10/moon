@@ -26,7 +26,7 @@ const WithMetamask = () => {
 
     const saveUser = () => {
         const data = {
-            metamask: wallet + Date.now(),
+            metamask: wallet,
             ref:      influencer,
         };
         dispatch(authWalletActions.createMetamaskUser(data));

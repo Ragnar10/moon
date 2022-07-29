@@ -28,7 +28,7 @@ const WithTelegram = () => {
                 meta:   user.metamask,
                 token:  user.token,
                 update: {
-                    telegram: telegramData + Date.now(),
+                    telegram: telegramData,
                 },
             };
             dispatch(authWalletActions.updateTelegramUser(data));

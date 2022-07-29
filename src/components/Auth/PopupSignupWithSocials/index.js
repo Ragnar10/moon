@@ -4,7 +4,7 @@ import Styles from './styles.module.scss';
 // Components
 import Message from '../../Message';
 import WithMetamask from './WithMetamask';
- import WithTwitter from './WithTwitter';
+import WithTwitter from './WithTwitter';
 import WithTelegram from './WithTelegram';
 
 const PopupSignupWithSocials = () => {
