@@ -99,7 +99,7 @@ export const authWalletActions = {
                         if (isMobileDevice()) {
                             if (navigator.userAgent.indexOf("CriOS") === -1) {
                                 // location.href="googlechrome"+location.href.substring(4);
-                                window.open(`${"googlechrome"+location.href+process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
+                                window.open(`googlechrome${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
                             }
                         } else {
                             dispatch(setStep('two'));
