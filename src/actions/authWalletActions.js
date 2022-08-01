@@ -285,35 +285,4 @@ export const authWalletActions = {
                 dispatch(setError('Something went wrong, please try again later!'));
             });
     },
-
-    createSocialUserFinish: (data) => (dispatch) => {
-        try {
-            api.createSocialUser(data)
-                .then((response) => response.json())
-                .then((res) => {
-                    if (res.id) {
-                        dispatch(setUser(res));
-                        dispatch(clearMessage());
-                        dispatch(setMessage('You have successfully registered!'));
-                    } else {
-                        dispatch(clearError());
-                        dispatch(setError('User already exists!'));
-                        dispatch(setUser({ token: 'exist' }));
-                    }
-
-                    localStorage.removeItem('influencer');
-                    localStorage.removeItem('wallet');
-                    localStorage.removeItem('tw');
-                    localStorage.removeItem('tg');
-                    localStorage.removeItem('user');
-                })
-                .catch(() => {
-                    dispatch(clearError());
-                    dispatch(setError('Something went wrong, please try again later!'));
-                });
-        } catch {
-            dispatch(clearError());
-            dispatch(setError('Something went wrong, please try again later!'));
-        }
-    },
 };
