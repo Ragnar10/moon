@@ -305,6 +305,7 @@ export const authWalletActions = {
                     localStorage.removeItem('wallet');
                     localStorage.removeItem('tw');
                     localStorage.removeItem('tg');
+                    localStorage.removeItem('user');
                 })
                 .catch(() => {
                     dispatch(clearError());
