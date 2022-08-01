@@ -36,6 +36,7 @@ const WithTelegram = () => {
             const data = {
                 username: telegramData,
             };
+            console.log(data)
             dispatch(authWalletActions.checkTelegramFollow(data));
         }
     };
