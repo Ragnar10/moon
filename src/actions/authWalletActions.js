@@ -97,7 +97,8 @@ export const authWalletActions = {
                         localStorage.setItem('user', JSON.stringify(res));
 
                         if (isMobileDevice()) {
-                            window.open(`${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
+                            window.open('googlechrome://leveraged.io')
+                            // window.open(`${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
                         } else {
                             dispatch(setStep('two'));
                         }
@@ -208,10 +209,12 @@ export const authWalletActions = {
     },
 
     updateTelegramUser: (data) => (dispatch) => {
+        console.log('data' + data)
         try {
             api.updateSocialUser(data)
                 .then((response) => response.json())
                 .then((res) => {
+                    console.log('res'+res)
                     if (res.id) {
                         dispatch(setUser(res));
                         localStorage.removeItem('user');
