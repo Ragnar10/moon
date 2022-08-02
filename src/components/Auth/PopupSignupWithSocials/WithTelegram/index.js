@@ -22,6 +22,7 @@ const WithTelegram = () => {
         dispatch(setTelegramData(res.username));
 
         localStorage.setItem('tg', res.username);
+        console.log('telegram data' + telegramData)
     };
 
     const updateUser = () => {
