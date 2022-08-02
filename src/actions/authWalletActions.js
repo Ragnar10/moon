@@ -209,12 +209,10 @@ export const authWalletActions = {
     },
 
     updateTelegramUser: (data) => (dispatch) => {
-        console.log('data' + data)
         try {
             api.updateSocialUser(data)
                 .then((response) => response.json())
                 .then((res) => {
-                    console.log('res'+res)
                     if (res.id) {
                         dispatch(setUser(res));
                         localStorage.removeItem('user');

@@ -18,10 +18,10 @@ const WithTelegram = () => {
 
     const handleTelegramResponse = (res) => {
         console.log( res)
-        // const tgUserName = res.username ||
-        dispatch(setTelegramData(res.username));
-
-        localStorage.setItem('tg', res.username);
+        const tgUserName = res.username || res.id
+        dispatch(setTelegramData(tgUserName));
+        console.log(tgUserName)
+        localStorage.setItem('tg', tgUserName);
     };
 
     const updateUser = () => {
