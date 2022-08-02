@@ -17,10 +17,8 @@ const WithTelegram = () => {
     const loading = useSelector((state) => state.authSocial.loading);
 
     const handleTelegramResponse = (res) => {
-        console.log( res)
         const tgUserName = res.username || res.id
         dispatch(setTelegramData(tgUserName));
-        console.log(tgUserName)
         localStorage.setItem('tg', tgUserName);
     };
 
@@ -34,7 +32,6 @@ const WithTelegram = () => {
                 },
 
             };
-            console.log('telegram data' + telegramData)
 
             dispatch(authWalletActions.updateTelegramUser(data));
         } else {
