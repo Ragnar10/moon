@@ -65,7 +65,7 @@ const Info = () => {
                     <span> <span className = { Styles.percentage_divider }></span> N/A</span>
                     <div className = { Styles.card_description }>
                         <span>Sub Affiliates</span>
-                        <span>OOn Sub Affiliate earnings</span>
+                        <span>On Sub Affiliate earnings</span>
                     </div>
                 </div>
             </div>
