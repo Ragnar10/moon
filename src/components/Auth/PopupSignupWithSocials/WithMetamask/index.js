@@ -13,6 +13,7 @@ import Loader from '../../../Loader';
 const WithMetamask = () => {
     const dispatch = useDispatch();
     const influencer = useSelector((state) => state.authSocial.influencer);
+    const user = useSelector((state) => state.authSocial.user);
     const wallet = useSelector((state) => state.authSocial.wallet);
     const loading = useSelector((state) => state.authSocial.loading);
 
@@ -24,13 +25,20 @@ const WithMetamask = () => {
         dispatch(authWalletActions.connectMeta());
     };
 
-    const saveUser = () => {
-        const data = {
-            metamask: wallet,
-            ref:      influencer,
-        };
-        dispatch(authWalletActions.createMetamaskUser(data));
+
+    const updateUser = () => {
+            const data = {
+                meta:   user.telegram,
+                token:  user.token,
+                update: {
+                    metamask: wallet,
+                },
+            };
+
+            dispatch(authWalletActions.updateMetamaskUser(data));
     };
+
+    const walletConnect = wallet ? 'Finish Setup' : 'Check subscription';
 
     const metaBtn = isMobileDevice() && !wallet
         ?  <a
@@ -57,8 +65,8 @@ const WithMetamask = () => {
                         ? <Loader />
                         : <button
                             disabled = { !wallet ? 'disabled' : null }
-                            onClick = { () => saveUser() }
-                            className = { nextBtn }>{ !wallet ? 'Waiting for accounts...' : 'Next step' }</button>
+                            onClick = { () => updateUser() }
+                            className = { nextBtn }>{ !wallet ? 'Waiting for accounts...' : walletConnect }</button>
                 }
             </div>
         </>

@@ -15,6 +15,7 @@ import {
 import { api } from '../api';
 // Utils
 import { isMobileDevice } from '../utils';
+import {useSelector} from "react-redux";
 
 export const authWalletActions = {
     checkRef: (data) => () => {
@@ -87,7 +88,7 @@ export const authWalletActions = {
         }
     },
 
-    createMetamaskUser: (data) => (dispatch) => {
+    createTelegramUser: (data) => (dispatch) => {
         try {
             api.createSocialUser(data)
                 .then((response) => response.json())
@@ -150,6 +151,7 @@ export const authWalletActions = {
         try {
             api.checkTwitterFollow(data)
                 .then((response) => {
+                    console.log(response)
                     if (response.ok) {
                         dispatch(setTwitterDescribe(true));
                     } else {
@@ -208,7 +210,7 @@ export const authWalletActions = {
         }
     },
 
-    updateTelegramUser: (data) => (dispatch) => {
+    updateMetamaskUser: (data) => (dispatch) => {
         try {
             api.updateSocialUser(data)
                 .then((response) => response.json())
@@ -237,7 +239,6 @@ export const authWalletActions = {
             dispatch(setError('Something went wrong, please try again later!'));
         }
     },
-
     getTwitterOauthToken: () => (dispatch) => {
         try {
             api.getTwitterOauthToken()

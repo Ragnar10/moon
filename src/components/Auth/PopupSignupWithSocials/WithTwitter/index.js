@@ -9,7 +9,8 @@ import Loader from '../../../Loader';
 
 const WithTwitter = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.authSocial.user);
+    const telegramData = useSelector((state) => state.authSocial.telegramData);
+    const user = useSelector((state) => state.authSocial.user)
     const twitterData = useSelector((state) => state.authSocial.twitterData);
     const twitterDescribe = useSelector((state) => state.authSocial.twitterDescribe);
     const loading = useSelector((state) => state.authSocial.loading);
@@ -21,14 +22,15 @@ const WithTwitter = () => {
     const updateUser = () => {
         if (twitterDescribe) {
             const data = {
-                meta:   user.metamask,
+                meta:  telegramData,
                 token:  user.token,
                 update: {
                     twitter:    twitterData.username,
                     twitter_id: twitterData.id,
                 },
             };
-            dispatch(authWalletActions.updateTwitterUser(data));
+           dispatch(authWalletActions.updateTwitterUser(data));
+
         } else {
             const data = {
                 twitter_id: twitterData.id,

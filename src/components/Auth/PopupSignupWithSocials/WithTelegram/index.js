@@ -11,35 +11,31 @@ import TelegramLoginBtn from '../../TelegramLoginBtn';
 
 const WithTelegram = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.authSocial.user);
+    const influencer = useSelector((state) => state.authSocial.influencer);
     const telegramData = useSelector((state) => state.authSocial.telegramData);
     const telegramDescribe = useSelector((state) => state.authSocial.telegramDescribe);
     const loading = useSelector((state) => state.authSocial.loading);
-
+    console.log(telegramData)
     const handleTelegramResponse = (res) => {
         const tgUserName = res.username || res.id
         dispatch(setTelegramData(tgUserName));
         localStorage.setItem('tg', tgUserName);
     };
 
-    const updateUser = () => {
+    const saveUser = () => {
         if (telegramDescribe) {
             const data = {
-                meta:   user.metamask,
-                token:  user.token,
-                update: {
                     telegram: telegramData,
-                },
-
+                    ref:      influencer,
             };
-
-            dispatch(authWalletActions.updateTelegramUser(data));
+            dispatch(authWalletActions.createTelegramUser(data));
         } else {
             const data = {
                 username: telegramData,
             };
             dispatch(authWalletActions.checkTelegramFollow(data));
         }
+
     };
 
     const isSubscribe = telegramDescribe ? 'Finish Setup' : 'Check subscription';
@@ -72,8 +68,9 @@ const WithTelegram = () => {
                         ? <Loader />
                         : <button
                             disabled = { !telegramData ? 'disabled' : null }
-                            onClick = { () => updateUser() }
-                            className = { nextBtn }>{ !telegramData ? 'Waiting for accounts...' : isSubscribe }</button>
+                            onClick = { () => saveUser() }
+                            className = { nextBtn }>
+                            { !telegramData ? 'Waiting for accounts...' : isSubscribe }</button>
                 }
             </div>
         </>
