@@ -274,7 +274,7 @@ export const authWalletActions = {
                     dispatch(setTwitterData(twitterData));
                     localStorage.setItem('tw', JSON.stringify(twitterData));
                     const user = JSON.parse(localStorage.getItem('user'));
-                    const tg = JSON.parse(localStorage.getItem('tg'));
+                    const tg = localStorage.getItem('tg');
                     console.log('Set user')
                     dispatch(setUser(user));
                     console.log('Set tg')
