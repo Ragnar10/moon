@@ -9,7 +9,7 @@ import {
     setUser,
     clearMessage,
     setMessage,
-    setPopupIsOpen, setTwitterDescribe, setTelegramDescribe,
+    setPopupIsOpen, setTwitterDescribe, setTelegramDescribe, setTelegramData,
 } from '../reducers/authSocialSlice';
 // Api
 import { api } from '../api';
@@ -273,9 +273,9 @@ export const authWalletActions = {
                     dispatch(setTwitterData(twitterData));
                     localStorage.setItem('tw', JSON.stringify(twitterData));
                     const user = JSON.parse(localStorage.getItem('user'));
-                    const wallet = JSON.parse(localStorage.getItem('wallet'));
+                    const tg = JSON.parse(localStorage.getItem('tg'));
                     dispatch(setUser(user));
-                    dispatch(setWallet(wallet.wallet));
+                    dispatch(setTelegramData(tg));
                     dispatch(setStep('two'));
                 } else {
                     dispatch(clearError());

@@ -15,7 +15,7 @@ const WithTelegram = () => {
     const telegramData = useSelector((state) => state.authSocial.telegramData);
     const telegramDescribe = useSelector((state) => state.authSocial.telegramDescribe);
     const loading = useSelector((state) => state.authSocial.loading);
-    console.log(telegramData)
+
     const handleTelegramResponse = (res) => {
         const tgUserName = res.username || res.id
         dispatch(setTelegramData(tgUserName));
@@ -38,7 +38,7 @@ const WithTelegram = () => {
 
     };
 
-    const isSubscribe = telegramDescribe ? 'Finish Setup' : 'Check subscription';
+    const isSubscribe = telegramDescribe ? 'Nest step' : 'Check subscription';
     const nextBtn = telegramDescribe ? `${Styles.next_btn} ${Styles.next_btn_available}` : Styles.next_btn;
 
     return (
