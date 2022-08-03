@@ -89,7 +89,7 @@ export const SignUpWallet = () => {
                 </p>
                 <button
                     onClick = { () => openPopup() }
-                    className = { Styles.signup_open_popup_btn }>{ 'Connect Telegram' }</button>;
+                    className = { Styles.signup_open_popup_btn }>{ 'Start setup' }</button>;
                 <div className = { Styles.content_socials }>
                     <a
                         href = { 'https://bit.ly/LVRGD_public' } target = { '_blank' }
