@@ -279,12 +279,12 @@ export const authWalletActions = {
                     dispatch(setStep('two'));
                 } else {
                     dispatch(clearError());
-                    dispatch(setError('Something went wrong, please try again later!'));
+                    dispatch(setError('Something went wrong (twitter data), please try again later!'));
                 }
             })
             .catch(() => {
                 dispatch(clearError());
-                dispatch(setError('Something went wrong, please try again later!'));
+                dispatch(setError('Something went wrong (access token), please try again later!'));
             });
     },
 };

@@ -38,7 +38,7 @@ const WithTelegram = () => {
 
     };
 
-    const isSubscribe = telegramDescribe ? 'Nest step' : 'Check subscription';
+    const isSubscribe = telegramDescribe ? 'Next step' : 'Check subscription';
     const nextBtn = telegramDescribe ? `${Styles.next_btn} ${Styles.next_btn_available}` : Styles.next_btn;
 
     return (
