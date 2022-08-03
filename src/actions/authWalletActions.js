@@ -270,21 +270,27 @@ export const authWalletActions = {
                         id:       res.user_id,
                         username: res.screen_name,
                     };
+                    console.log('Set twitter data')
                     dispatch(setTwitterData(twitterData));
                     localStorage.setItem('tw', JSON.stringify(twitterData));
                     const user = JSON.parse(localStorage.getItem('user'));
                     const tg = JSON.parse(localStorage.getItem('tg'));
+                    console.log('Set user')
                     dispatch(setUser(user));
+                    console.log('Set tg')
                     dispatch(setTelegramData(tg));
+                    console.log('Set step')
                     dispatch(setStep('two'));
+                    console.log('Finish')
                 } else {
                     dispatch(clearError());
-                    dispatch(setError('Something went wrong (twitter data), please try again later!'));
+                    dispatch(setError('Something went wrong, please try again later!'));
                 }
             })
-            .catch(() => {
+            .catch((e) => {
+                console.log(e)
                 dispatch(clearError());
-                dispatch(setError('Something went wrong (access token), please try again later!'));
+                dispatch(setError('Something went wrong, please try again later!'));
             });
     },
 };
