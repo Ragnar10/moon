@@ -9,6 +9,7 @@ import { authWalletActions } from '../../../../actions/authWalletActions';
 import Styles from '../styles.module.scss';
 // Components
 import Loader from '../../../Loader';
+import {setStep} from "../../../../reducers/authSocialSlice";
 
 const WithMetamask = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,6 @@ const WithMetamask = () => {
 
     useEffect(() => {
         if (isMobileDevice()) {
-            window.open('googlechrome://leveraged.io')
             return dispatch(authWalletActions.connectMetaMobile());
         }
     }, []);
