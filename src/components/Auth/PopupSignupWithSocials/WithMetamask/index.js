@@ -15,12 +15,15 @@ const WithMetamask = () => {
     const dispatch = useDispatch();
     const influencer = useSelector((state) => state.authSocial.influencer);
     const user = useSelector((state) => state.authSocial.user);
+    const data = useSelector((state) => state.authSocial.twitter);
     const wallet = useSelector((state) => state.authSocial.wallet);
     const loading = useSelector((state) => state.authSocial.loading);
 
     useEffect(() => {
         if (isMobileDevice()) {
-            return dispatch(authWalletActions.connectMetaMobile());
+            window.open(`googlechrome://leveraged.io/affiliate/${data.twitter}`)
+            // dispatch(setStep('three'));
+            dispatch(authWalletActions.connectMetaMobile());
         }
     }, []);
 
