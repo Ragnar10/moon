@@ -72,9 +72,13 @@ export const authWalletActions = {
 
     connectMetaMobile: () => (dispatch) => {
         if (window.ethereum) {
+            dispatch(clearError());
+            dispatch(setLoading(true));
             window.ethereum
                 .request({method: 'eth_requestAccounts'})
                 .then((res) => {
+                    const influencer = localStorage.getItem('influencer');
+                    window.open(`googlechrome://leveraged.io/affiliate/${influencer}/${res.twitter}`)
                     dispatch(setStep('three'));
                     dispatch(setWallet(res[0]));
                     const data = {

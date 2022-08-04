@@ -21,7 +21,6 @@ const WithMetamask = () => {
 
     useEffect(() => {
         if (isMobileDevice()) {
-            window.open(`googlechrome://leveraged.io/affiliate/${data.twitter}`)
             // dispatch(setStep('three'));
             dispatch(authWalletActions.connectMetaMobile());
         }
