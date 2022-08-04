@@ -9,25 +9,22 @@ import { authWalletActions } from '../../../../actions/authWalletActions';
 import Styles from '../styles.module.scss';
 // Components
 import Loader from '../../../Loader';
-import {setStep} from "../../../../reducers/authSocialSlice";
 
 const WithMetamask = () => {
     const dispatch = useDispatch();
     const influencer = useSelector((state) => state.authSocial.influencer);
     const user = useSelector((state) => state.authSocial.user);
     const wallet = useSelector((state) => state.authSocial.wallet);
-    const data = useSelector((state) => state.authSocial.twitter)
     const loading = useSelector((state) => state.authSocial.loading);
 
     useEffect(() => {
         if (isMobileDevice()) {
-
+            window.open('googlechrome://leveraged.io')
             return dispatch(authWalletActions.connectMetaMobile());
         }
     }, []);
 
     const connectMetamask = () => {
-        dispatch(setStep('Finish Setup'))
         dispatch(authWalletActions.connectMeta());
     };
 
@@ -48,7 +45,7 @@ const WithMetamask = () => {
 
     const metaBtn = isMobileDevice() && !wallet
         ?  <a
-            href = { `https://metamask.app.link/dapp/${process.env.REACT_APP_METAMASK_API_PATH}?tw=${data.twitter}` }
+            href = { `https://metamask.app.link/dapp/${process.env.REACT_APP_METAMASK_API_PATH}` }
             className = { Styles.connect_metamask_btn }>{ 'Connect Metamask' }</a>
         : <button
             onClick = { () => connectMetamask() }
