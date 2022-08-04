@@ -100,7 +100,7 @@ export const authWalletActions = {
                         if (isMobileDevice()) {
                             window.open('googlechrome://leveraged.io')
                             // window.open(`${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
-                        } else if (res.non_field_errors && res.non_field_errors === 'User already exists') {
+                        } else if (res.non_field_errors && res.non_field_errors[0] === 'User already exists') {
                             dispatch(setStep('two'));
                         } else {
                             dispatch(setStep('two'));
