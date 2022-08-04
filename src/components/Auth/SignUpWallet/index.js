@@ -12,7 +12,7 @@ import {authWalletActions} from '../../../actions/authWalletActions';
 import {
     setPopupIsOpen,
     setInfluencer,
-    setStep,
+    setStep, setTelegramData, setTwitterData,
 } from '../../../reducers/authSocialSlice';
 // Styles
 import Styles from './styles.module.scss';
@@ -32,7 +32,7 @@ export const SignUpWallet = () => {
     }, []);
 
     useEffect(() => {
-        const {meta, token} = queryString.parse(window.location.search);
+        const {meta, influencer, user_tg, user_tw, user_token, token} = queryString.parse(window.location.search);
 
         const data = {
             meta,
@@ -43,6 +43,13 @@ export const SignUpWallet = () => {
             dispatch(authWalletActions.getSocialUser(data));
             dispatch(setPopupIsOpen(true));
             dispatch(setStep('two'));
+        } else if (meta) {
+            dispatch(setPopupIsOpen(JSON.stringify({popupIsOpen: true})));
+            dispatch(setInfluencer(influencer));
+            dispatch(setTelegramData(user_tg));
+            dispatch(setTwitterData(user_tw));
+            dispatch(authWalletActions.getAllData({telegram: user_tg, token: user_token}));
+            dispatch(setStep('three'));
         }
     }, []);
 

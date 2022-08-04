@@ -291,7 +291,6 @@ export const authWalletActions = {
     },
     getAllData: (data) => (dispatch) => {
         dispatch(setUser(data));
-        localStorage.setItem('user', JSON.stringify(data));
         dispatch(setStep('three'));
     },
 };

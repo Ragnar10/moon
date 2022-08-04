@@ -11,14 +11,11 @@ import {authWalletActions} from '../../../actions/authWalletActions';
 import Styles from './styles.module.scss';
 // Components
 import Message from '../../Message';
-import {setInfluencer, setPopupIsOpen, setStep, setTelegramData, setUser} from "../../../reducers/authSocialSlice";
-import {isMobileDevice} from '../../../utils'
 
 export const PresentationContent = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const twitterData = useSelector((state) => state.authSocial.twitterData);
-    const user = useSelector((state) => state.authSocial.user);
     const error = useSelector((state) => state.auth.error);
     const message = useSelector((state) => state.auth.message);
 
@@ -35,42 +32,17 @@ export const PresentationContent = () => {
         }
     };
 
-    const initMetamask = () => {
-        const {influencer, user_tg, user_token} = queryString.parse(window.location.search);
-        const _user = {
-            token: user_token,
-            telegram: user_tg
-        }
-        localStorage.setItem('user', JSON.stringify(_user));
-        localStorage.setItem('influencer', influencer);
-        localStorage.setItem('popupIsOpen', JSON.stringify({popupIsOpen: true}));
-        localStorage.setItem('metamask', true);
-        dispatch(setTelegramData(user_tg));
-        dispatch(setPopupIsOpen(true));
-        dispatch(setInfluencer(influencer));
-        dispatch(setUser(_user));
-        dispatch(setStep('three'));
-        dispatch(authWalletActions.getAllData(_user))
-    };
-
     useEffect(() => {
-        const isMobile = isMobileDevice()
-        const inf = localStorage.getItem('influencer');
-        if (isMobile && !inf) {
-            return initMetamask();
-        } else {
-            return authTwitter();
-        }
+        return authTwitter();
     }, []);
 
     useEffect(() => {
         const influencer = localStorage.getItem('influencer');
-        const metamask = localStorage.getItem('metamask');
 
         if (twitterData.username || metamask) {
             navigate(`/affiliate/${influencer}`, {replace: true});
         }
-    }, [twitterData, user]);
+    }, [twitterData]);
 
     return (
         <>
