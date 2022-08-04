@@ -72,30 +72,20 @@ export const authWalletActions = {
 
     connectMetaMobile: () => (dispatch) => {
         if (window.ethereum) {
-            dispatch(clearError());
-            dispatch(setLoading(true));
             window.ethereum
                 .request({method: 'eth_requestAccounts'})
                 .then((res) => {
-                    if (res.code) {
-                        dispatch(setLoading(false));
-                        dispatch(setError('Check your extension!'));
-                    } else {
-                        dispatch(clearError());
-                        dispatch(setWallet(res[0]));
-                        dispatch(setLoading(false));
-                        const data = {
-                            wallet: res[0],
-                        };
-                        localStorage.setItem('wallet', JSON.stringify(data));
-                    }
+                    dispatch(setStep('three'));
+                    dispatch(setWallet(res[0]));
+                    const data = {
+                        wallet: res[0],
+                    };
+                    localStorage.setItem('wallet', JSON.stringify(data));
                 })
                 .catch(() => {
                     dispatch(clearError());
-                    dispatch(setLoading(false));
                     dispatch(setError('Something went wrong, please try again later!'));
                 });
-
         }
     },
 

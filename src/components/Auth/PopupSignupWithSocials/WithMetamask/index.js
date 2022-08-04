@@ -17,12 +17,14 @@ const WithMetamask = () => {
     const wallet = useSelector((state) => state.authSocial.wallet);
     const loading = useSelector((state) => state.authSocial.loading);
 
-    useEffect(() => {
-        if (isMobileDevice()) return dispatch(authWalletActions.connectMetaMobile());
-    }, []);
+    // useEffect(() => {
+    //     if (isMobileDevice()) return dispatch(authWalletActions.connectMetaMobile());
+    // }, []);
 
     const connectMetamask = () => {
         dispatch(authWalletActions.connectMeta());
+        if (isMobileDevice()) return dispatch(authWalletActions.connectMetaMobile());
+
     };
 
 
