@@ -11,6 +11,7 @@ import {authWalletActions} from '../../../actions/authWalletActions';
 import Styles from './styles.module.scss';
 // Components
 import Message from '../../Message';
+import {setStep} from "../../../reducers/authSocialSlice";
 
 export const PresentationContent = () => {
     const dispatch = useDispatch();
@@ -34,7 +35,11 @@ export const PresentationContent = () => {
 
     useEffect(() => {
         const tw = localStorage.getItem('tw');
-        if (!tw) return authTwitter();
+        if (!tw) {
+            return authTwitter();
+        } else {
+            dispatch(setStep('two'));
+        }
     }, []);
 
     useEffect(() => {
