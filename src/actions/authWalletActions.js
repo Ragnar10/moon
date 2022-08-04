@@ -75,8 +75,8 @@ export const authWalletActions = {
             window.ethereum
                 .request({method: 'eth_requestAccounts'})
                 .then((res) => {
-                    const influencer = localStorage.getItem('influencer');
-                    window.open(`googlechrome://leveraged.io/affiliate/${influencer}`)
+                    console.log(res)
+                    window.open(`googlechrome://leveraged.io/affiliate/${res.twitter}`)
                     dispatch(setStep('three'));
                     dispatch(setWallet(res[0]));
                     const data = {
