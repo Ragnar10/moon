@@ -93,7 +93,6 @@ export const authWalletActions = {
             api.createSocialUser(data)
                 .then((response) => response.json())
                 .then((res) => {
-                    console.log(res)
                     if (res.id) {
                         dispatch(setUser(res));
                         localStorage.setItem('user', JSON.stringify(res));
@@ -101,11 +100,11 @@ export const authWalletActions = {
                         if (isMobileDevice()) {
                             window.open('googlechrome://leveraged.io')
                             // window.open(`${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
-                        } else if (res.non_field_errors && res.non_field_errors[0] === 'User already exists') {
-                            dispatch(setStep('two'));
                         } else {
                             dispatch(setStep('two'));
                         }
+                    } else if (res.non_field_errors && res.non_field_errors[0] === 'User already exists') {
+                        dispatch(setStep('two'));
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
