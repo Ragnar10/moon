@@ -72,11 +72,10 @@ export const authWalletActions = {
 
     connectMetaMobile: () => (dispatch) => {
         if (window.ethereum) {
-            dispatch(setStep('three'));
-
              window.ethereum
                 .request({method: 'eth_requestAccounts'})
                 .then((res) => {
+                    dispatch(setStep('three'));
                     dispatch(setWallet(res[0]));
                     const data = {
                         wallet: res[0],
