@@ -93,6 +93,7 @@ export const authWalletActions = {
             api.createSocialUser(data)
                 .then((response) => response.json())
                 .then((res) => {
+                    console.log(res)
                     if (res.id) {
                         dispatch(setUser(res));
                         localStorage.setItem('user', JSON.stringify(res));
