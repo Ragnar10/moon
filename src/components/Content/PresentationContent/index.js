@@ -12,7 +12,7 @@ import Styles from './styles.module.scss';
 // Components
 import Message from '../../Message';
 import {setStep} from "../../../reducers/authSocialSlice";
-import {isMobileDevice} from 'utils';
+import {isMobileDevice} from '../../../utils'
 
 export const PresentationContent = () => {
     const dispatch = useDispatch();
