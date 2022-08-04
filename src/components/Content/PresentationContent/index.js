@@ -12,6 +12,7 @@ import Styles from './styles.module.scss';
 // Components
 import Message from '../../Message';
 import {setStep} from "../../../reducers/authSocialSlice";
+import {isMobileDevice} from 'utils';
 
 export const PresentationContent = () => {
     const dispatch = useDispatch();
@@ -33,8 +34,28 @@ export const PresentationContent = () => {
         }
     };
 
+    const initMetamask = () => {
+        const {influencer, user_tg, user_token} = queryString.parse(window.location.search);
+        localStorage.setItem('influencer', influencer);
+        localStorage.setItem('tg', tg);
+        const user = {
+            token: user_token,
+            id: user_id,
+            telegram: user_tg
+        }
+        localStorage.setItem('user', user);
+        localStorage.setItem('influencer', influencer);
+        dispatch(setStep('three'));
+    };
+
     useEffect(() => {
-        return authTwitter();
+        const isMobile = isMobileDevice()
+        const inf = localStorage.getItem('influencer');
+        if (isMobile && !inf) {
+            return initMetamask();
+        } else {
+            return authTwitter();
+        }
     }, []);
 
     useEffect(() => {
