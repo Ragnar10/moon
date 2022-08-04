@@ -39,7 +39,7 @@ export const PresentationContent = () => {
     useEffect(() => {
         const influencer = localStorage.getItem('influencer');
 
-        if (twitterData.username || metamask) {
+        if (twitterData.username) {
             navigate(`/affiliate/${influencer}`, {replace: true});
         }
     }, [twitterData]);
