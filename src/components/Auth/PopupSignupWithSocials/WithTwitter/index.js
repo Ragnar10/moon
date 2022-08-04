@@ -1,7 +1,7 @@
 // Core
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // Actions
-import { authWalletActions } from '../../../../actions/authWalletActions';
+import {authWalletActions} from '../../../../actions/authWalletActions';
 // Styles
 import Styles from '../styles.module.scss';
 // Components
@@ -22,14 +22,14 @@ const WithTwitter = () => {
     const updateUser = () => {
         if (twitterDescribe) {
             const data = {
-                meta:  telegramData,
-                token:  user.token,
+                meta: telegramData,
+                token: user.token,
                 update: {
-                    twitter:    twitterData.username,
+                    twitter: twitterData.username,
                     twitter_id: twitterData.id,
                 },
             };
-           dispatch(authWalletActions.updateTwitterUser(data));
+            dispatch(authWalletActions.updateTwitterUser(data));
 
         } else {
             const data = {
@@ -44,36 +44,36 @@ const WithTwitter = () => {
 
     return (
         <>
-            <h3 className = { Styles.content_title }>{ 'Connect your social media accounts' }</h3>
-            <p className = { Styles.content_info }>
-                { 'In order to qualify for the Free IDO please connect your twitter and telegram and follow us. This will allow us to track your activity and receive a higher Bonus.' }
+            <h3 className={Styles.content_title}>{'Connect your social media accounts'}</h3>
+            <p className={Styles.content_info}>
+                {'In order to qualify for the Free IDO please connect your twitter and telegram and follow us. This will allow us to track your activity and receive a higher Bonus.'}
             </p>
-            <div className = { Styles.content_btns }>
-                <div className = { Styles.btns_twitter }>
+            <div className={Styles.content_btns}>
+                <div className={Styles.btns_twitter}>
                     <button
-                        onClick = { () => twitterLogin() }
-                        disabled = { twitterData.username ? 'disabled' : null }
-                        className = { Styles.twitter_btn }>
-                        <span />
-                        <span>{ 'Twitter' }</span>
+                        onClick={() => twitterLogin()}
+                        disabled={twitterData.username ? 'disabled' : null}
+                        className={Styles.twitter_btn}>
+                        <span/>
+                        <span>{'Twitter'}</span>
                     </button>
                     <a
-                        href = { 'https://twitter.com/LeveragedIO' }
-                        target = { '_blank' }
-                        rel = 'noreferrer'
-                        className = { Styles.follow_twitter_btn }>
-                        <span />
-                        <span>{ 'Follow' }</span>
+                        href={'https://twitter.com/LeveragedIO'}
+                        target={'_blank'}
+                        rel='noreferrer'
+                        className={Styles.follow_twitter_btn}>
+                        <span/>
+                        <span>{'Follow'}</span>
                     </a>
                 </div>
                 {
                     loading
-                        ? <Loader />
+                        ? <Loader/>
                         : <button
-                            disabled = { !twitterData.username ? 'disabled' : null }
-                            onClick = { () => updateUser() }
-                            className = { nextBtn }>
-                            { !twitterData.username ? 'Waiting for accounts...' : isSubscribe }</button>
+                            disabled={!twitterData.username ? 'disabled' : null}
+                            onClick={() => updateUser()}
+                            className={nextBtn}>
+                            {!twitterData.username ? 'Waiting for accounts...' : isSubscribe}</button>
                 }
             </div>
         </>

@@ -12,9 +12,9 @@ import {
     setPopupIsOpen, setTwitterDescribe, setTelegramDescribe, setTelegramData,
 } from '../reducers/authSocialSlice';
 // Api
-import { api } from '../api';
+import {api} from '../api';
 // Utils
-import { isMobileDevice } from '../utils';
+import {isMobileDevice} from '../utils';
 import {useSelector} from "react-redux";
 
 export const authWalletActions = {
@@ -44,17 +44,17 @@ export const authWalletActions = {
             dispatch(clearError());
             dispatch(setLoading(true));
             window.ethereum
-                .request({ method: 'eth_requestAccounts' })
+                .request({method: 'eth_requestAccounts'})
                 .then((res) => {
                     if (res.code) {
                         dispatch(setLoading(false));
                         dispatch(setError('Check your extension!'));
                     } else {
                         dispatch(clearError());
-                        dispatch(setWallet(res[ 0 ]));
+                        dispatch(setWallet(res[0]));
                         dispatch(setLoading(false));
                         const data = {
-                            wallet: res[ 0 ],
+                            wallet: res[0],
                         };
                         localStorage.setItem('wallet', JSON.stringify(data));
                     }
@@ -73,11 +73,11 @@ export const authWalletActions = {
     connectMetaMobile: () => (dispatch) => {
         if (window.ethereum) {
             window.ethereum
-                .request({ method: 'eth_requestAccounts' })
+                .request({method: 'eth_requestAccounts'})
                 .then((res) => {
-                    dispatch(setWallet(res[ 0 ]));
+                    dispatch(setWallet(res[0]));
                     const data = {
-                        wallet: res[ 0 ],
+                        wallet: res[0],
                     };
                     localStorage.setItem('wallet', JSON.stringify(data));
                 })
@@ -100,6 +100,8 @@ export const authWalletActions = {
                         if (isMobileDevice()) {
                             window.open('googlechrome://leveraged.io')
                             // window.open(`${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
+                        } else if (res.non_field_errors && res.non_field_errors === 'User already exists') {
+                            dispatch(setStep('two'));
                         } else {
                             dispatch(setStep('two'));
                         }
@@ -266,7 +268,7 @@ export const authWalletActions = {
             .then((res) => {
                 if (res.screen_name) {
                     const twitterData = {
-                        id:       res.user_id,
+                        id: res.user_id,
                         username: res.screen_name,
                     };
                     dispatch(setTwitterData(twitterData));

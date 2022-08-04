@@ -1,8 +1,8 @@
 // Core
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 // Actions
-import { authWalletActions } from '../../../../actions/authWalletActions';
-import { setTelegramData } from '../../../../reducers/authSocialSlice';
+import {authWalletActions} from '../../../../actions/authWalletActions';
+import {setTelegramData} from '../../../../reducers/authSocialSlice';
 // Styles
 import Styles from '../styles.module.scss';
 // Components
@@ -25,8 +25,8 @@ const WithTelegram = () => {
     const saveUser = () => {
         if (telegramDescribe) {
             const data = {
-                    telegram: telegramData,
-                    ref:      influencer,
+                telegram: telegramData,
+                ref: influencer,
             };
             dispatch(authWalletActions.createTelegramUser(data));
         } else {
@@ -43,34 +43,34 @@ const WithTelegram = () => {
 
     return (
         <>
-            <h3 className = { Styles.content_title }>{ 'Connect your social media accounts' }</h3>
-            <p className = { Styles.content_info }>
-                { 'In order to qualify for the Free IDO please connect your twitter and telegram and follow us. This will allow us to track your activity and receive a higher Bonus.' }
+            <h3 className={Styles.content_title}>{'Connect your social media accounts'}</h3>
+            <p className={Styles.content_info}>
+                {'In order to qualify for the Free IDO please connect your twitter and telegram and follow us. This will allow us to track your activity and receive a higher Bonus.'}
             </p>
-            <div className = { Styles.content_btns }>
-                <div className = { Styles.btns_telegram }>
+            <div className={Styles.content_btns}>
+                <div className={Styles.btns_telegram}>
                     <TelegramLoginBtn
-                        dataOnauth = { handleTelegramResponse }
-                        botName = { process.env.REACT_APP_BOT_NAME }
-                        requestAccess = 'white'
-                        class = { telegramData ? Styles.telegram_disabled : null } />
+                        dataOnauth={handleTelegramResponse}
+                        botName={process.env.REACT_APP_BOT_NAME}
+                        requestAccess='white'
+                        class={telegramData ? Styles.telegram_disabled : null}/>
                     <a
-                        href = { 'https://t.me/lvrgd' }
-                        target = { '_blank' }
-                        rel = 'noreferrer'
-                        className = { Styles.follow_telegram_btn }>
-                        <span />
-                        <span>{ 'Join' }</span>
+                        href={'https://t.me/lvrgd'}
+                        target={'_blank'}
+                        rel='noreferrer'
+                        className={Styles.follow_telegram_btn}>
+                        <span/>
+                        <span>{'Join'}</span>
                     </a>
                 </div>
                 {
                     loading
-                        ? <Loader />
+                        ? <Loader/>
                         : <button
-                            disabled = { !telegramData ? 'disabled' : null }
-                            onClick = { () => saveUser() }
-                            className = { nextBtn }>
-                            { !telegramData ? 'Waiting for accounts...' : isSubscribe }</button>
+                            disabled={!telegramData ? 'disabled' : null}
+                            onClick={() => saveUser()}
+                            className={nextBtn}>
+                            {!telegramData ? 'Waiting for accounts...' : isSubscribe}</button>
                 }
             </div>
         </>

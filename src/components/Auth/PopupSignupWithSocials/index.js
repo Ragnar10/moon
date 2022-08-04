@@ -1,5 +1,5 @@
 // Core
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import Styles from './styles.module.scss';
 // Components
 import Message from '../../Message';
@@ -19,18 +19,18 @@ const PopupSignupWithSocials = () => {
     const stepsThreeClass = user.twitter || step === 'three' ? `${Styles.steps_three} ${Styles.wallet_ready}` : Styles.steps_three;
 
     return (
-        <section className = { Styles.popup }>
-            <div className = { Styles.shadow } />
-            { error && <Message>{ error }</Message> }
-            { message && <Message class = { Styles.message }>{ message }</Message> }
-            <div className = { Styles.popup_content }>
-                { step === 'one' &&  <WithTelegram />}
-                { step === 'two' && telegramData && <WithTwitter /> }
-                { step === 'three' && telegramData && twitterData && <WithMetamask /> }
-                <div className = { Styles.steps }>
-                    <span className = { Styles.steps_one } />
-                    <span className = { stepsTwoClass } />
-                    <span className = { stepsThreeClass } />
+        <section className={Styles.popup}>
+            <div className={Styles.shadow}/>
+            {error && <Message>{error}</Message>}
+            {message && <Message class={Styles.message}>{message}</Message>}
+            <div className={Styles.popup_content}>
+                {step === 'one' && <WithTelegram/>}
+                {step === 'two' && telegramData && <WithTwitter/>}
+                {step === 'three' && telegramData && twitterData && <WithMetamask/>}
+                <div className={Styles.steps}>
+                    <span className={Styles.steps_one}/>
+                    <span className={stepsTwoClass}/>
+                    <span className={stepsThreeClass}/>
                 </div>
             </div>
         </section>
