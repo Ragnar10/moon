@@ -34,12 +34,7 @@ export const PresentationContent = () => {
     };
 
     useEffect(() => {
-        const tw = localStorage.getItem('tw');
-        if (!tw) {
-            return authTwitter();
-        } else {
-            dispatch(setStep('two'));
-        }
+        return authTwitter();
     }, []);
 
     useEffect(() => {
