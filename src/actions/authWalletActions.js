@@ -289,4 +289,9 @@ export const authWalletActions = {
                 dispatch(setError('Something went wrong, please try again later!'));
             });
     },
+    getAllData: (data) => (dispatch) => {
+        dispatch(setUser(data));
+        localStorage.setItem('user', JSON.stringify(data));
+        dispatch(setStep('three'));
+    },
 };
