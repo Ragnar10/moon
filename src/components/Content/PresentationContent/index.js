@@ -11,6 +11,7 @@ import {authWalletActions} from '../../../actions/authWalletActions';
 import Styles from './styles.module.scss';
 // Components
 import Message from '../../Message';
+import {setStep} from "../../../reducers/authSocialSlice";
 
 export const PresentationContent = () => {
     const dispatch = useDispatch();
@@ -34,6 +35,7 @@ export const PresentationContent = () => {
 
     useEffect(() => {
         return authTwitter();
+
     }, []);
 
     useEffect(() => {
@@ -41,6 +43,7 @@ export const PresentationContent = () => {
 
         if (twitterData.username) {
             navigate(`/affiliate/${influencer}`, {replace: true});
+            dispatch(setStep('step two'))
         }
     }, [twitterData]);
 
