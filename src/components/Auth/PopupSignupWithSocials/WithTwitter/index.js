@@ -32,12 +32,12 @@ const WithTwitter = () => {
                 },
             };
             dispatch(authWalletActions.updateTwitterUser(data));
-            dispatch(setStep('two'))
         } else {
             const data = {
                 twitter_id: twitterData.id,
             };
             dispatch(authWalletActions.checkTwitterFollow(data));
+            dispatch(setStep('two'))
         }
     };
 

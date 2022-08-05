@@ -96,7 +96,17 @@ export const authWalletActions = {
                         dispatch(setUser(res));
                         localStorage.setItem('user', JSON.stringify(res));
                     } else if (res.non_field_errors && res.non_field_errors[0] === 'User already exists') {
-                        dispatch(setStep('two'));
+                        api.getSocialUser(data)
+                            .then ((res) =>{
+                                if (res) {
+                                    dispatch(setStep('two'));
+                                }
+                            })
+                            .catch(() => {
+                                dispatch(clearError(''));
+                                dispatch(setError('Something went wrong, please try again later!'));
+                            })
+
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));
