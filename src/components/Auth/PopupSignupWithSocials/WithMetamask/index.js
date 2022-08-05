@@ -15,13 +15,11 @@ const WithMetamask = () => {
     const dispatch = useDispatch();
     const influencer = useSelector((state) => state.authSocial.influencer);
     const user = useSelector((state) => state.authSocial.user);
-    const data = useSelector((state) => state.authSocial.twitter);
     const wallet = useSelector((state) => state.authSocial.wallet);
     const loading = useSelector((state) => state.authSocial.loading);
 
     useEffect(() => {
         if (isMobileDevice()) {
-            // dispatch(setStep('three'));
             dispatch(authWalletActions.connectMetaMobile());
         }
     }, []);
@@ -39,7 +37,6 @@ const WithMetamask = () => {
                     metamask: wallet,
                 },
             };
-
             dispatch(authWalletActions.updateMetamaskUser(data));
     };
 

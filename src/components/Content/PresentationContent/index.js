@@ -43,7 +43,6 @@ export const PresentationContent = () => {
 
         if (twitterData.username) {
             navigate(`/affiliate/${influencer}`, {replace: true});
-            dispatch(setStep('two'))
         }
     }, [twitterData]);
 

@@ -18,6 +18,7 @@ const WithTwitter = () => {
 
     const twitterLogin = () => {
         dispatch(authWalletActions.getTwitterOauthToken());
+        dispatch(setStep('two'))
     };
 
     const updateUser = () => {
@@ -31,13 +32,12 @@ const WithTwitter = () => {
                 },
             };
             dispatch(authWalletActions.updateTwitterUser(data));
-
+            dispatch(setStep('two'))
         } else {
             const data = {
                 twitter_id: twitterData.id,
             };
             dispatch(authWalletActions.checkTwitterFollow(data));
-            dispatch(setStep('two'))
         }
     };
 
