@@ -49,6 +49,16 @@ export const api = {
         });
     },
 
+    getTelegramUser: (data) => {
+        return fetch(`${apiPath}/v1/users/${data.username}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${data.token}`,
+            },
+        });
+    },
+
     updateSocialUser: (data) => {
         return fetch(`${apiPath}/v1/users/${data.meta}/`, {
             method: 'PATCH',
