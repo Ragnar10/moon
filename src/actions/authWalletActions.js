@@ -95,7 +95,6 @@ export const authWalletActions = {
                     if (res.id) {
                         dispatch(setUser(res));
                         localStorage.setItem('user', JSON.stringify(res));
-                        // dispatch(setStep())
                     } else {
                         dispatch(clearError(''));
                         dispatch(setError('User already exists!'));

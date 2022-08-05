@@ -2,7 +2,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 // Actions
 import {authWalletActions} from '../../../../actions/authWalletActions';
-import {setTelegramData} from '../../../../reducers/authSocialSlice';
+import {setStep, setTelegramData} from '../../../../reducers/authSocialSlice';
 // Styles
 import Styles from '../styles.module.scss';
 // Components
@@ -34,8 +34,8 @@ const WithTelegram = () => {
                 username: telegramData,
             };
             dispatch(authWalletActions.checkTelegramFollow(data));
+            dispatch(setStep('one'))
         }
-
     };
 
     const isSubscribe = telegramDescribe ? 'Next step' : 'Check subscription';
