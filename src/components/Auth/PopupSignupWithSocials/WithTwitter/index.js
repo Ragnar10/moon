@@ -6,6 +6,7 @@ import {authWalletActions} from '../../../../actions/authWalletActions';
 import Styles from '../styles.module.scss';
 // Components
 import Loader from '../../../Loader';
+import {setStep} from "../../../../reducers/authSocialSlice";
 
 const WithTwitter = () => {
     const dispatch = useDispatch();
@@ -36,6 +37,7 @@ const WithTwitter = () => {
                 twitter_id: twitterData.id,
             };
             dispatch(authWalletActions.checkTwitterFollow(data));
+            dispatch(setStep('two'))
         }
     };
 
