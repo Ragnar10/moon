@@ -14,8 +14,6 @@ import {
 // Api
 import {api} from '../api';
 // Utils
-import {isMobileDevice} from '../utils';
-import {useSelector} from "react-redux";
 
 export const authWalletActions = {
     checkRef: (data) => () => {
@@ -97,13 +95,6 @@ export const authWalletActions = {
                     if (res.id) {
                         dispatch(setUser(res));
                         localStorage.setItem('user', JSON.stringify(res));
-
-                        if (isMobileDevice()) {
-                            window.open('googlechrome://leveraged.io')
-                            // window.open(`${process.env.REACT_APP_BASE_PATH}/affiliate/${data.ref}?meta=${data.metamask}&token=${res.token}`, '_blank');
-                        } else {
-                            dispatch(setStep('two'));
-                        }
                     } else if (res.non_field_errors && res.non_field_errors[0] === 'User already exists') {
                         dispatch(setStep('two'));
                     } else {
