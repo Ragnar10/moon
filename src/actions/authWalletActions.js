@@ -94,6 +94,7 @@ export const authWalletActions = {
                 .then((res) => {
                     if (res.id) {
                         dispatch(setUser(res));
+                        dispatch(setStep('two'))
                         localStorage.setItem('user', JSON.stringify(res));
                     } else {
                         dispatch(clearError(''));

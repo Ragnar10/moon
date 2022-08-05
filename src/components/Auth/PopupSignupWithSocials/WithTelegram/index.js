@@ -34,7 +34,6 @@ const WithTelegram = () => {
                 username: telegramData,
             };
             dispatch(authWalletActions.checkTelegramFollow(data));
-            dispatch(setStep('one'))
         }
     };
 
